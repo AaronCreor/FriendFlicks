@@ -5,3 +5,5 @@
  - Aaron Creor
  - Karanveer Singh Bhullar
  - Joshua Fantillo
+
+### Check the WIKI for installation instructions
