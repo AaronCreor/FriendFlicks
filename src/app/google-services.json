@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "667879454126",
+    "firebase_url": "https://nebulabs-001.firebaseio.com",
+    "project_id": "nebulabs-001",
+    "storage_bucket": "nebulabs-001.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667879454126:android:ba3d3a5c114a718e90043f",
+        "android_client_info": {
+          "package_name": "com.nebulabs.friendflix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667879454126-n2aivvomf8jf4ihppj06tp8bkaueoqe4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArP6Jv4dUdrLhn1kGfP2ukhtltGp8KelE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667879454126-n2aivvomf8jf4ihppj06tp8bkaueoqe4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
