@@ -6,4 +6,4 @@
  - Karanveer Singh Bhullar
  - Joshua Fantillo
 
-### Check the WIKI for installation instructions
+### Check the [WIKI](https://cisgitlab.ufv.ca/nebulabs/Movie/wikis/home#friendflix-wiki) for installation instructions
