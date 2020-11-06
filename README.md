@@ -1,6 +1,9 @@
-# COMP 370 Project
+![FFLogo](mockups/logo.png "FriendFlix")
+# FriendFlix
 
-## Members
+## COMP 370 Project
+
+### Members
  - Chinmay Sharma
  - Aaron Creor
  - Karanveer Singh Bhullar
