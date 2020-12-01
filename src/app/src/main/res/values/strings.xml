@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FriendFlix</string>
+    <string name="welcome_text">Welcome to FriendFlix!</string>
+    <string name="loginButton_text">LOGIN WITH GOOGLE</string>
 </resources>
