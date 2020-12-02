@@ -1,5 +1,6 @@
 package com.nebulabs.friendflix;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,10 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("Profile");
+
         populateData();
 
         Button logout = (Button) findViewById(R.id.logout_button);
@@ -43,8 +48,9 @@ public class ProfileActivity extends AppCompatActivity {
         ImageView profile_image = findViewById(R.id.userImage);
 
         user_name.setText(user.getDisplayName());
-        Log.d("FIRE",user.getPhotoUrl().toString());
-        Log.d("FIRE",user.getEmail());
+//        Log.d("FIRE",user.getPhotoUrl().toString());
+//        Log.d("FIRE",user.getEmail());
+//        Log.d("FIRE",user.getUid());
 
         Picasso.get().load(user.getPhotoUrl()).into(profile_image);
         user_email.setText(user.getEmail());
