@@ -7,15 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
+    <androidx.cardview.widget.CardView
         android:id="@+id/profileImage"
-        android:layout_width="150sp"
-        android:layout_height="150sp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:cardCornerRadius="50dp"
         android:layout_marginTop="75dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/userImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/userName"
@@ -48,24 +56,12 @@
         android:layout_marginTop="24dp"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userEmail"
         android:backgroundTint="@android:color/holo_blue_light"
         app:srcCompat="@drawable/ic_baseline_settings_24" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editInfoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.64"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userEmail"
-        android:backgroundTint="@android:color/holo_blue_light"
-        app:srcCompat="@drawable/ic_baseline_wrap_text_24" />
 
     <TextView
         android:id="@+id/settingsButtonUndertext"
@@ -75,21 +71,10 @@
         android:gravity="center"
         android:text="Settings"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsButton" />
 
-    <TextView
-        android:id="@+id/editInfoButtonUndertext"
-        android:layout_width="60dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="Edit Info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.64"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editInfoButton" />
 
     <Button
         android:id="@+id/logout_button"
@@ -97,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:backgroundTint="@android:color/holo_purple"
+        android:layout_marginBottom="32dp"
         android:text="Log out"
         android:textSize="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
