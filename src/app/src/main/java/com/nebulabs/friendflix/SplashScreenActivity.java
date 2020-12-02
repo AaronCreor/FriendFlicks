@@ -14,7 +14,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splashscreen);
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, FirebaseLoginActivity.class);
             startActivity(intent);
             finish();
 
