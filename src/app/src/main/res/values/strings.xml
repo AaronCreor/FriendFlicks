@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">FriendFlix</string>
     <string name="welcome_text">Welcome to FriendFlix!</string>
-    <string name="loginButton_text">LOGIN WITH GOOGLE</string>
+    <string name="firebase_webClient_id">667879454126-n2aivvomf8jf4ihppj06tp8bkaueoqe4.apps.googleusercontent.com</string>
 </resources>
