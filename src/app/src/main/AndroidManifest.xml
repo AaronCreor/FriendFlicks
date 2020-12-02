@@ -19,12 +19,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".FirebaseLoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
+
         <activity android:name=".MainActivity" >
 
         </activity>
+
         <activity android:name=".ProfileActivity">
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" /></activity>
+
+        <activity android:name=".AddGroupActivity">
             <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity" /></activity>

@@ -42,6 +42,7 @@ public class FirebaseLoginActivity extends AppCompatActivity {
         });
     }
 
+
     public void checkCurrentUser() {
         // [START check_current_user]
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
