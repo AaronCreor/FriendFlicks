@@ -22,5 +22,6 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity android:name=".MainActivity" >
         </activity>
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 </manifest>

@@ -53,7 +53,7 @@ public class FirebaseLoginActivity extends AppCompatActivity {
             Toasty.success(getApplicationContext(),"Logged In", Toast.LENGTH_SHORT).show();
         } else {
             // No user is signed in
-            Toasty.error(getApplicationContext(),"Not Logged In",Toast.LENGTH_SHORT).show();
+            Toasty.warning(getApplicationContext(),"Please SIGN IN",Toast.LENGTH_SHORT).show();
         }
         // [END check_current_user]
     }
