@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     selectedFrag = new ProfileFragment();
                     break;
                 case R.id.groupsTab:
-                    selectedFrag = new GroupsFragment();
+                    selectedFrag = new FriendsFragment();
                     break;
                 case R.id.moviesTab:
                     selectedFrag = new MyListFragment();

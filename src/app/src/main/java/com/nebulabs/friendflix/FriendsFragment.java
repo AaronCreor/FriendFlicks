@@ -34,78 +34,78 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
-public class GroupsFragment extends Fragment {
+public class FriendsFragment extends Fragment {
 
     RecyclerView recyclerView;
-    GroupsRecyclerAdapter groupsRecyclerAdapter;
+    FriendsRecyclerAdapter friendsRecyclerAdapter;
 
-    List<String> groupsList;
+    List<String> friendsList;
 
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public GroupsFragment(){
+    public FriendsFragment(){
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_groups,container,false);
+        return inflater.inflate(R.layout.fragment_friends,container,false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        groupsList = new ArrayList<>();
+        friendsList = new ArrayList<>();
 
-        recyclerView = view.findViewById(R.id.recyclerViewGroupsList);
-        groupsRecyclerAdapter = new GroupsRecyclerAdapter(groupsList);
+        recyclerView = view.findViewById(R.id.recyclerViewFriendsList);
+        friendsRecyclerAdapter = new FriendsRecyclerAdapter(friendsList);
 
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        recyclerView.setAdapter(groupsRecyclerAdapter);
+        recyclerView.setAdapter(friendsRecyclerAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
 
-        groupsList.add("BCIS Class of 2021");
-        groupsList.add("Shadow Raiders");
-        groupsList.add("Tankard Corsairs");
-        groupsList.add("Fountain FC");
-        groupsList.add("Black Snake Pirates");
-        groupsList.add("Angels Chess Club");
-        groupsList.add("Corsairs of the Seven Sails");
-        groupsList.add("Bandits of the Silent Sea");
+        friendsList.add("Chinmay Sharma");
+        friendsList.add("Mesut Ozil");
+        friendsList.add("Joshua Fantillo");
+        friendsList.add("Danny Welbeck");
+        friendsList.add("Aaron Creor");
+        friendsList.add("Mishal Bashir");
+        friendsList.add("Jane Doe");
+        friendsList.add("Jonny Doe");
 
         FloatingActionButton addGroup_fab = view.findViewById(R.id.addgroupfab);
         addGroup_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Toasty.info(getContext(),"ADD GROUP",Toasty.LENGTH_SHORT).show();
-                addNewGroup();
+                addNewFriend();
             }
         });
     }
 
-    public void addNewGroup(){
+    public void addNewFriend(){
         final FlatDialog flatDialog = new FlatDialog(getContext());
-        flatDialog.setTitle("ADD GROUP")
-                .setSubtitle("Enter details for new group")
-                .setFirstTextFieldHint("name")
-                .setFirstButtonText("CREATE")
+        flatDialog.setTitle("ADD FRIEND")
+                .setSubtitle("Ask your friend to share their user ID with you")
+                .setFirstTextFieldHint("friend's user ID")
+                .setFirstButtonText("SEND REQUEST")
                 .setSecondButtonText("CANCEL")
                 .withFirstButtonListner(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (flatDialog.getFirstTextField().isEmpty()){
-                            Toasty.error(getContext(),"Enter a group name", Toasty.LENGTH_SHORT).show();
+                            Toasty.error(getContext(),"Enter your friend's user ID", Toasty.LENGTH_SHORT).show();
                         }
                         else {
                             ProgressDialog dialog = new ProgressDialog(getContext());
-                            dialog.setMessage("Creating group, please wait...");
+                            dialog.setMessage("Sending request, please wait...");
                             dialog.show();
 
                             DocumentReference docRef = db.collection("groups").document(flatDialog.getFirstTextField());
@@ -116,7 +116,7 @@ public class GroupsFragment extends Fragment {
                                         DocumentSnapshot document = task.getResult();
                                         if (document.exists()) {
                                             Log.d("CHECK", "Group already exists");
-                                            Toasty.error(getContext(),"Group Already Exists", Toasty.LENGTH_SHORT).show();
+                                            Toasty.error(getContext(),"That user is already your friend!", Toasty.LENGTH_SHORT).show();
                                             dialog.dismiss();
                                         } else {
                                             Log.d("CHECK", "No group exists");
