@@ -75,7 +75,7 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
         public void onClick(View view) {
             Toasty.info(view.getContext(), groupsList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
             String name = groupsList.get(getAdapterPosition());
-            Fragment selectedFrag = new MovieFragment(name);
+            Fragment selectedFrag = new FriendFragment(name);
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container_view, selectedFrag)
                     .commit();
