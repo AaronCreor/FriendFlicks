@@ -5,4 +5,20 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+    <style name="AppTheme.NoActionBar" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <!--  It should be true otherwise action mode will not overlay toolbar -->
+        <item name="windowActionModeOverlay">true</item>
+
+        <!--  For Custom Action Mode Background Color/Drawable -->
+        <item name="actionModeBackground">@color/grey</item>
+    </style>
+
+    <style name="BlackStatusBar" parent="AppTheme.NoActionBar">
+        <item name="android:statusBarColor">@color/grey</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>
