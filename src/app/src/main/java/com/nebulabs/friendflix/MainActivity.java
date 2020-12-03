@@ -26,41 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomTabView = findViewById(R.id.bottom_navigation);
         bottomTabView.setOnNavigationItemSelectedListener(navListener);
-/*
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .add(R.id.fragment_container_view, ProfileFragment.class, null)
-                .commit();
-*/
-//        getSupportActionBar().setTitle("Home");
-/*
-        Button addgrp = findViewById(R.id.add_group_button);
-        addgrp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),AddGroupActivity.class);
-                startActivity(i);
-            }
-        });
 
-        Button moviescr = findViewById(R.id.movie_screen_button);
-        moviescr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),MovieActivity.class);
-                startActivity(i);
-            }
-        });
-
-        Button explscr = findViewById(R.id.explore_screen_button);
-        explscr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),ExploreActivity.class);
-                startActivity(i);
-            }
-        });
-*/
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -73,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     selectedFrag = new ProfileFragment();
                     break;
                 case R.id.groupsTab:
-                    selectedFrag = new ProfileFragment();
+                    selectedFrag = new GroupFragment();
                     break;
                 case R.id.moviesTab:
                     selectedFrag = new ProfileFragment();
@@ -84,29 +50,5 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
-
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.bottom_nav_menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.accountTab:
-                Intent i = new Intent(getApplicationContext(), ProfileFragment.class);
-                startActivity(i);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
-
- */
 
 }

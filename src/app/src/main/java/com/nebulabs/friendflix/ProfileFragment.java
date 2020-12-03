@@ -46,27 +46,6 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    /*
-        @Override
-        protected void onCreate(@Nullable Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.fragment_profile);
-
-    //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    //        getSupportActionBar().setHomeButtonEnabled(true);
-    //        getSupportActionBar().setTitle("Profile");
-
-            populateData();
-
-            Button logout = (Button) findViewById(R.id.logout_button);
-            logout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    signOut();
-                }
-            });
-        }
-    */
     public void populateData(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         TextView user_name = getView().findViewById(R.id.userName);
@@ -90,29 +69,5 @@ public class ProfileFragment extends Fragment {
         getActivity().finish();
         // [END auth_sign_out]
     }
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_profile, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_home:
-                Intent i = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(i);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
-
- */
-
 
 }
