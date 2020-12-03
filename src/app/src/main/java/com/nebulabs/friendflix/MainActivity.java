@@ -31,11 +31,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button groupsscr = findViewById(R.id.mylist_button);
+        Button groupsscr = findViewById(R.id.groups_button);
         groupsscr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MyList.class);
+                Intent i = new Intent(getApplicationContext(), GroupsActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button mylistscr = findViewById(R.id.mylist_button);
+        mylistscr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MyListActivity.class);
                 startActivity(i);
             }
         });

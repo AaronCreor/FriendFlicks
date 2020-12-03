@@ -9,7 +9,7 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyList extends AppCompatActivity {
+public class MyListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
