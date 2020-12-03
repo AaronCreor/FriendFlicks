@@ -16,11 +16,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.flatdialoglibrary.dialog.FlatDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -71,35 +75,54 @@ public class GroupFragment extends Fragment {
                             Toasty.error(getContext(),"Enter a group name", Toasty.LENGTH_SHORT).show();
                         }
                         else {
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                            Map<String, Object> memberData = new HashMap<>();
-                            memberData.put("email",user.getEmail());
-                            memberData.put("uid",user.getUid());
-                            memberData.put("admin",true);
-
                             ProgressDialog dialog = new ProgressDialog(getContext());
                             dialog.setMessage("Creating group, please wait...");
                             dialog.show();
 
-                            db.collection("groups").document(flatDialog.getFirstTextField())
-                                    .set(memberData)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d("FIRE", "DocumentSnapshot successfully written!");
+                            DocumentReference docRef = db.collection("groups").document(flatDialog.getFirstTextField());
+                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+                                            Log.d("CHECK", "Group already exists");
+                                            Toasty.error(getContext(),"Group Already Exists", Toasty.LENGTH_SHORT).show();
                                             dialog.dismiss();
-                                            Toasty.success(getContext(), flatDialog.getFirstTextField() + " created!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Log.d("CHECK", "No group exists");
+                                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                            Map<String, Object> memberData = new HashMap<>();
+                                            memberData.put("email",user.getEmail());
+                                            memberData.put("uid",user.getUid());
+                                            memberData.put("admin",true);
+
+                                            db.collection("groups").document(flatDialog.getFirstTextField())
+                                                    .set(memberData)
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            Log.d("FIRE", "DocumentSnapshot successfully written!");
+                                                            dialog.dismiss();
+                                                            Toasty.success(getContext(), flatDialog.getFirstTextField() + " created!", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Log.w("FIRE", "Error writing document", e);
+                                                            Toasty.error(getContext(),"Group Creation Failed", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                            flatDialog.dismiss();
                                         }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w("FIRE", "Error writing document", e);
-                                            Toasty.error(getContext(),"Group Creation Failed", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                            flatDialog.dismiss();
+                                    } else {
+                                        Log.d("CHECK", "get failed with ", task.getException());
+                                    }
+                                }
+                            });
+
                         }
                     }
                 })
