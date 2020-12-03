@@ -31,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button groupsscr = findViewById(R.id.mylist_button);
+        groupsscr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MyList.class);
+                startActivity(i);
+            }
+        });
+
         Button moviescr = findViewById(R.id.movie_screen_button);
         moviescr.setOnClickListener(new View.OnClickListener() {
             @Override

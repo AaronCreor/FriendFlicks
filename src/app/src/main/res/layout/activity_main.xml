@@ -41,7 +41,19 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_group_button"
-        app:layout_constraintVertical_bias="0.204" />
+        app:layout_constraintVertical_bias="0.1" />
+
+    <Button
+        android:id="@+id/mylist_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="my list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movie_screen_button"
+        app:layout_constraintVertical_bias="0.1" />
 
     <Button
         android:id="@+id/explore_screen_button"
@@ -50,8 +62,10 @@
         android:text="Explore"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movie_screen_button" />
+        app:layout_constraintTop_toBottomOf="@+id/mylist_button"
+        app:layout_constraintVertical_bias="0.1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
