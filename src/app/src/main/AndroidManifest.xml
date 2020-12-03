@@ -38,5 +38,17 @@
             <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity" /></activity>
+        
+        <activity android:name=".MovieActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
+        <activity android:name=".ExploreActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
     </application>
 </manifest>

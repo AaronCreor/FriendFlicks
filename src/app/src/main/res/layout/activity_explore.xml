@@ -166,7 +166,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="410dp"
+        android:layout_width="0dp"
         android:layout_height="280dp"
         android:layout_gravity="bottom"
         android:layout_marginTop="80dp"
@@ -183,7 +183,7 @@
 
         <TextView
             android:id="@+id/movieTitle"
-            android:layout_width="368dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Movie Title"
             android:textColor="@color/white"
@@ -192,7 +192,7 @@
 
         <TextView
             android:id="@+id/movieInfo"
-            android:layout_width="368dp"
+            android:layout_width="match_parent"
             android:layout_height="172dp"
             android:text="Movie Info"
             android:textColor="@color/white"
@@ -200,7 +200,7 @@
             android:textStyle="normal" />
 
         <LinearLayout
-            android:layout_width="368dp"
+            android:layout_width="match_parent"
             android:layout_height="37dp"
             android:orientation="horizontal">
 
@@ -212,7 +212,7 @@
                 android:text="Skip" />
 
             <Button
-                android:id="@+id/backButton"
+                android:id="@+id/addMovietoListButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

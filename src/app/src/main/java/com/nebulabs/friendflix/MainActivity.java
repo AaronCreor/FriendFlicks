@@ -31,6 +31,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button moviescr = findViewById(R.id.movie_screen_button);
+        moviescr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),MovieActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button explscr = findViewById(R.id.explore_screen_button);
+        explscr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),ExploreActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     @Override

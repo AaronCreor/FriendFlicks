@@ -158,7 +158,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="467dp"
         android:layout_gravity="bottom"
         android:layout_marginTop="80dp"
@@ -174,7 +174,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
-            android:layout_width="368dp"
+            android:layout_width="match_parent"
             android:layout_height="117dp"
             android:orientation="horizontal">
 
@@ -193,7 +193,7 @@
 
         <TextView
             android:id="@+id/movieTitle"
-            android:layout_width="368dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Movie Title"
             android:textColor="@color/white"
@@ -202,7 +202,7 @@
 
         <TextView
             android:id="@+id/movieInfo"
-            android:layout_width="368dp"
+            android:layout_width="match_parent"
             android:layout_height="172dp"
             android:text="Movie Info"
             android:textColor="@color/white"
@@ -210,13 +210,13 @@
             android:textStyle="normal" />
 
         <LinearLayout
-            android:layout_width="368dp"
+            android:layout_width="match_parent"
             android:layout_height="37dp"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/backButton"
-                android:layout_width="wrap_content"
+                android:id="@+id/addMovietoListButton"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Back" />
@@ -226,7 +226,7 @@
 
     <ImageView
         android:id="@+id/movieImageView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="161dp"
         android:layout_marginBottom="23dp"
         android:contentDescription="Movie Image"
