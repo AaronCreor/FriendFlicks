@@ -151,14 +151,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/movieImageView"
-                android:layout_width="match_parent"
-                android:layout_height="370dp"
-                android:contentDescription="Movie Image"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/logo" />
-
 
         </FrameLayout>
 
@@ -166,8 +158,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="410dp"
-        android:layout_height="280dp"
+        android:layout_width="411dp"
+        android:layout_height="467dp"
         android:layout_gravity="bottom"
         android:layout_marginTop="80dp"
         android:gravity="center|start"
@@ -180,6 +172,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="368dp"
+            android:layout_height="117dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/movieGenre"
+                android:layout_width="278dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/ratingView"
+                android:layout_width="278dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/movieTitle"
@@ -205,20 +215,26 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/skip"
-                android:layout_width="124dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Skip" />
-
-            <Button
-                android:id="@+id/addToList"
+                android:id="@+id/backButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Add To List" />
+                android:text="Back" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/movieImageView"
+        android:layout_width="match_parent"
+        android:layout_height="161dp"
+        android:layout_marginBottom="23dp"
+        android:contentDescription="Movie Image"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:srcCompat="@drawable/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,5 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
-
-public class ExploreActivity {
+public class MovieActivity {
 }
