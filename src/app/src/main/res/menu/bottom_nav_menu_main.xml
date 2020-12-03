@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/account"
+        android:id="@+id/moviesTab"
+        android:icon="@drawable/movies"
+        android:title="Movies" />
+
+    <item
+        android:id="@+id/groupsTab"
+        android:icon="@drawable/groups"
+        android:title="Groups" />
+
+    <item
+        android:id="@+id/accountTab"
         android:icon="@drawable/account_circle"
         android:title="Profile" />
-
-    <item
-        android:id="@+id/fire"
-        android:icon="@drawable/fire"
-        android:title="Matchs" />
-
-    <item
-        android:id="@+id/chat"
-        android:icon="@drawable/chat_processing"
-        android:title="Chat" />
 
 </menu>
