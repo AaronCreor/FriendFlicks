@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -93,13 +94,16 @@ public class GroupFragment extends Fragment {
                                             Log.d("CHECK", "No group exists");
                                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                                            Map<String, Object> memberData = new HashMap<>();
+                                            final Map<String, Object> memberData = new HashMap<>();
                                             memberData.put("email",user.getEmail());
                                             memberData.put("uid",user.getUid());
                                             memberData.put("admin",true);
 
+                                            Map<String, Object> addUserToArrayMap = new HashMap<>();
+                                            addUserToArrayMap.put("members", FieldValue.arrayUnion(memberData));
+
                                             db.collection("groups").document(flatDialog.getFirstTextField())
-                                                    .set(memberData)
+                                                    .set(addUserToArrayMap)
                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override
                                                         public void onSuccess(Void aVoid) {
