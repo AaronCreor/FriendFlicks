@@ -76,7 +76,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         @Override
         public void onClick(View view) {
             Toasty.info(view.getContext(), moviesList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
-            Fragment selectedFrag = new MovieFragment();
+            String movieName = moviesList.get(getAdapterPosition());
+            Fragment selectedFrag = new MovieFragment(movieName);
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container_view, selectedFrag)
                     .commit();
