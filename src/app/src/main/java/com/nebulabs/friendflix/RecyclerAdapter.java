@@ -1,7 +1,5 @@
 package com.nebulabs.friendflix;
 
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
@@ -27,7 +27,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.recycler_list_item, parent, false);
+        View view = layoutInflater.inflate(R.layout.recycler_movielist_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -70,7 +70,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), moviesList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+            Toasty.info(view.getContext(), moviesList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
         }
     }
 }
