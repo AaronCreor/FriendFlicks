@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -17,22 +16,21 @@ import java.util.List;
 import es.dmoral.toasty.Toasty;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class GroupsRecyclerAdapter extends RecyclerView.Adapter<GroupsRecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
-    List<String> moviesList;
+    List<String> groupsList;
 
-    public RecyclerAdapter(List<String> moviesList) {
-        this.moviesList = moviesList;
+    public GroupsRecyclerAdapter(List<String> moviesList) {
+        this.groupsList = moviesList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.recycler_movielist_item, parent, false);
+        View view = layoutInflater.inflate(R.layout.recycler_list_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -40,12 +38,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.rowCountTextView.setText(String.valueOf(position));
-        holder.textView.setText(moviesList.get(position));
+        holder.textView.setText(groupsList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return moviesList.size();
+        return groupsList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -65,7 +63,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    moviesList.remove(getAdapterPosition());
+                    groupsList.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
                     return true;
                 }
@@ -75,9 +73,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         @Override
         public void onClick(View view) {
-            Toasty.info(view.getContext(), moviesList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
-            String movieName = moviesList.get(getAdapterPosition());
-            Fragment selectedFrag = new MovieFragment(movieName);
+            Toasty.info(view.getContext(), groupsList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+            String name = groupsList.get(getAdapterPosition());
+            Fragment selectedFrag = new MovieFragment(name);
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container_view, selectedFrag)
                     .commit();

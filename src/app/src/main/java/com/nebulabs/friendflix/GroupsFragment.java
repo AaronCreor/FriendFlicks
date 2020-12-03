@@ -6,14 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flatdialoglibrary.dialog.FlatDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,17 +27,24 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
-public class GroupFragment extends Fragment {
+public class GroupsFragment extends Fragment {
+
+    RecyclerView recyclerView;
+    GroupsRecyclerAdapter groupsRecyclerAdapter;
+
+    List<String> groupsList;
 
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public GroupFragment(){
+    public GroupsFragment(){
 
     }
 
@@ -51,6 +57,28 @@ public class GroupFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        groupsList = new ArrayList<>();
+
+        recyclerView = view.findViewById(R.id.recyclerViewGroupsList);
+        groupsRecyclerAdapter = new GroupsRecyclerAdapter(groupsList);
+
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        recyclerView.setAdapter(groupsRecyclerAdapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+
+        groupsList.add("BCIS Class of 2021");
+        groupsList.add("Shadow Raiders");
+        groupsList.add("Tankard Corsairs");
+        groupsList.add("Fountain FC");
+        groupsList.add("Black Snake Pirates");
+        groupsList.add("Angels Chess Club");
+        groupsList.add("Corsairs of the Seven Sails");
+        groupsList.add("Bandits of the Silent Sea");
 
         FloatingActionButton addGroup_fab = view.findViewById(R.id.addgroupfab);
         addGroup_fab.setOnClickListener(new View.OnClickListener() {

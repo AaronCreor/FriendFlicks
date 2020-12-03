@@ -14,19 +14,19 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieListFragment extends Fragment {
+public class MyListFragment extends Fragment {
 
     RecyclerView recyclerView;
-    RecyclerAdapter recyclerAdapter;
+    MyListRecyclerAdapter myListRecyclerAdapter;
 
     List<String> moviesList;
 
-    public MovieListFragment(){}
+    public MyListFragment(){}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_recycler_movielist,container,false);
+        return inflater.inflate(R.layout.fragment_recycler_mylist,container,false);
     }
 
     @Override
@@ -35,12 +35,12 @@ public class MovieListFragment extends Fragment {
 
         moviesList = new ArrayList<>();
 
-        recyclerView = view.findViewById(R.id.recyclerViewMovieList);
-        recyclerAdapter = new RecyclerAdapter(moviesList);
+        recyclerView = view.findViewById(R.id.recyclerViewMyList);
+        myListRecyclerAdapter = new MyListRecyclerAdapter(moviesList);
 
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setAdapter(myListRecyclerAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);

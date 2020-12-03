@@ -1,12 +1,7 @@
 package com.nebulabs.friendflix;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomTabView = findViewById(R.id.bottom_navigation);
         bottomTabView.setOnNavigationItemSelectedListener(navListener);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,new MovieListFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,new MyListFragment()).commit();
 
 
     }
@@ -55,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
                     selectedFrag = new ProfileFragment();
                     break;
                 case R.id.groupsTab:
-                    selectedFrag = new GroupFragment();
+                    selectedFrag = new GroupsFragment();
                     break;
                 case R.id.moviesTab:
-                    selectedFrag = new MovieListFragment();
+                    selectedFrag = new MyListFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,selectedFrag).commit();
