@@ -31,9 +31,11 @@ public class FriendFragment extends Fragment {
     List<String> moviesList;
 
     String name;
+    String email;
 
-    public FriendFragment(String name){
+    public FriendFragment(String name, String email){
         this.name = name;
+        this.email = email;
     }
 
     @Nullable
@@ -47,6 +49,8 @@ public class FriendFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         TextView friendName = getView().findViewById(R.id.friendName);
         friendName.setText(name);
+        TextView friendEmail = getView().findViewById(R.id.friendEmail);
+        friendEmail.setText(email);
 
         MaterialButtonToggleGroup materialButtonToggleGroup =
                 (MaterialButtonToggleGroup) getView().findViewById(R.id.toggleButton);
@@ -64,7 +68,7 @@ public class FriendFragment extends Fragment {
                                 recyclerView.removeAllViews();
                                 populateCommonMatches();
                             }
-                            else if(checkedId == 2131231206 && clickFlag) {// user clicked "their list"
+                            else if(checkedId == 2131231207 && clickFlag) {// user clicked "their list"
                                 moviesList.clear();
                                 recyclerView.removeAllViews();
                                 populateTheirList();

@@ -20,9 +20,9 @@ import androidx.fragment.app.Fragment;
 public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
-    List<String> friendsList;
+    List<String[]> friendsList;
 
-    public FriendsRecyclerAdapter(List<String> moviesList) {
+    public FriendsRecyclerAdapter(List<String[]> moviesList) {
         this.friendsList = moviesList;
     }
 
@@ -37,8 +37,8 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.rowCountTextView.setText(String.valueOf(position));
-        holder.textView.setText(friendsList.get(position));
+        holder.rowCountTextView.setText(friendsList.get(position)[1]);
+        holder.textView.setText(friendsList.get(position)[0]);
     }
 
     @Override
@@ -73,9 +73,10 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
 
         @Override
         public void onClick(View view) {
-            Toasty.info(view.getContext(), friendsList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
-            String name = friendsList.get(getAdapterPosition());
-            Fragment selectedFrag = new FriendFragment(name);
+            Toasty.info(view.getContext(), friendsList.get(getAdapterPosition())[1], Toast.LENGTH_SHORT).show();
+            String name = friendsList.get(getAdapterPosition())[0];
+            String email = friendsList.get(getAdapterPosition())[1];
+            Fragment selectedFrag = new FriendFragment(name, email);
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container_view, selectedFrag)
                     .commit();
