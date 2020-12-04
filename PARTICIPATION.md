@@ -5,12 +5,13 @@
 
 
 ## Chinmay Sharma
-
-### Oct 17
  - Created initial android project files for the app
- 
-### Oct 18
  - Setup firebase support (For database and authentication)
+ - Created splashscreen ui and backend
+ - Created login screen ui and backend
+ - Created profile fragment backend
+ - Created fragment layout for main activity screen
+ - Added dialog box in movies and friends fragment
 
 
 
@@ -21,4 +22,3 @@
 ## Joshua Fantillo
  - Setup Omdb database get commands (getTitle, getPoster, getRatings.. etc.)
  - Created List of most popular movies IMDbMovies.csv
-
