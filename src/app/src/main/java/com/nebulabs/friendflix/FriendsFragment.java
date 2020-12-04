@@ -77,7 +77,9 @@ public class FriendsFragment extends Fragment {
         User user = usersData.getUserByEmail(userEmail);
         Iterator<String> friendEmailIterator = user.friendsList.iterator();
         while(friendEmailIterator.hasNext()) {
-            friendsList.add(usersData.getUserByEmail(friendEmailIterator.next()).userName);
+            User possibleFriend = usersData.getUserByEmail(friendEmailIterator.next());
+            if(possibleFriend != null && possibleFriend.friendsList.contains(userEmail))
+                friendsList.add(possibleFriend.userName);
         }
 
 //        friendsList.add("Chinmay Sharma");

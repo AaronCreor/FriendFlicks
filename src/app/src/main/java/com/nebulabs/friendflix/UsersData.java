@@ -150,7 +150,18 @@ public class UsersData {
         jonnyFriends.add("chinmay@gmail.com");
         jonnyFriends.add("joshua@gmail.com");
         jonnyFriends.add("karan@gmail.com");
+        jonnyFriends.add("herobrine@gmail.com");
         User jonny = new User("jonnyboy@gmail.com", "Jonny", jonnyMovies.get(), jonnyFriends.get());
+        usersList.add(jonny);
+
+        MovieList herobrineMovies = new MovieList();
+        herobrineMovies.add(1);
+        FriendsList herobrineFriends = new FriendsList();
+        herobrineFriends.add("aaron@gmail.com");
+        herobrineFriends.add("chinmay@gmail.com");
+        herobrineFriends.add("joshua@gmail.com");
+        herobrineFriends.add("karan@gmail.com");
+        User herobrine = new User("herobrine@gmail.com", "Herobrine", herobrineMovies.get(), herobrineFriends.get());
         usersList.add(jonny);
     }
 }
