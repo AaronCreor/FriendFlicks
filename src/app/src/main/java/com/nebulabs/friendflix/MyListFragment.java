@@ -17,7 +17,7 @@ import java.util.List;
 public class MyListFragment extends Fragment {
 
     RecyclerView recyclerView;
-    MyListRecyclerAdapter myListRecyclerAdapter;
+    MoviesRecyclerAdapter moviesRecyclerAdapter;
 
     List<String> moviesList;
 
@@ -36,11 +36,11 @@ public class MyListFragment extends Fragment {
         moviesList = new ArrayList<>();
 
         recyclerView = view.findViewById(R.id.recyclerViewMyList);
-        myListRecyclerAdapter = new MyListRecyclerAdapter(moviesList);
+        moviesRecyclerAdapter = new MoviesRecyclerAdapter(moviesList);
 
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        recyclerView.setAdapter(myListRecyclerAdapter);
+        recyclerView.setAdapter(moviesRecyclerAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);

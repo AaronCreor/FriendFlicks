@@ -89,4 +89,14 @@
             app:cornerRadius="0dp" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewFriend"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

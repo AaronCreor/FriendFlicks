@@ -17,12 +17,12 @@ import es.dmoral.toasty.Toasty;
 
 import androidx.fragment.app.Fragment;
 
-public class MyListRecyclerAdapter extends RecyclerView.Adapter<MyListRecyclerAdapter.ViewHolder> {
+public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
     List<String> moviesList;
 
-    public MyListRecyclerAdapter(List<String> moviesList) {
+    public MoviesRecyclerAdapter(List<String> moviesList) {
         this.moviesList = moviesList;
     }
 

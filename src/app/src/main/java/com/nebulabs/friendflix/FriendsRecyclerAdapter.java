@@ -20,10 +20,10 @@ import androidx.fragment.app.Fragment;
 public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
-    List<String> groupsList;
+    List<String> friendsList;
 
     public FriendsRecyclerAdapter(List<String> moviesList) {
-        this.groupsList = moviesList;
+        this.friendsList = moviesList;
     }
 
     @NonNull
@@ -38,12 +38,12 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.rowCountTextView.setText(String.valueOf(position));
-        holder.textView.setText(groupsList.get(position));
+        holder.textView.setText(friendsList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return groupsList.size();
+        return friendsList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -63,7 +63,7 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    groupsList.remove(getAdapterPosition());
+                    friendsList.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
                     return true;
                 }
@@ -73,8 +73,8 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
 
         @Override
         public void onClick(View view) {
-            Toasty.info(view.getContext(), groupsList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
-            String name = groupsList.get(getAdapterPosition());
+            Toasty.info(view.getContext(), friendsList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+            String name = friendsList.get(getAdapterPosition());
             Fragment selectedFrag = new FriendFragment(name);
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container_view, selectedFrag)
