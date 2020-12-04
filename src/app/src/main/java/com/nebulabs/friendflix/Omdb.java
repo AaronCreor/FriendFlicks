@@ -1,14 +1,5 @@
-//All public functions include
-//getSynopsis
-//getMovieDatabase
-//getRottenTomato
-//getPosterLink
-//getTitle
-//Other Functions are private for the use of those functions
-//All get functions require the imdbID
-//
+package com.nebulabs.friendflix;
 
-package edu.neu.cs5200.web.service.client.ombd;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
