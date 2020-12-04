@@ -73,7 +73,7 @@ public class FriendsFragment extends Fragment {
 
 
         String userEmail = MainActivity.userEmail;
-        UsersData usersData = new UsersData();
+        UsersData usersData = MainActivity.usersData;
         User user = usersData.getUserByEmail(userEmail);
         Iterator<String> friendEmailIterator = user.friendsList.iterator();
         while(friendEmailIterator.hasNext()) {

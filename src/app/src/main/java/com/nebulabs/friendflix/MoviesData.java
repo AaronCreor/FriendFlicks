@@ -4,6 +4,7 @@
 package com.nebulabs.friendflix;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -22,6 +23,17 @@ class Movie {
 
 public class MoviesData {
     List<Movie> movieList= new ArrayList<Movie>();
+
+    public Movie getMovieByID(int ID) {
+        Movie empty = null;
+        Iterator<Movie> movieIterator = movieList.iterator();
+        while(movieIterator.hasNext()) {
+            Movie current = movieIterator.next();
+            if(current.id == ID)
+                return current;
+        }
+        return empty;
+    }
 
     public MoviesData() {
         movieList.add(new Movie(0, "Limitless", 2011));

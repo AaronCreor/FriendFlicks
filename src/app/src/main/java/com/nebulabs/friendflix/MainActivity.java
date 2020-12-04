@@ -18,6 +18,8 @@ import es.dmoral.toasty.Toasty;
 public class MainActivity extends AppCompatActivity {
 
     public static String userEmail = "jonnyboy@gmail.com";
+    public static UsersData usersData = new UsersData();
+    public static MoviesData moviesData = new MoviesData();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
