@@ -4,6 +4,7 @@
 package com.nebulabs.friendflix;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 class MovieList {
@@ -39,10 +40,10 @@ class FriendsList {
 }
 
 class User {
-    String userEmail;
-    String userName;
-    ArrayList<Integer> movieList;
-    ArrayList<String> friendsList;
+    public String userEmail;
+    public String userName;
+    public ArrayList<Integer> movieList;
+    public ArrayList<String> friendsList;
 
     public User(String userEmail, String userName, ArrayList<Integer> movieList, ArrayList<String> friendsList) {
         this.userEmail = userEmail;
@@ -53,7 +54,18 @@ class User {
 }
 
 public class UsersData {
-    List<User> usersList = new ArrayList<User>();;
+    public User getUserByEmail(String email) {
+        User empty = null;
+        Iterator<User> userIterator = usersList.iterator();
+        while(userIterator.hasNext()) {
+            User current = userIterator.next();
+            if(current.userEmail == email)
+                return current;
+        }
+        return empty;
+    }
+
+    public List<User> usersList = new ArrayList<User>();;
 
     public UsersData() {
         MovieList aaronMovies = new MovieList();
@@ -120,5 +132,36 @@ public class UsersData {
         karanFriends.add("chinmay@gmail.com");
         User karan = new User("karan@gmail.com", "Karan", karanMovies.get(), karanFriends.get());
         usersList.add(karan);
+
+        MovieList jonnyMovies = new MovieList();
+        jonnyMovies.add(1);
+        jonnyMovies.add(2);
+        jonnyMovies.add(3);
+        jonnyMovies.add(8);
+        jonnyMovies.add(9);
+        jonnyMovies.add(10);
+        jonnyMovies.add(19);
+        jonnyMovies.add(20);
+        jonnyMovies.add(25);
+        jonnyMovies.add(26);
+        jonnyMovies.add(28);
+        FriendsList jonnyFriends = new FriendsList();
+        jonnyFriends.add("aaron@gmail.com");
+        jonnyFriends.add("chinmay@gmail.com");
+        jonnyFriends.add("joshua@gmail.com");
+        jonnyFriends.add("karan@gmail.com");
+        jonnyFriends.add("herobrine@gmail.com");
+        User jonny = new User("jonnyboy@gmail.com", "Jonny", jonnyMovies.get(), jonnyFriends.get());
+        usersList.add(jonny);
+
+        MovieList herobrineMovies = new MovieList();
+        herobrineMovies.add(1);
+        FriendsList herobrineFriends = new FriendsList();
+        herobrineFriends.add("aaron@gmail.com");
+        herobrineFriends.add("chinmay@gmail.com");
+        herobrineFriends.add("joshua@gmail.com");
+        herobrineFriends.add("karan@gmail.com");
+        User herobrine = new User("herobrine@gmail.com", "Herobrine", herobrineMovies.get(), herobrineFriends.get());
+        usersList.add(jonny);
     }
 }
