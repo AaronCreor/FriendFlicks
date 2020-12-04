@@ -80,12 +80,14 @@ public class FriendFragment extends Fragment {
                     @Override
                     public void onButtonChecked(
                         MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
-                            if(checkedId == 2131230860 && clickFlag) { // user clicked "show common"
+//                            friendName.setText(getResources().getResourceEntryName(checkedId)); // to debug id name corresponding to checkedId
+//                            friendName.setText(Integer.toString(checkedId)); // to debug checkedId value
+                            if(getResources().getResourceEntryName(checkedId).equals("common_matches") && clickFlag) { // user clicked "show common"
                                 moviesList.clear();
                                 recyclerView.removeAllViews();
                                 populateCommonMatches();
                             }
-                            else if(checkedId == 2131231207 && clickFlag) {// user clicked "their list"
+                            else if(getResources().getResourceEntryName(checkedId).equals("their_list") && clickFlag) {// user clicked "their list"
                                 moviesList.clear();
                                 recyclerView.removeAllViews();
                                 populateTheirList();

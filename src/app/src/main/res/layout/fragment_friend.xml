@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".1"
             android:insetBottom="0dp"
-            android:text="common matches"
+            android:text="Common Matches"
             app:cornerRadius="0dp"
             app:strokeColor="@android:color/darker_gray"
             app:theme="@style/Theme.MaterialComponents" />
