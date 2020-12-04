@@ -26,7 +26,7 @@ public class MyListFragment extends Fragment {
     RecyclerView recyclerView;
     MoviesRecyclerAdapter moviesRecyclerAdapter;
 
-    List<String> moviesList;
+    List<String[]> moviesList;
 
     public MyListFragment(){}
 
@@ -67,7 +67,7 @@ public class MyListFragment extends Fragment {
             }
         });
 
-        moviesList = new ArrayList<>();
+        moviesList = new ArrayList<String[]>();
 
         recyclerView = view.findViewById(R.id.recyclerViewMyList);
         moviesRecyclerAdapter = new MoviesRecyclerAdapter(moviesList);
@@ -86,8 +86,12 @@ public class MyListFragment extends Fragment {
         while(movieIterator.hasNext()) {
             int currentMovieID = movieIterator.next();
             Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
-            if(currentMovie != null)
-                moviesList.add(currentMovie.name);
+            if(currentMovie != null) {
+                String[] input = new String[2];
+                input[0] = currentMovie.name;
+                input[1] = Integer.toString(currentMovie.year);
+                moviesList.add(input);
+            }
         }
 
 //        moviesList.add("Iron Man");
