@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,10 +14,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class FriendFragment extends Fragment {
+
+    boolean showCommon;
 
     RecyclerView recyclerView;
     MoviesRecyclerAdapter moviesRecyclerAdapter;
@@ -41,9 +47,25 @@ public class FriendFragment extends Fragment {
         TextView friendName = getView().findViewById(R.id.friendName);
         friendName.setText(name);
 
-//        R.id.toggleButton.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
-//            // Respond to button selection
-//        }
+        MaterialButtonToggleGroup materialButtonToggleGroup =
+                (MaterialButtonToggleGroup) getView().findViewById(R.id.toggleButton);
+        int buttonId = materialButtonToggleGroup.getCheckedButtonId();
+
+        MaterialButton button = materialButtonToggleGroup.findViewById(buttonId);
+
+        materialButtonToggleGroup.addOnButtonCheckedListener(
+                new MaterialButtonToggleGroup.OnButtonCheckedListener() {
+                    @Override
+                    public void onButtonChecked(
+                        MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
+                        friendName.setText(Integer.toString(checkedId));
+                            if(checkedId == 2131230860) { // user clicked "show common"
+                                friendName.setText("Common");
+                            }
+                            else // user clicked "their list"
+                                friendName.setText("Their");
+                        }
+                });
 
         moviesList = new ArrayList<>();
 
