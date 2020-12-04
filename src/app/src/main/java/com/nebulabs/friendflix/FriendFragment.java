@@ -18,11 +18,12 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class FriendFragment extends Fragment {
 
-    boolean showCommon;
+    boolean clickFlag = false; // fix for click registering twice
 
     RecyclerView recyclerView;
     MoviesRecyclerAdapter moviesRecyclerAdapter;
@@ -58,12 +59,17 @@ public class FriendFragment extends Fragment {
                     @Override
                     public void onButtonChecked(
                         MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
-                        friendName.setText(Integer.toString(checkedId));
-                            if(checkedId == 2131230860) { // user clicked "show common"
-                                friendName.setText("Common");
+                            if(checkedId == 2131230860 && clickFlag) { // user clicked "show common"
+                                moviesList.clear();
+                                recyclerView.removeAllViews();
+                                populateCommonMatches();
                             }
-                            else // user clicked "their list"
-                                friendName.setText("Their");
+                            else if(checkedId == 2131231206 && clickFlag) {// user clicked "their list"
+                                moviesList.clear();
+                                recyclerView.removeAllViews();
+                                populateTheirList();
+                            }
+                            clickFlag = !clickFlag;
                         }
                 });
 
@@ -79,29 +85,51 @@ public class FriendFragment extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        populateCommonMatches();
 
-        moviesList.add("Iron Man");
+
+//        moviesList.add("Iron Man");
+//        moviesList.add("The Incredible Hulk");
+//        moviesList.add("Iron Man 2");
+//        moviesList.add("Thor");
+//        moviesList.add("Captain America: The First Avenger");
+//        moviesList.add("The Avengers");
+//        moviesList.add("Iron Man 3");
+//        moviesList.add("Thor: The Dark World");
+//        moviesList.add("Captain America: The Winter Soldier");
+//        moviesList.add("Guardians of the Galaxy");
+//        moviesList.add("Avengers: Age of Ultron");
+//        moviesList.add("Ant-Man");
+//        moviesList.add("Captain America: Civil War");
+//        moviesList.add("Doctor Strange");
+//        moviesList.add("Guardians of the Galaxy Vol. 2");
+//        moviesList.add("Spider-Man: Homecoming");
+//        moviesList.add("Thor: Ragnarok");
+//        moviesList.add("Black Panther");
+//        moviesList.add("Avengers: Infinity War");
+//        moviesList.add("Ant-Man and the Wasp");
+//        moviesList.add("Captain Marvel");
+//        moviesList.add("Avengers: Endgame");
+//        moviesList.add("Spider-Man: Far From Home");
+    }
+
+    void populateCommonMatches() {
         moviesList.add("The Incredible Hulk");
-        moviesList.add("Iron Man 2");
-        moviesList.add("Thor");
-        moviesList.add("Captain America: The First Avenger");
-        moviesList.add("The Avengers");
-        moviesList.add("Iron Man 3");
         moviesList.add("Thor: The Dark World");
-        moviesList.add("Captain America: The Winter Soldier");
-        moviesList.add("Guardians of the Galaxy");
-        moviesList.add("Avengers: Age of Ultron");
-        moviesList.add("Ant-Man");
-        moviesList.add("Captain America: Civil War");
-        moviesList.add("Doctor Strange");
-        moviesList.add("Guardians of the Galaxy Vol. 2");
-        moviesList.add("Spider-Man: Homecoming");
-        moviesList.add("Thor: Ragnarok");
-        moviesList.add("Black Panther");
-        moviesList.add("Avengers: Infinity War");
         moviesList.add("Ant-Man and the Wasp");
-        moviesList.add("Captain Marvel");
-        moviesList.add("Avengers: Endgame");
+        moviesList.add("Spider-Man: Far From Home");
+    }
+
+    void populateTheirList() {
+        moviesList.add("The Incredible Hulk");
+        moviesList.add("Limitless");
+        moviesList.add("Thor: The Dark World");
+        moviesList.add("Hitchhiker's Guide to the Galaxy");
+        moviesList.add("The Revelations of Narnia");
+        moviesList.add("Sherlock Holmes");
+        moviesList.add("Ant-Man and the Wasp");
+        moviesList.add("Batman Begins");
+        moviesList.add("Justice League");
         moviesList.add("Spider-Man: Far From Home");
     }
 }
