@@ -41,7 +41,7 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.rowCountTextView.setText(friendsList.get(position)[1]);
-        holder.textView.setText(friendsList.get(position)[0]);
+        holder.recyclerItemTextView.setText(friendsList.get(position)[0]);
     }
 
     @Override
@@ -52,13 +52,13 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imageView;
-        TextView textView, rowCountTextView;
+        TextView recyclerItemTextView, rowCountTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.imageView);
-            textView = itemView.findViewById(R.id.textView);
+            imageView = itemView.findViewById(R.id.recyclerItemImageView);
+            recyclerItemTextView = itemView.findViewById(R.id.recyclerItemTextView);
             rowCountTextView = itemView.findViewById(R.id.rowCountTextView);
 
             itemView.setOnClickListener(this);

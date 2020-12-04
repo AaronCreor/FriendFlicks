@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <ImageButton
-        android:id="@+id/backButton"
+        android:id="@+id/friend_backButton"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="45dp"
         android:layout_height="46dp"
@@ -48,7 +48,7 @@
         app:cardCornerRadius="50dp"
         app:layout_constraintEnd_toStartOf="@+id/friendName"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/backButton"
+        app:layout_constraintStart_toEndOf="@+id/friend_backButton"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -74,7 +74,7 @@
         android:layout_marginTop="22dp"
         android:weightSum="1.0"
         app:checkedButton="@id/common_matches"
-        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintTop_toBottomOf="@id/friend_backButton"
         app:selectionRequired="true"
         app:singleSelection="true"
         app:theme="@style/Theme.MaterialComponents">
