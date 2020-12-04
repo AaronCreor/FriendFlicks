@@ -29,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -71,14 +72,22 @@ public class FriendsFragment extends Fragment {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
 
-        friendsList.add("Chinmay Sharma");
-        friendsList.add("Mesut Ozil");
-        friendsList.add("Joshua Fantillo");
-        friendsList.add("Danny Welbeck");
-        friendsList.add("Aaron Creor");
-        friendsList.add("Mishal Bashir");
-        friendsList.add("Jane Doe");
-        friendsList.add("Jonny Doe");
+        String userEmail = MainActivity.userEmail;
+        UsersData usersData = new UsersData();
+        User user = usersData.getUserByEmail(userEmail);
+        Iterator<String> friendEmailIterator = user.friendsList.iterator();
+        while(friendEmailIterator.hasNext()) {
+            friendsList.add(usersData.getUserByEmail(friendEmailIterator.next()).userName);
+        }
+
+//        friendsList.add("Chinmay Sharma");
+//        friendsList.add("Mesut Ozil");
+//        friendsList.add("Joshua Fantillo");
+//        friendsList.add("Danny Welbeck");
+//        friendsList.add("Aaron Creor");
+//        friendsList.add("Mishal Bashir");
+//        friendsList.add("Jane Doe");
+//        friendsList.add("Jonny Doe");
 
         FloatingActionButton addGroup_fab = view.findViewById(R.id.addgroupfab);
         addGroup_fab.setOnClickListener(new View.OnClickListener() {
