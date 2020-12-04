@@ -64,9 +64,13 @@
         android:id="@+id/toggleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1.0">
+        android:weightSum="1.0"
+        app:singleSelection="true"
+        app:checkedButton="@id/common_matches"
+        app:selectionRequired="true">
 
         <com.google.android.material.button.MaterialButton
+            app:strokeColor="@android:color/darker_gray"
             app:theme="@style/Theme.MaterialComponents"
             android:id="@+id/common_matches"
             style="?attr/materialButtonOutlinedStyle"
@@ -78,6 +82,7 @@
             app:cornerRadius="0dp" />
 
         <com.google.android.material.button.MaterialButton
+            app:strokeColor="@android:color/darker_gray"
             app:theme="@style/Theme.MaterialComponents"
             android:id="@+id/their_list"
             style="?attr/materialButtonOutlinedStyle"

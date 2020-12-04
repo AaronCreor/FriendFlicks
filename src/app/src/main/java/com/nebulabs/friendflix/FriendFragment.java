@@ -41,6 +41,10 @@ public class FriendFragment extends Fragment {
         TextView friendName = getView().findViewById(R.id.friendName);
         friendName.setText(name);
 
+//        R.id.toggleButton.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
+//            // Respond to button selection
+//        }
+
         moviesList = new ArrayList<>();
 
         recyclerView = view.findViewById(R.id.recyclerViewFriend);
