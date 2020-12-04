@@ -19,4 +19,6 @@
 
 
 ## Joshua Fantillo
+ - Setup Omdb database get commands (getTitle, getPoster, getRatings.. etc.)
+ - Created List of most popular movies IMDbMovies.csv
 
