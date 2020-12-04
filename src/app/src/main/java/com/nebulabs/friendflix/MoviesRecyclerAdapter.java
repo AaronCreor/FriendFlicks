@@ -17,6 +17,9 @@ import es.dmoral.toasty.Toasty;
 
 import androidx.fragment.app.Fragment;
 
+/**
+ * Recycler view adapter for each Movie entity in movie list
+ */
 public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";

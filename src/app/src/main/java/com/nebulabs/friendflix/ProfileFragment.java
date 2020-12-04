@@ -21,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
+/**
+ * Fragment to display the user profile and logout button
+ */
 public class ProfileFragment extends Fragment {
 
     public ProfileFragment(){
@@ -46,6 +49,9 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    /**
+     * Populate data in views from google servers
+     */
     public void populateData(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         TextView user_name = getView().findViewById(R.id.userName);
@@ -61,6 +67,9 @@ public class ProfileFragment extends Fragment {
         user_email.setText(user.getEmail());
     }
 
+    /**
+     * Sign out the user
+     */
     public void signOut() {
         // [START auth_sign_out]
         FirebaseAuth.getInstance().signOut();

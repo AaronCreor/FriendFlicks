@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+/**
+ * Activity to display a splash screen to allow data pre-loading
+ */
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Override

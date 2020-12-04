@@ -21,6 +21,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
+/**
+ * Fragment to display a single friend from friend list
+ */
 public class FriendFragment extends Fragment {
 
     boolean clickFlag = false; // fix for click registering twice

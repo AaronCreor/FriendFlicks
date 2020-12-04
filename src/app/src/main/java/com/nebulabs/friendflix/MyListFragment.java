@@ -11,9 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.flatdialoglibrary.dialog.FlatDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragment to display movie list of a user
+ */
 public class MyListFragment extends Fragment {
 
     RecyclerView recyclerView;
@@ -32,6 +38,33 @@ public class MyListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Search Fab
+        FloatingActionButton searchFab = view.findViewById(R.id.search_mylist_fab);
+        searchFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FlatDialog flatDialog = new FlatDialog(getContext());
+                flatDialog.setTitle("Search Movie")
+                        .setSubtitle("Enter movie name")
+                        .setFirstTextFieldHint("movie name")
+                        .setFirstButtonText("SEARCH")
+                        .setSecondButtonText("CANCEL")
+                        .withFirstButtonListner(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //TODO: ADD SEARCH SUPPORT
+                            }
+                        })
+                        .withSecondButtonListner(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                flatDialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
+        });
 
         moviesList = new ArrayList<>();
 

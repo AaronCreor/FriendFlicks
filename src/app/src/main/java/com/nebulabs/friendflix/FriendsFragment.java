@@ -34,6 +34,9 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
+/**
+ * Fragment to display friend list of a user
+ */
 public class FriendsFragment extends Fragment {
 
     RecyclerView recyclerView;
@@ -108,7 +111,7 @@ public class FriendsFragment extends Fragment {
                             dialog.setMessage("Sending request, please wait...");
                             dialog.show();
 
-                            DocumentReference docRef = db.collection("groups").document(flatDialog.getFirstTextField());
+                            DocumentReference docRef = db.collection("friends").document(flatDialog.getFirstTextField());
                             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {

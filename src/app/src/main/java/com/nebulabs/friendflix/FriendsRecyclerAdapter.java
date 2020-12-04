@@ -17,6 +17,9 @@ import es.dmoral.toasty.Toasty;
 
 import androidx.fragment.app.Fragment;
 
+/**
+ * Recycler view adapter for each friend entity in friend list of user
+ */
 public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";

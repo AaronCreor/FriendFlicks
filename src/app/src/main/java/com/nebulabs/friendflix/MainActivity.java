@@ -14,7 +14,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import es.dmoral.toasty.Toasty;
 
-
+/**
+ * Main activity screen containing all fragments and navigation views
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Navigation listener for top navigation bar
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -70,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
 */
     boolean doubleBackToExitPressedOnce = false;
 
+    /**
+     * Handle back presses from activity screen
+     */
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {

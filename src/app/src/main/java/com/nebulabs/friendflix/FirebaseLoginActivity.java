@@ -22,7 +22,9 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
-
+/**
+ * Activity screen for login
+ */
 public class FirebaseLoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
 
@@ -43,6 +45,10 @@ public class FirebaseLoginActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Check if user already logged in and bypass login screen
+     * Else display a sign in request toast to user
+     */
     public void checkCurrentUser() {
         // [START check_current_user]
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -59,6 +65,9 @@ public class FirebaseLoginActivity extends AppCompatActivity {
         // [END check_current_user]
     }
 
+    /**
+     * Initiate firebase sign in process
+     */
     public void createSignInIntent() {
         // [START auth_fui_create_intent]
         // Choose authentication providers
@@ -75,6 +84,12 @@ public class FirebaseLoginActivity extends AppCompatActivity {
         // [END auth_fui_create_intent]
     }
 
+    /**
+     * Check result of firebase login and display main activity if login authorized
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     // [START auth_fui_result]
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -118,6 +133,9 @@ public class FirebaseLoginActivity extends AppCompatActivity {
     }
     // [END auth_fui_result]
 
+    /**
+     * Sign out of the app
+     */
     public void signOut() {
         // [START auth_fui_signout]
         AuthUI.getInstance()
