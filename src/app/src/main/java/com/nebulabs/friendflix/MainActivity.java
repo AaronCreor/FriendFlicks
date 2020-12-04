@@ -2,7 +2,7 @@ package com.nebulabs.friendflix;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-
+import android.view.KeyEvent;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +26,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.fragment_container_view, fragment)
                 .commit();
     }
-
+    @Override
+    public void onBackPressed() {
+        Fragment selectedFrag = null;
+        selectedFrag = new MyListFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,selectedFrag).commit();
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFrag = null;
