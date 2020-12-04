@@ -34,7 +34,7 @@ public class FriendFragment extends Fragment {
     RecyclerView recyclerView;
     MoviesRecyclerAdapter moviesRecyclerAdapter;
 
-    List<String> moviesList;
+    List<String[]> moviesList;
 
     String name;
     String email;
@@ -96,7 +96,7 @@ public class FriendFragment extends Fragment {
                         }
                 });
 
-        moviesList = new ArrayList<>();
+        moviesList = new ArrayList<String[]>();
 
         recyclerView = view.findViewById(R.id.recyclerViewFriend);
         moviesRecyclerAdapter = new MoviesRecyclerAdapter(moviesList);
@@ -137,22 +137,34 @@ public class FriendFragment extends Fragment {
     }
 
     void populateCommonMatches() {
-        moviesList.add("The Incredible Hulk");
-        moviesList.add("Thor: The Dark World");
-        moviesList.add("Ant-Man and the Wasp");
-        moviesList.add("Spider-Man: Far From Home");
+        UsersData usersData = MainActivity.usersData;
+        User friend = usersData.getUserByEmail(email);
+        Iterator<Integer> movieIterator = friend.movieList.iterator();
+        while(movieIterator.hasNext()) {
+            int currentMovieID = movieIterator.next();
+            Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
+            if(currentMovie != null) {
+                String[] input = new String[2];
+                input[0] = currentMovie.name;
+                input[1] = Integer.toString(currentMovie.year);
+                moviesList.add(input);
+            }
+        }
     }
 
     void populateTheirList() {
-        moviesList.add("The Incredible Hulk");
-        moviesList.add("Limitless");
-        moviesList.add("Thor: The Dark World");
-        moviesList.add("Hitchhiker's Guide to the Galaxy");
-        moviesList.add("The Revelations of Narnia");
-        moviesList.add("Sherlock Holmes");
-        moviesList.add("Ant-Man and the Wasp");
-        moviesList.add("Batman Begins");
-        moviesList.add("Justice League");
-        moviesList.add("Spider-Man: Far From Home");
+        UsersData usersData = MainActivity.usersData;
+        User friend = usersData.getUserByEmail(email);
+        Iterator<Integer> movieIterator = friend.movieList.iterator();
+        while(movieIterator.hasNext()) {
+            int currentMovieID = movieIterator.next();
+            Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
+            if(currentMovie != null) {
+                String[] input = new String[2];
+                input[0] = currentMovie.name;
+                input[1] = Integer.toString(currentMovie.year);
+                moviesList.add(input);
+            }
+        }
     }
 }

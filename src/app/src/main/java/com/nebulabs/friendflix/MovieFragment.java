@@ -61,12 +61,12 @@ public class MovieFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (pressed == 1){
-                    movieFavButton.setImageDrawable(getResources().getDrawable(R.drawable.movie_favourite));
+                    movieFavButton.setImageResource(R.drawable.movie_favourite);
                     v.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary),PorterDuff.Mode.SRC_ATOP);
                     pressed = 0;
                 } else {
                     v.getBackground().setColorFilter(Color.WHITE,PorterDuff.Mode.SRC_ATOP);
-                    movieFavButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_favorite_24));
+                    movieFavButton.setImageResource(R.drawable.ic_baseline_favorite_24);
                     pressed = 1;
                 }
             }

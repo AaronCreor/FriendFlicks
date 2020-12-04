@@ -48,9 +48,7 @@ public class FriendsFragment extends Fragment {
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public FriendsFragment(){
-
-    }
+    public FriendsFragment(){}
 
     @Nullable
     @Override
@@ -133,7 +131,7 @@ public class FriendsFragment extends Fragment {
                                     if (task.isSuccessful()) {
                                         DocumentSnapshot document = task.getResult();
                                         if (document.exists()) {
-                                            Log.d("CHECK", "Group already exists");
+                                            Log.d("CHECK", "Friend already exists");
                                             Toasty.error(getContext(),"That user is already your friend!", Toasty.LENGTH_SHORT).show();
                                             dialog.dismiss();
                                         } else {
@@ -145,11 +143,9 @@ public class FriendsFragment extends Fragment {
                                             memberData.put("uid",user.getUid());
                                             memberData.put("admin",true);
 
-                                            Map<String, Object> addUserToArrayMap = new HashMap<>();
-                                            addUserToArrayMap.put("members", FieldValue.arrayUnion(memberData));
 
                                             db.collection("groups").document(flatDialog.getFirstTextField())
-                                                    .set(addUserToArrayMap)
+                                                    .set(memberData)
                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override
                                                         public void onSuccess(Void aVoid) {

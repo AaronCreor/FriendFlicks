@@ -23,9 +23,9 @@ import androidx.fragment.app.Fragment;
 public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
-    List<String> moviesList;
+    List<String[]> moviesList;
 
-    public MoviesRecyclerAdapter(List<String> moviesList) {
+    public MoviesRecyclerAdapter(List<String[]> moviesList) {
         this.moviesList = moviesList;
     }
 
@@ -40,8 +40,8 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.rowCountTextView.setText(String.valueOf(position));
-        holder.textView.setText(moviesList.get(position));
+        holder.rowCountTextView.setText(moviesList.get(position)[1]);
+        holder.textView.setText(moviesList.get(position)[0]);
     }
 
     @Override
@@ -76,8 +76,8 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
 
         @Override
         public void onClick(View view) {
-            Toasty.info(view.getContext(), moviesList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
-            String movieName = moviesList.get(getAdapterPosition());
+            Toasty.info(view.getContext(), moviesList.get(getAdapterPosition())[0], Toast.LENGTH_SHORT).show();
+            String movieName = moviesList.get(getAdapterPosition())[0];
             Fragment selectedFrag = new MovieFragment(movieName);
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container_view, selectedFrag)
