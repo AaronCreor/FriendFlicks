@@ -3,6 +3,8 @@ package com.nebulabs.friendflix;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,7 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import es.dmoral.toasty.Toasty;
 
@@ -20,13 +27,15 @@ import androidx.fragment.app.Fragment;
 /**
  * Recycler view adapter for each Movie entity in movie list
  */
-public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAdapter.ViewHolder> {
+public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = "RecyclerAdapter";
     List<String[]> moviesList;
+    List<String[]> unfilteredMoviesList;
 
     public MoviesRecyclerAdapter(List<String[]> moviesList) {
         this.moviesList = moviesList;
+        this.unfilteredMoviesList = new ArrayList<String[]>(moviesList);
     }
 
     @NonNull
@@ -48,6 +57,44 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
     public int getItemCount() {
         return moviesList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return myFilter;
+    }
+
+    Filter myFilter = new Filter() {
+
+        // run on background thread
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<String[]> filteredList = new ArrayList<>();
+
+            if(constraint == null || constraint.length() == 0) {
+                filteredList.addAll(unfilteredMoviesList);
+            }
+            else {
+                for(String[] movie : unfilteredMoviesList) {
+                    if (movie[0].toLowerCase().contains(constraint.toString().toLowerCase())) {
+                        filteredList.add(movie);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+
+            return filterResults;
+        }
+
+        // runs on a ui thread
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults filterResults) {
+            moviesList.clear();
+            moviesList.addAll((Collection<? extends String[]>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

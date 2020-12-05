@@ -3,6 +3,8 @@ package com.nebulabs.friendflix;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
@@ -24,9 +28,11 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
 
     private static final String TAG = "RecyclerAdapter";
     List<String[]> friendsList;
+    List<String[]> unfilteredFriendsList;
 
-    public FriendsRecyclerAdapter(List<String[]> moviesList) {
-        this.friendsList = moviesList;
+    public FriendsRecyclerAdapter(List<String[]> friendsList) {
+        this.friendsList = friendsList;
+        this.unfilteredFriendsList = new ArrayList<String[]>(friendsList);
     }
 
     @NonNull
@@ -48,6 +54,43 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
     public int getItemCount() {
         return friendsList.size();
     }
+
+    public Filter getFilter() {
+        return myFilter;
+    }
+
+    Filter myFilter = new Filter() {
+
+        // run on background thread
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<String[]> filteredList = new ArrayList<>();
+
+            if(constraint == null || constraint.length() == 0) {
+                filteredList.addAll(unfilteredFriendsList);
+            }
+            else {
+                for(String[] friend : unfilteredFriendsList) {
+                    if (friend[0].toLowerCase().contains(constraint.toString().toLowerCase())) {
+                        filteredList.add(friend);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+
+            return filterResults;
+        }
+
+        // runs on a ui thread
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults filterResults) {
+            friendsList.clear();
+            friendsList.addAll((Collection<? extends String[]>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
