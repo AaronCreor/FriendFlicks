@@ -18,10 +18,10 @@ public class Omdb {
 	public static final String SEARCH_URL = "http://www.omdbapi.com/?type=movie&s=TITLE&apikey=APIKEY";
 	public static final String SEARCH_BY_IMDB_URL = "http://www.omdbapi.com/?type=movie&i=IMDB&apikey=APIKEY";
 	private static final String PATH_TO_CSV = "IMDbMovies.csv";
-	private static final String KEY = "2f9c8f89";
+	public static final String KEY = "2f9c8f89";
 	
 	//this gets the data string from the omdb webstie
-	private static String sendGetRequest(String requestUrl)
+	public static String sendGetRequest(String requestUrl)
 	{
 		
 		StringBuffer response = new StringBuffer();

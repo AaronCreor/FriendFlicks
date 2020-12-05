@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     public static String userEmail = "jonnyboy@gmail.com";
     public static UsersData usersData = new UsersData();
     public static MoviesData moviesData = new MoviesData();
+    public static String response = "Welcome to Explore Screen";
+    public static boolean exploreScreenAlreadyCreated = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
