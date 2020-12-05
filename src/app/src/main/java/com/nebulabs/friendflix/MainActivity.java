@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomTabView.getMenu().getItem(0).setChecked(true);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,new MyListFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,new ExploreFragment()).commit();
 
 
     }
@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
             Fragment selectedFrag = null;
 
             switch (item.getItemId()) {
+                case R.id.exploreTab:
+                    selectedFrag = new ExploreFragment();
+                    break;
                 case R.id.accountTab:
                     selectedFrag = new ProfileFragment();
                     break;
