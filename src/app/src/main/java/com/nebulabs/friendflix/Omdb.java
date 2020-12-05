@@ -4,13 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Omdb {
@@ -218,6 +217,19 @@ public class Omdb {
 		}
 		
 		return  movieName;
+	}
+
+	public static String fillId() throws IOException {
+		String id = "";
+		id = fillImdbArray().get(randomNum());
+		return id;
+	}
+
+	protected static int randomNum()
+	{
+		Random rand = new Random();
+		int upperBound = 2852;
+		return rand.nextInt(upperBound);
 	}
 	
 	public static void main(String[] args) throws IOException {

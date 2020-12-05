@@ -3,20 +3,23 @@
 
 package com.nebulabs.friendflix;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 
 class Movie {
-    String id;
+    int id;
     String name;
-    String year;
+    int year;
 
-    public Movie(String id, String name, String year) {
+    public Movie(int id, String name, int year) throws IOException {
         this.id = id;
-        this.name = Omdb.getTitle(id);
-        this.year = Omdb.getYear(id);
+        this.name = name;
+        this.year = year;
     }
 }
 
@@ -24,27 +27,26 @@ class Movie {
 public class MoviesData {
     List<Movie> movieList= new ArrayList<Movie>();
 
-    public Movie getMovieByID(String ID) {
+    public Movie getMovieByID(int ID) {
         Movie empty = null;
         Iterator<Movie> movieIterator = movieList.iterator();
         while(movieIterator.hasNext()) {
             Movie current = movieIterator.next();
-            if(current.id.equals(ID))
+            if(current.id == ID)
                 return current;
         }
         return empty;
     }
-    
+
     final private int MOVIE_LIST_SIZE = 10;
-    public MoviesData() {
+    public MoviesData() throws IOException {
         //only has at most 10 movies in the array
         while(movieList.size() < MOVIE_LIST_SIZE)
         {
-            String id = "";
             //String id = getIdFromFirebase();
             //id value is just a place holder for now
             //the id value will be got from the json data on firebase
-            movieList.add(new Movie(id, Omdb.getTitle(id), Omdb.getYear(id)));
+            movieList.add(new Movie(0, "batman", 2015));
         }
 
 
