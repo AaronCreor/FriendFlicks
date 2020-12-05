@@ -106,6 +106,22 @@ public class Omdb {
 		}
 		return synopsis;
 	}
+	//gets the year
+	public static String getYear(String id)
+	{
+		String year = "";
+		String[] movieInfo = omdbDataString(id);
+		int j=0;
+		while(j< movieInfo.length-1)
+		{
+			if(movieInfo[j].equals("Year"))
+			{
+				year = movieInfo[j+1];
+			}
+			j++;
+		}
+		return year;
+	}
 	//searches for the moviedatabase and returns the score
 	public static String getMovieDatabase(String id)
 	{
