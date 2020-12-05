@@ -104,14 +104,38 @@
             app:theme="@style/Theme.MaterialComponents" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
+    <com.arlib.floatingsearchview.FloatingSearchView
+        android:id="@+id/friend_searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        app:floatingSearch_leftActionMode="showSearch"
+        app:floatingSearch_close_search_on_keyboard_dismiss="true"
+        app:floatingSearch_searchBarMarginLeft="@dimen/search_view_inset"
+        app:floatingSearch_searchBarMarginRight="@dimen/search_view_inset"
+        app:floatingSearch_searchBarMarginTop="@dimen/search_view_inset"
+        app:floatingSearch_searchHint="Search"
+        app:floatingSearch_showSearchKey="false"
+        app:floatingSearch_showVoiceInput="true"
+        app:floatingSearch_suggestionsListAnimDuration="250"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toggleButton" />
+
+    <View
+        android:id="@+id/friend_searchBar_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@id/friend_searchBar"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFriend"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+        app:layout_constraintTop_toBottomOf="@id/friend_searchBar_divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
