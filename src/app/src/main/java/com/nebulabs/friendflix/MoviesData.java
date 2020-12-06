@@ -3,12 +3,10 @@
 
 package com.nebulabs.friendflix;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import static java.lang.Integer.parseInt;
 
 
 class Movie {
