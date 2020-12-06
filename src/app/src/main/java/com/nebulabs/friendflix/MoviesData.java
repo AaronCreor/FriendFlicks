@@ -3,10 +3,12 @@
 
 package com.nebulabs.friendflix;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
 
 
 class Movie {
@@ -19,6 +21,8 @@ class Movie {
         this.name = name;
         this.year = year;
     }
+
+
 
 }
 
@@ -36,7 +40,6 @@ public class MoviesData {
         }
         return empty;
     }
-
 
     public MoviesData() {
         movieList.add(new Movie(0, "Limitless", 2011));
@@ -69,6 +72,7 @@ public class MoviesData {
         movieList.add(new Movie(27, "Power Rangers", 2017));
         movieList.add(new Movie(28, "Goosebumps", 2015));
     }
+    
 
     public List getMovieList() {
         return movieList;

@@ -223,7 +223,7 @@ public class Omdb {
 
 	public static String fillId() throws IOException {
 		String id = "";
-		id = fillImdbArray().get(randomNum());
+		id = String.valueOf(randomNum());
 		return id;
 	}
 
