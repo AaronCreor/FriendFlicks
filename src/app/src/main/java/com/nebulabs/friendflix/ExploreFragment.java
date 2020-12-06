@@ -1,8 +1,5 @@
 package com.nebulabs.friendflix;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,7 +94,7 @@ public class ExploreFragment extends Fragment {
                     String userEmail = MainActivity.userEmail;
                     UsersData usersData = MainActivity.usersData;
                     User user = usersData.getUserByEmail(userEmail);
-                    user.addMovie(movieID, movieTitleValue, Integer.parseInt(movieYearValue));
+                    user.addMovie(new Movie(movieID, movieTitleValue, Integer.parseInt(movieYearValue)));
                     Toasty.info(view.getContext(), movieID, Toast.LENGTH_SHORT).show();
 
                     // and then...

@@ -13,6 +13,7 @@ public class User {
     @SerializedName("userEmail")
     String userEmail;
 
+
     /**
      * Create a new user
      * @param mUid user id
