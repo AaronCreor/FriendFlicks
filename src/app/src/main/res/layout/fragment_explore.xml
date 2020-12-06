@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/explore_movieposter"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,6 +19,7 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
+        android:gravity="center"
         android:id="@+id/explore_movietitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,6 +32,7 @@
         app:layout_constraintTop_toBottomOf="@id/explore_movieposter" />
 
     <TextView
+        android:gravity="center"
         android:id="@+id/explore_movieyear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,12 +44,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/explore_movietitle" />
 
+    <TextView
+        android:id="@+id/explore_moviesynopsis"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="With the help of a mysterious pill that enables the user to access 100% of his brain abilities, a struggling writer becomes a financial wizard, but it also puts him in a new world with lots of dangers."
+        app:layout_constraintBottom_toTopOf="@+id/explore_skip_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/explore_movieyear" />
+
     <Button
         android:id="@+id/explore_skip_button"
         style="?android:attr/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="40dp"
         android:backgroundTint="@color/teal_700"
         android:text="Load new random movie"
         android:textColor="@color/white"

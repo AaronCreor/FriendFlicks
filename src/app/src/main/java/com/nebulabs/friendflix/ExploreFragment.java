@@ -64,6 +64,8 @@ public class ExploreFragment extends Fragment {
         movieTitle = getView().findViewById(R.id.explore_movietitle);
         movieYear = getView().findViewById(R.id.explore_movieyear);
         moviePoster = getView().findViewById(R.id.explore_movieposter);
+        movieSynopsis = getView().findViewById(R.id.explore_moviesynopsis);
+
 
         renderMovieInfo();
 
@@ -114,6 +116,7 @@ public class ExploreFragment extends Fragment {
             movieTitleValue = obj.getString("Title");
             movieYearValue = obj.getString("Year");
             moviePosterValue = obj.getString("Poster");
+            movieSynopsisValue = obj.getString("Plot");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -121,6 +124,7 @@ public class ExploreFragment extends Fragment {
         movieTitle.setText(movieTitleValue);
         movieYear.setText(movieYearValue);
         Picasso.get().load(moviePosterValue).into(moviePoster);
+        movieSynopsis.setText(movieSynopsisValue);
     }
 
     String generateRandomMovieID() throws IOException {
