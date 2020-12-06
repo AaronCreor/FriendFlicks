@@ -11,8 +11,6 @@
 
     <ImageButton
         android:id="@+id/friend_backButton"
-        android:clickable="true"
-        android:focusableInTouchMode="true"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="45dp"
         android:layout_height="46dp"
@@ -24,8 +22,6 @@
 
     <TextView
         android:id="@+id/friendName"
-        android:clickable="true"
-        android:focusableInTouchMode="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -37,8 +33,6 @@
 
     <TextView
         android:id="@+id/friendEmail"
-        android:clickable="true"
-        android:focusableInTouchMode="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
@@ -49,8 +43,6 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profileImage"
-        android:clickable="true"
-        android:focusableInTouchMode="true"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="12dp"
@@ -63,8 +55,6 @@
 
         <ImageView
             android:id="@+id/friendImage"
-            android:clickable="true"
-            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -81,8 +71,6 @@
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleButton"
-        android:clickable="true"
-        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -144,8 +132,6 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFriend"
-        android:clickable="true"
-        android:focusableInTouchMode="true"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
