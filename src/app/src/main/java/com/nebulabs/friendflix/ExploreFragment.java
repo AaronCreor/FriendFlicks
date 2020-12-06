@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
@@ -78,11 +79,24 @@ public class ExploreFragment extends Fragment {
         }
         MainActivity.exploreScreenAlreadyCreated = true;
 
-        Button skip = (Button) view.findViewById(R.id.explore_skip_button);
+        MaterialButton skip = view.findViewById(R.id.explore_skipbutton);
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
+                    showRandomMovie();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        MaterialButton like = view.findViewById(R.id.explore_likebutton);
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    // put movie in friendList [implement this here], and then...
                     showRandomMovie();
                 } catch (IOException e) {
                     e.printStackTrace();
