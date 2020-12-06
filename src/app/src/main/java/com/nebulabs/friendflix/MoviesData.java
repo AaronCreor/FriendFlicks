@@ -72,7 +72,7 @@ public class MoviesData {
         movieList.add(new Movie(27, "Power Rangers", 2017));
         movieList.add(new Movie(28, "Goosebumps", 2015));
     }
-    
+
 
     public List getMovieList() {
         return movieList;

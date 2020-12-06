@@ -230,7 +230,7 @@ public class Omdb {
 	protected static int randomNum()
 	{
 		Random rand = new Random();
-		int upperBound = 2852;
+		int upperBound = 250;
 		return rand.nextInt(upperBound);
 	}
 	
