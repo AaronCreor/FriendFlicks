@@ -144,7 +144,7 @@ public class FriendFragment extends Fragment {
         Iterator<Integer> movieIterator = friend.movieList.iterator();
         while(movieIterator.hasNext()) {
             int currentMovieID = movieIterator.next();
-            Movie currentMovie = MainActivity.moviesData.getMovieByID(Omdb.randomNum());
+            Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
             if(currentMovie != null) {
                 String[] input = new String[2];
                 input[0] = currentMovie.name;
