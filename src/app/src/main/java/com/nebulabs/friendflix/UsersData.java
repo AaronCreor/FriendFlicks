@@ -8,17 +8,22 @@ import java.util.Iterator;
 import java.util.List;
 
 class MovieList {
-    ArrayList<String> movieList;
+    ArrayList<Movie> movieList;
 
     public MovieList() {
-        movieList = new ArrayList<String>();
+        movieList = new ArrayList<Movie>();
     }
 
-    public void add(String movieID) {
-        movieList.add(movieID);
+    public void add(Movie movie) {
+        movieList.add(movie);
     }
 
-    public ArrayList<String> get() {
+    public void add(String movieID, String movieName, int movieYear) {
+        Movie input = new Movie(movieID, movieName, movieYear);
+        this.add(input);
+    }
+
+    public ArrayList<Movie> get() {
         return movieList;
     }
 }
@@ -42,14 +47,19 @@ class FriendsList {
 class User {
     public String userEmail;
     public String userName;
-    public ArrayList<String> movieList;
+    public ArrayList<Movie> movieList;
     public ArrayList<String> friendsList;
 
-    public User(String userEmail, String userName, ArrayList<String> movieList, ArrayList<String> friendsList) {
+    public User(String userEmail, String userName, ArrayList<Movie> movieList, ArrayList<String> friendsList) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.movieList = movieList;
         this.friendsList = friendsList;
+    }
+
+    public void addMovie(String movieID, String movieName, int movieYear) {
+        Movie input = new Movie(movieID, movieName, movieYear);
+        this.movieList.add(input);
     }
 }
 
@@ -69,15 +79,15 @@ public class UsersData {
 
     public UsersData() {
         MovieList aaronMovies = new MovieList();
-        aaronMovies.add("tt0114369");
-        aaronMovies.add("tt0381681");
-        aaronMovies.add("tt0118799");
-        aaronMovies.add("tt0043014");
-        aaronMovies.add("tt0087884");
-        aaronMovies.add("tt0198781");
-        aaronMovies.add("tt0110357");
-        aaronMovies.add("tt0056592");
-        aaronMovies.add("tt2119532");
+        aaronMovies.add(new Movie("tt0114369", "Se7en", 1995));
+        aaronMovies.add(new Movie("tt0381681", "Before Sunset", 2004));
+        aaronMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997));
+        aaronMovies.add(new Movie("tt0043014", "Sunset Blvd.", 1950));
+        aaronMovies.add(new Movie("tt0087884", "Paris, Texas", 2018));
+        aaronMovies.add(new Movie("tt0198781", "Monsters, Inc.", 2001));
+        aaronMovies.add(new Movie("tt0110357", "The Lion King", 1994));
+        aaronMovies.add(new Movie("tt0056592", "To Kill a Mockingbird", 1962));
+        aaronMovies.add(new Movie("tt2119532", "Hacksaw Ridge", 2016));
         FriendsList aaronFriends = new FriendsList();
         aaronFriends.add("jonnyboy@gmail.com");
         aaronFriends.add("joshua@gmail.com");
@@ -86,14 +96,14 @@ public class UsersData {
         usersList.add(aaron);
 
         MovieList chinmayMovies = new MovieList();
-        chinmayMovies.add("tt1911644");
-        chinmayMovies.add("tt0116571");
-        chinmayMovies.add("tt0095765");
-        chinmayMovies.add("tt0114369");
-        chinmayMovies.add("tt0381681");
-        chinmayMovies.add("tt0032976");
-        chinmayMovies.add("tt0118799");
-        chinmayMovies.add("tt2582802");
+        chinmayMovies.add(new Movie("tt1911644", "The Call", 2013));
+        chinmayMovies.add(new Movie("tt0116571", "House Arrest", 1996));
+        chinmayMovies.add(new Movie("tt0095765", "Cinema Paradiso", 1988));
+        chinmayMovies.add(new Movie("tt0114369", "Se7en", 1995));
+        chinmayMovies.add(new Movie("tt0381681", "Before Sunset", 2004));
+        chinmayMovies.add(new Movie("tt0032976", "Rebecca", 1940));
+        chinmayMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997));
+        chinmayMovies.add(new Movie("tt2582802", "Whiplash", 2014));
         FriendsList chinmayFriends = new FriendsList();
         chinmayFriends.add("jonnyboy@gmail.com");
         chinmayFriends.add("joshua@gmail.com");
@@ -102,14 +112,14 @@ public class UsersData {
         usersList.add(chinmay);
 
         MovieList joshMovies = new MovieList();
-        joshMovies.add("tt0372784");
-        joshMovies.add("tt0034583");
-        joshMovies.add("tt0053125");
-        joshMovies.add("tt0114814");
-        joshMovies.add("tt1255953");
-        joshMovies.add("tt2119532");
-        joshMovies.add("tt0108052");
-        joshMovies.add("tt0056592");
+        joshMovies.add(new Movie("tt0372784", "Batman Begins", 2005));
+        joshMovies.add(new Movie("tt0034583", "Casablanca", 1942));
+        joshMovies.add(new Movie("tt0053125", "North by Northwest", 1959));
+        joshMovies.add(new Movie("tt0114814", "The Usual Suspects", 1995));
+        joshMovies.add(new Movie("tt1255953", "Incendies", 2010));
+        joshMovies.add(new Movie("tt2119532", "Hacksaw Ridge", 2016));
+        joshMovies.add(new Movie("tt0108052", "Schindler's List", 1993));
+        joshMovies.add(new Movie("tt0056592", "To Kill a Mockingbird", 1962));
         FriendsList joshFriends = new FriendsList();
         joshFriends.add("jonnyboy@gmail.com");
         joshFriends.add("aaron@gmail.com");
@@ -118,14 +128,14 @@ public class UsersData {
         usersList.add(josh);
 
         MovieList karanMovies = new MovieList();
-        karanMovies.add("tt1911644");
-        karanMovies.add("tt0095765");
-        karanMovies.add("tt0381681");
-        karanMovies.add("tt0118799");
-        karanMovies.add("tt0088247");
-        karanMovies.add("tt0208092");
-        karanMovies.add("tt0017136");
-        karanMovies.add("tt0087884");
+        karanMovies.add(new Movie("tt1911644", "The Call", 2013));
+        karanMovies.add(new Movie("tt0095765", "Cinema Paradiso", 1988));
+        karanMovies.add(new Movie("tt0381681", "Before Sunset", 2004));
+        karanMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997));
+        karanMovies.add(new Movie("tt0088247", "The Terminator", 1984));
+        karanMovies.add(new Movie("tt0208092", "Snatch", 2017));
+        karanMovies.add(new Movie("tt0017136", "Metropolis", 1927));
+        karanMovies.add(new Movie("tt0087884", "Paris, Texas", 2018));
         FriendsList karanFriends = new FriendsList();
         karanFriends.add("jonnyboy@gmail.com");
         karanFriends.add("aaron@gmail.com");
@@ -134,17 +144,17 @@ public class UsersData {
         usersList.add(karan);
 
         MovieList jonnyMovies = new MovieList();
-        jonnyMovies.add("tt1911644");
-        jonnyMovies.add("tt0116571");
-        jonnyMovies.add("tt0095765");
-        jonnyMovies.add("tt2582802");
-        jonnyMovies.add("tt0088247");
-        jonnyMovies.add("tt0167404");
-        jonnyMovies.add("tt0110357");
-        jonnyMovies.add("tt0042192");
-        jonnyMovies.add("tt0114814");
-        jonnyMovies.add("tt0053125");
-        jonnyMovies.add("tt0372784");
+        jonnyMovies.add(new Movie("tt1911644", "The Call", 2013));
+        jonnyMovies.add(new Movie("tt0116571", "House Arrest", 1996));
+        jonnyMovies.add(new Movie("tt0095765", "Cinema Paradiso", 1988));
+        jonnyMovies.add(new Movie("tt2582802", "Whiplash", 2014));
+        jonnyMovies.add(new Movie("tt0088247", "The Terminator", 1984));
+        jonnyMovies.add(new Movie("tt0167404", "The Sixth Sense", 1999));
+        jonnyMovies.add(new Movie("tt0110357", "The Lion King", 1994));
+        jonnyMovies.add(new Movie("tt0042192", "All About Eve", 1950));
+        jonnyMovies.add(new Movie("tt0114814", "The Usual Suspects", 1995));
+        jonnyMovies.add(new Movie("tt0053125", "North by Northwest", 1959));
+        jonnyMovies.add(new Movie("tt0372784", "Batman Begins", 2005));
         FriendsList jonnyFriends = new FriendsList();
         jonnyFriends.add("aaron@gmail.com");
         jonnyFriends.add("chinmay@gmail.com");
@@ -155,16 +165,16 @@ public class UsersData {
         usersList.add(jonny);
 
         MovieList herobrineMovies = new MovieList();
-        herobrineMovies.add("tt0114369");
-        herobrineMovies.add("tt0381681");
-        herobrineMovies.add("tt0118799");
-        herobrineMovies.add("tt2582802");
-        herobrineMovies.add("tt0088247");
-        herobrineMovies.add("tt0167404");
-        herobrineMovies.add("tt0208092");
-        herobrineMovies.add("tt0043014");
-        herobrineMovies.add("tt8579674");
-        herobrineMovies.add("tt1255953");
+        herobrineMovies.add(new Movie("tt0114369", "Se7en", 1995));
+        herobrineMovies.add(new Movie("tt0381681", "Before Sunset", 2004));
+        herobrineMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997));
+        herobrineMovies.add(new Movie("tt2582802", "Whiplash", 2014));
+        herobrineMovies.add(new Movie("tt0088247", "The Terminator", 1984));
+        herobrineMovies.add(new Movie("tt0167404", "The Sixth Sense", 1999));
+        herobrineMovies.add(new Movie("tt0208092", "Snatch", 2017));
+        herobrineMovies.add(new Movie("tt0043014", "Sunset Blvd.", 1950));
+        herobrineMovies.add(new Movie("tt8579674", "1917", 2019));
+        herobrineMovies.add(new Movie("tt1255953", "Incendies", 2010));
         FriendsList herobrineFriends = new FriendsList();
         herobrineFriends.add("aaron@gmail.com");
         herobrineFriends.add("chinmay@gmail.com");

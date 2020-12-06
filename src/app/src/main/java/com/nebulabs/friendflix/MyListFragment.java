@@ -47,10 +47,10 @@ public class MyListFragment extends Fragment {
         String userEmail = MainActivity.userEmail;
         UsersData usersData = MainActivity.usersData;
         User user = usersData.getUserByEmail(userEmail);
-        Iterator<String> movieIterator = user.movieList.iterator();
+        Iterator<Movie> movieIterator = user.movieList.iterator();
         while(movieIterator.hasNext()) {
-            String currentMovieID = movieIterator.next();
-            Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
+            Movie currentMovie = movieIterator.next();
+//            Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
             if(currentMovie != null) {
                 String[] input = new String[3];
                 input[0] = currentMovie.id;

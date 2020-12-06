@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,10 +22,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * Fragment to display the user profile and logout button
  */
 public class ExploreFragment extends Fragment {
+
+    String movieID;
 
     TextView movieTitle;
     TextView movieYear;
@@ -89,6 +94,8 @@ public class ExploreFragment extends Fragment {
                     String userEmail = MainActivity.userEmail;
                     UsersData usersData = MainActivity.usersData;
                     User user = usersData.getUserByEmail(userEmail);
+                    user.addMovie(movieID, movieTitleValue, Integer.parseInt(movieYearValue));
+                    Toasty.info(view.getContext(), movieID, Toast.LENGTH_SHORT).show();
 
                     // and then...
                     showRandomMovie();
@@ -100,7 +107,7 @@ public class ExploreFragment extends Fragment {
     }
 
     public void showRandomMovie() throws IOException {
-        String movieID = generateRandomMovieID();
+        movieID = generateRandomMovieID();
         String getRequestURL = "https://www.omdbapi.com/?apikey=" + Omdb.KEY + "&i=" + movieID;
 
         Thread t = new Thread() {
@@ -121,6 +128,7 @@ public class ExploreFragment extends Fragment {
     public void renderMovieInfo() {
         try {
             obj = new JSONObject(MainActivity.responseExplore);
+            movieID = obj.getString("imdbID");
             movieTitleValue = obj.getString("Title");
             movieYearValue = obj.getString("Year");
             moviePosterValue = obj.getString("Poster");

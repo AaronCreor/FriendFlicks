@@ -123,11 +123,10 @@ public class FriendFragment extends Fragment {
         UsersData usersData = MainActivity.usersData;
         User user = usersData.getUserByEmail(MainActivity.userEmail);
         User friend = usersData.getUserByEmail(email);
-        Iterator<String> movieIterator = user.movieList.iterator();
+        Iterator<Movie> movieIterator = user.movieList.iterator();
         while(movieIterator.hasNext()) {
-            String currentMovieID = movieIterator.next();
-            if(friend.movieList.contains(currentMovieID)) {
-                Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
+            Movie currentMovie = movieIterator.next();
+            if(friend.movieList.contains(currentMovie)) {
                 if(currentMovie != null) {
                     String[] input = new String[3];
                     input[0] = currentMovie.id;
@@ -142,10 +141,10 @@ public class FriendFragment extends Fragment {
     void populateTheirList() {
         UsersData usersData = MainActivity.usersData;
         User friend = usersData.getUserByEmail(email);
-        Iterator<String> movieIterator = friend.movieList.iterator();
+        Iterator<Movie> movieIterator = friend.movieList.iterator();
         while(movieIterator.hasNext()) {
-            String currentMovieID = movieIterator.next();
-            Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
+            Movie currentMovie = movieIterator.next();
+//            Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
             if(currentMovie != null) {
                 String[] input = new String[3];
                 input[0] = currentMovie.id;
