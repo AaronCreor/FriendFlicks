@@ -3,12 +3,10 @@
 
 package com.nebulabs.friendflix;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
 
 
 class Movie {
@@ -16,26 +14,12 @@ class Movie {
     String name;
     int year;
 
-<<<<<<< HEAD
-    public Movie(int id, String name, int year) throws IOException {
-=======
     public Movie(int id, String name, int year) {
->>>>>>> 73e6807cb03e4a21029f09e5884940e4e4113405
         this.id = id;
         this.name = name;
         this.year = year;
     }
 
-//    OMDB based instantiation by Josh - uncomment when integrating with online database
-//    String id;
-//    String name;
-//    String year;
-//
-//    public Movie(String id, String name, String year) {
-//        this.id = id;
-//        this.name = Omdb.getTitle(id);
-//        this.year = Omdb.getYear(id);
-//    }
 }
 
 
@@ -52,34 +36,7 @@ public class MoviesData {
         }
         return empty;
     }
-<<<<<<< HEAD
 
-    final private int MOVIE_LIST_SIZE = 10;
-    public MoviesData() throws IOException {
-        //only has at most 10 movies in the array
-        while(movieList.size() < MOVIE_LIST_SIZE)
-        {
-            //String id = getIdFromFirebase();
-            //id value is just a place holder for now
-            //the id value will be got from the json data on firebase
-            movieList.add(new Movie(0, "batman", 2015));
-        }
-=======
->>>>>>> 73e6807cb03e4a21029f09e5884940e4e4113405
-
-//    OMDB getMovie method by Josh - uncomment when integrating with online database
-//    public Movie getMovieByID(String ID) {
-//        Movie empty = null;
-//        Iterator<Movie> movieIterator = movieList.iterator();
-//        while(movieIterator.hasNext()) {
-//            Movie current = movieIterator.next();
-//            if(current.id.equals(ID))
-//                return current;
-//        }
-//        return empty;
-//    }
-    
-    final private int MOVIE_LIST_SIZE = 10; // OMDB / Josh
 
     public MoviesData() {
         movieList.add(new Movie(0, "Limitless", 2011));
@@ -112,21 +69,6 @@ public class MoviesData {
         movieList.add(new Movie(27, "Power Rangers", 2017));
         movieList.add(new Movie(28, "Goosebumps", 2015));
     }
-
-//    OMDB based MoviesData instantiation by Josh - uncomment when integrating with database
-//    public MoviesData() {
-//        //only has at most 10 movies in the array
-//        while(movieList.size() < MOVIE_LIST_SIZE)
-//        {
-//            String id = "";
-//            //String id = getIdFromFirebase();
-//            //id value is just a place holder for now
-//            //the id value will be got from the json data on firebase
-//            movieList.add(new Movie(id, Omdb.getTitle(id), Omdb.getYear(id)));
-//        }
-//
-//
-//    }
 
     public List getMovieList() {
         return movieList;
