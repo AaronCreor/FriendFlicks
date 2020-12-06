@@ -24,6 +24,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +35,18 @@ import java.util.ArrayList;
  * Fragment to display the user profile and logout button
  */
 public class ExploreFragment extends Fragment {
+
+    TextView movieTitle;
+    TextView movieYear;
+    ImageView moviePoster;
+    TextView movieSynopsis;
+
+    JSONObject obj;
+
+    String movieTitleValue;
+    String movieYearValue;
+    String moviePosterValue;
+    String movieSynopsisValue;
 
     public ExploreFragment(){
     }
@@ -48,8 +61,11 @@ public class ExploreFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView theResponse = getView().findViewById(R.id.explore_mainText);
-        theResponse.setText(MainActivity.response);
+        movieTitle = getView().findViewById(R.id.explore_movietitle);
+        movieYear = getView().findViewById(R.id.explore_movieyear);
+        moviePoster = getView().findViewById(R.id.explore_movieposter);
+
+        renderMovieInfo();
 
         if(!MainActivity.exploreScreenAlreadyCreated) {
             try {
@@ -76,7 +92,6 @@ public class ExploreFragment extends Fragment {
     public void showRandomMovie() throws IOException {
         String movieID = generateRandomMovieID();
         String getRequestURL = "https://www.omdbapi.com/?apikey=" + Omdb.KEY + "&i=" + movieID;
-        TextView theResponse = getView().findViewById(R.id.explore_mainText);
 
         Thread t = new Thread() {
             public void run() {
@@ -90,15 +105,22 @@ public class ExploreFragment extends Fragment {
             e.printStackTrace();
         }
 
-        final JSONObject obj;
+        renderMovieInfo();
+    }
+
+    public void renderMovieInfo() {
         try {
             obj = new JSONObject(MainActivity.response);
-            MainActivity.response = obj.getString("Title");
+            movieTitleValue = obj.getString("Title");
+            movieYearValue = obj.getString("Year");
+            moviePosterValue = obj.getString("Poster");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        theResponse.setText(MainActivity.response);
+        movieTitle.setText(movieTitleValue);
+        movieYear.setText(movieYearValue);
+        Picasso.get().load(moviePosterValue).into(moviePoster);
     }
 
     String generateRandomMovieID() throws IOException {
