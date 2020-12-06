@@ -24,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
     public static String userEmail = "jonnyboy@gmail.com";
     public static UsersData usersData = new UsersData();
     public static MoviesData moviesData = new MoviesData();
-    public static String response = "If you see this, then something went wrong";
+    public static String responseExplore = "If you see this, then something went wrong";
+    public static String responseMovie = "If you see this, then something went wrong";
     public static boolean exploreScreenAlreadyCreated = false;
+    public static boolean movieScreenAlreadyCreated = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

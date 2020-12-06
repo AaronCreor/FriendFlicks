@@ -8,17 +8,17 @@ import java.util.Iterator;
 import java.util.List;
 
 class MovieList {
-    ArrayList<Integer> movieList;
+    ArrayList<String> movieList;
 
     public MovieList() {
-        movieList = new ArrayList<Integer>();
+        movieList = new ArrayList<String>();
     }
 
-    public void add(int movieID) {
+    public void add(String movieID) {
         movieList.add(movieID);
     }
 
-    public ArrayList<Integer> get() {
+    public ArrayList<String> get() {
         return movieList;
     }
 }
@@ -42,10 +42,10 @@ class FriendsList {
 class User {
     public String userEmail;
     public String userName;
-    public ArrayList<Integer> movieList;
+    public ArrayList<String> movieList;
     public ArrayList<String> friendsList;
 
-    public User(String userEmail, String userName, ArrayList<Integer> movieList, ArrayList<String> friendsList) {
+    public User(String userEmail, String userName, ArrayList<String> movieList, ArrayList<String> friendsList) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.movieList = movieList;
@@ -69,15 +69,15 @@ public class UsersData {
 
     public UsersData() {
         MovieList aaronMovies = new MovieList();
-        aaronMovies.add(4);
-        aaronMovies.add(5);
-        aaronMovies.add(7);
-        aaronMovies.add(12);
-        aaronMovies.add(15);
-        aaronMovies.add(17);
-        aaronMovies.add(19);
-        aaronMovies.add(21);
-        aaronMovies.add(23);
+        aaronMovies.add("tt0114369");
+        aaronMovies.add("tt0381681");
+        aaronMovies.add("tt0118799");
+        aaronMovies.add("tt0043014");
+        aaronMovies.add("tt0087884");
+        aaronMovies.add("tt0198781");
+        aaronMovies.add("tt0110357");
+        aaronMovies.add("tt0056592");
+        aaronMovies.add("tt2119532");
         FriendsList aaronFriends = new FriendsList();
         aaronFriends.add("jonnyboy@gmail.com");
         aaronFriends.add("joshua@gmail.com");
@@ -86,14 +86,14 @@ public class UsersData {
         usersList.add(aaron);
 
         MovieList chinmayMovies = new MovieList();
-        chinmayMovies.add(1);
-        chinmayMovies.add(2);
-        chinmayMovies.add(3);
-        chinmayMovies.add(4);
-        chinmayMovies.add(5);
-        chinmayMovies.add(6);
-        chinmayMovies.add(7);
-        chinmayMovies.add(8);
+        chinmayMovies.add("tt1911644");
+        chinmayMovies.add("tt0116571");
+        chinmayMovies.add("tt0095765");
+        chinmayMovies.add("tt0114369");
+        chinmayMovies.add("tt0381681");
+        chinmayMovies.add("tt0032976");
+        chinmayMovies.add("tt0118799");
+        chinmayMovies.add("tt2582802");
         FriendsList chinmayFriends = new FriendsList();
         chinmayFriends.add("jonnyboy@gmail.com");
         chinmayFriends.add("joshua@gmail.com");
@@ -102,14 +102,14 @@ public class UsersData {
         usersList.add(chinmay);
 
         MovieList joshMovies = new MovieList();
-        joshMovies.add(28);
-        joshMovies.add(27);
-        joshMovies.add(26);
-        joshMovies.add(25);
-        joshMovies.add(24);
-        joshMovies.add(23);
-        joshMovies.add(22);
-        joshMovies.add(21);
+        joshMovies.add("tt0372784");
+        joshMovies.add("tt0034583");
+        joshMovies.add("tt0053125");
+        joshMovies.add("tt0114814");
+        joshMovies.add("tt1255953");
+        joshMovies.add("tt2119532");
+        joshMovies.add("tt0108052");
+        joshMovies.add("tt0056592");
         FriendsList joshFriends = new FriendsList();
         joshFriends.add("jonnyboy@gmail.com");
         joshFriends.add("aaron@gmail.com");
@@ -118,14 +118,14 @@ public class UsersData {
         usersList.add(josh);
 
         MovieList karanMovies = new MovieList();
-        karanMovies.add(1);
-        karanMovies.add(3);
-        karanMovies.add(5);
-        karanMovies.add(7);
-        karanMovies.add(9);
-        karanMovies.add(11);
-        karanMovies.add(13);
-        karanMovies.add(15);
+        karanMovies.add("tt1911644");
+        karanMovies.add("tt0095765");
+        karanMovies.add("tt0381681");
+        karanMovies.add("tt0118799");
+        karanMovies.add("tt0088247");
+        karanMovies.add("tt0208092");
+        karanMovies.add("tt0017136");
+        karanMovies.add("tt0087884");
         FriendsList karanFriends = new FriendsList();
         karanFriends.add("jonnyboy@gmail.com");
         karanFriends.add("aaron@gmail.com");
@@ -134,17 +134,17 @@ public class UsersData {
         usersList.add(karan);
 
         MovieList jonnyMovies = new MovieList();
-        jonnyMovies.add(1);
-        jonnyMovies.add(2);
-        jonnyMovies.add(3);
-        jonnyMovies.add(8);
-        jonnyMovies.add(9);
-        jonnyMovies.add(10);
-        jonnyMovies.add(19);
-        jonnyMovies.add(20);
-        jonnyMovies.add(25);
-        jonnyMovies.add(26);
-        jonnyMovies.add(28);
+        jonnyMovies.add("tt1911644");
+        jonnyMovies.add("tt0116571");
+        jonnyMovies.add("tt0095765");
+        jonnyMovies.add("tt2582802");
+        jonnyMovies.add("tt0088247");
+        jonnyMovies.add("tt0167404");
+        jonnyMovies.add("tt0110357");
+        jonnyMovies.add("tt0042192");
+        jonnyMovies.add("tt0114814");
+        jonnyMovies.add("tt0053125");
+        jonnyMovies.add("tt0372784");
         FriendsList jonnyFriends = new FriendsList();
         jonnyFriends.add("aaron@gmail.com");
         jonnyFriends.add("chinmay@gmail.com");
@@ -155,7 +155,16 @@ public class UsersData {
         usersList.add(jonny);
 
         MovieList herobrineMovies = new MovieList();
-        herobrineMovies.add(1);
+        herobrineMovies.add("tt0114369");
+        herobrineMovies.add("tt0381681");
+        herobrineMovies.add("tt0118799");
+        herobrineMovies.add("tt2582802");
+        herobrineMovies.add("tt0088247");
+        herobrineMovies.add("tt0167404");
+        herobrineMovies.add("tt0208092");
+        herobrineMovies.add("tt0043014");
+        herobrineMovies.add("tt8579674");
+        herobrineMovies.add("tt1255953");
         FriendsList herobrineFriends = new FriendsList();
         herobrineFriends.add("aaron@gmail.com");
         herobrineFriends.add("chinmay@gmail.com");

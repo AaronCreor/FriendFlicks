@@ -1,98 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="bottom"
-    android:background="@color/grey"
-    android:gravity="center|start"
-    android:orientation="vertical"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp">
+    tools:context=".MainActivity">
+
 
     <ImageView
-        android:id="@+id/movieImageView"
+        android:id="@+id/movie_movieposter"
         android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/movie_movietitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Limitless"
+        android:textSize="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movie_movieposter" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/movie_movieyear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:text="2011"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movie_movietitle" />
+
+    <TextView
+        android:id="@+id/movie_moviesynopsis"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="0.75"
-        android:contentDescription="Movie Image"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/logo" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="With the help of a mysterious pill that enables the user to access 100% of his brain abilities, a struggling writer becomes a financial wizard, but it also puts him in a new world with lots of dangers."
+        app:layout_constraintBottom_toTopOf="@+id/movie_actionbuttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movie_movieyear" />
 
-    <LinearLayout
-        android:id="@+id/movieScreenLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom"
-        android:layout_weight="3.75"
-        android:background="@color/grey"
-        android:gravity="center|start"
-        android:orientation="vertical"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="117dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/movieGenre"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/ratingView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/movieTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Movie Title"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/movieInfo"
-            android:layout_width="match_parent"
-            android:layout_height="172dp"
-            android:text="Movie Info"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="normal" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
+    <LinearLayout android:layout_width="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        android:id="@+id/movie_actionbuttons"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
         android:orientation="horizontal">
 
-
-        <ImageButton
-            android:id="@+id/movie_back_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+        <com.google.android.material.button.MaterialButton
+            style="?attr/materialButtonOutlinedStyle"
+            app:theme="@style/Theme.MaterialComponents"
+            android:id="@+id/movie_backbutton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary"
-            app:srcCompat="@drawable/movie_back" />
+            android:insetBottom="0dp"
+            app:cornerRadius="0dp"
+            android:text="Go Back"/>
 
-        <ImageButton
-            android:id="@+id/movie_like_button"
-            android:layout_width="0dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:layout_height="match_parent"
+        <com.google.android.material.button.MaterialButton
+            style="?attr/materialButtonOutlinedStyle"
+            app:theme="@style/Theme.MaterialComponents"
+            android:id="@+id/movie_likebutton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/movie_favourite" />
+            android:insetBottom="0dp"
+            app:cornerRadius="0dp"
+            android:text="Like"/>
+
     </LinearLayout>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

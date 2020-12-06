@@ -123,15 +123,16 @@ public class FriendFragment extends Fragment {
         UsersData usersData = MainActivity.usersData;
         User user = usersData.getUserByEmail(MainActivity.userEmail);
         User friend = usersData.getUserByEmail(email);
-        Iterator<Integer> movieIterator = user.movieList.iterator();
+        Iterator<String> movieIterator = user.movieList.iterator();
         while(movieIterator.hasNext()) {
-            int currentMovieID = movieIterator.next();
+            String currentMovieID = movieIterator.next();
             if(friend.movieList.contains(currentMovieID)) {
                 Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
                 if(currentMovie != null) {
-                    String[] input = new String[2];
-                    input[0] = currentMovie.name;
-                    input[1] = Integer.toString(currentMovie.year);
+                    String[] input = new String[3];
+                    input[0] = currentMovie.id;
+                    input[1] = currentMovie.name;
+                    input[2] = Integer.toString(currentMovie.year);
                     moviesList.add(input);
                 }
             }
@@ -141,14 +142,15 @@ public class FriendFragment extends Fragment {
     void populateTheirList() {
         UsersData usersData = MainActivity.usersData;
         User friend = usersData.getUserByEmail(email);
-        Iterator<Integer> movieIterator = friend.movieList.iterator();
+        Iterator<String> movieIterator = friend.movieList.iterator();
         while(movieIterator.hasNext()) {
-            int currentMovieID = movieIterator.next();
+            String currentMovieID = movieIterator.next();
             Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
             if(currentMovie != null) {
-                String[] input = new String[2];
-                input[0] = currentMovie.name;
-                input[1] = Integer.toString(currentMovie.year);
+                String[] input = new String[3];
+                input[0] = currentMovie.id;
+                input[1] = currentMovie.name;
+                input[2] = Integer.toString(currentMovie.year);
                 moviesList.add(input);
             }
         }

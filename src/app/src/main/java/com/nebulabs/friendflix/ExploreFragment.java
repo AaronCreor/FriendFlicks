@@ -1,33 +1,22 @@
 package com.nebulabs.friendflix;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -96,7 +85,12 @@ public class ExploreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    // put movie in friendList [implement this here], and then...
+                    // put movie in friendList [implement this here]
+                    String userEmail = MainActivity.userEmail;
+                    UsersData usersData = MainActivity.usersData;
+                    User user = usersData.getUserByEmail(userEmail);
+
+                    // and then...
                     showRandomMovie();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -111,7 +105,7 @@ public class ExploreFragment extends Fragment {
 
         Thread t = new Thread() {
             public void run() {
-                MainActivity.response = Omdb.sendGetRequest(getRequestURL);
+                MainActivity.responseExplore = Omdb.sendGetRequest(getRequestURL);
             }
         };
         t.start();
@@ -126,7 +120,7 @@ public class ExploreFragment extends Fragment {
 
     public void renderMovieInfo() {
         try {
-            obj = new JSONObject(MainActivity.response);
+            obj = new JSONObject(MainActivity.responseExplore);
             movieTitleValue = obj.getString("Title");
             movieYearValue = obj.getString("Year");
             moviePosterValue = obj.getString("Poster");

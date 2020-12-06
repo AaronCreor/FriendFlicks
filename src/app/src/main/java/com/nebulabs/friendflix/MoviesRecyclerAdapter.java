@@ -49,8 +49,9 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.rowCountTextView.setText(moviesList.get(position)[1]);
-        holder.textView.setText(moviesList.get(position)[0]);
+        holder.movieIDView.setText(moviesList.get(position)[0]);
+        holder.rowCountTextView.setText(moviesList.get(position)[2]);
+        holder.textView.setText(moviesList.get(position)[1]);
     }
 
     @Override
@@ -75,7 +76,7 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
             }
             else {
                 for(String[] movie : unfilteredMoviesList) {
-                    if (movie[0].toLowerCase().contains(constraint.toString().toLowerCase())) {
+                    if (movie[1].toLowerCase().contains(constraint.toString().toLowerCase())) {
                         filteredList.add(movie);
                     }
                 }
@@ -99,7 +100,7 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imageView;
-        TextView textView, rowCountTextView;
+        TextView textView, rowCountTextView, movieIDView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,6 +108,7 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
             imageView = itemView.findViewById(R.id.recyclerItemImageView);
             textView = itemView.findViewById(R.id.recyclerItemTextView);
             rowCountTextView = itemView.findViewById(R.id.rowCountTextView);
+            movieIDView = itemView.findViewById(R.id.movieIDview);
 
             itemView.setOnClickListener(this);
 
@@ -124,8 +126,8 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
         @Override
         public void onClick(View view) {
             Toasty.info(view.getContext(), moviesList.get(getAdapterPosition())[0], Toast.LENGTH_SHORT).show();
-            String movieName = moviesList.get(getAdapterPosition())[0];
-            Fragment selectedFrag = new MovieFragment(movieName);
+            String movieID = moviesList.get(getAdapterPosition())[0];
+            Fragment selectedFrag = new MovieFragment(movieID);
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container_view, selectedFrag)
                     .commit();

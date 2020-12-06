@@ -4,10 +4,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,19 +15,37 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import es.dmoral.toasty.Toasty;
+import com.google.android.material.button.MaterialButton;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 /**
  * Fragment to display a single movie from movie list
  */
 public class MovieFragment extends Fragment {
 
-    String name;
+    String movieID;
+
+    TextView movieTitle;
+    TextView movieYear;
+    ImageView moviePoster;
+    TextView movieSynopsis;
+
+    JSONObject obj;
+
+    String movieTitleValue;
+    String movieYearValue;
+    String moviePosterValue;
+    String movieSynopsisValue;
 
     int pressed = 0;
 
-    public MovieFragment(String name){
-        this.name = name;
+    public MovieFragment(String movieID){
+        this.movieID = movieID;
     }
 
     @Nullable
@@ -41,11 +57,20 @@ public class MovieFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView title = getView().findViewById(R.id.movieTitle);
-        title.setText(name);
+
+        movieTitle = getView().findViewById(R.id.movie_movietitle);
+        movieYear = getView().findViewById(R.id.movie_movieyear);
+        moviePoster = getView().findViewById(R.id.movie_movieposter);
+        movieSynopsis = getView().findViewById(R.id.movie_moviesynopsis);
+
+        try {
+            showMovie();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // Back Button
-        ImageButton movieBackButton = view.findViewById(R.id.movie_back_button);
+        MaterialButton movieBackButton = view.findViewById(R.id.movie_backbutton);
         movieBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,20 +81,56 @@ public class MovieFragment extends Fragment {
         });
 
         // Like Button
-        ImageButton movieFavButton = view.findViewById(R.id.movie_like_button);
+        MaterialButton movieFavButton = view.findViewById(R.id.movie_likebutton);
         movieFavButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (pressed == 1){
-                    movieFavButton.setImageResource(R.drawable.movie_favourite);
+//                    movieFavButton.setImageResource(R.drawable.movie_favourite);
                     v.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary),PorterDuff.Mode.SRC_ATOP);
                     pressed = 0;
                 } else {
                     v.getBackground().setColorFilter(Color.WHITE,PorterDuff.Mode.SRC_ATOP);
-                    movieFavButton.setImageResource(R.drawable.ic_baseline_favorite_24);
+//                    movieFavButton.setImageResource(R.drawable.ic_baseline_favorite_24);
                     pressed = 1;
                 }
             }
         });
     }
+
+    public void showMovie() throws IOException {
+        String getRequestURL = "https://www.omdbapi.com/?apikey=" + Omdb.KEY + "&i=" + movieID;
+
+        Thread t = new Thread() {
+            public void run() {
+                MainActivity.responseMovie = Omdb.sendGetRequest(getRequestURL);
+            }
+        };
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        renderMovieInfo();
+    }
+
+    public void renderMovieInfo() {
+        try {
+            obj = new JSONObject(MainActivity.responseMovie);
+            movieTitleValue = obj.getString("Title");
+            movieYearValue = obj.getString("Year");
+            moviePosterValue = obj.getString("Poster");
+            movieSynopsisValue = obj.getString("Plot");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        movieTitle.setText(movieTitleValue);
+        movieYear.setText(movieYearValue);
+        Picasso.get().load(moviePosterValue).into(moviePoster);
+        movieSynopsis.setText(movieSynopsisValue);
+    }
 }
+
