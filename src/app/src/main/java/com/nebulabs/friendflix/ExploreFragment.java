@@ -94,7 +94,7 @@ public class ExploreFragment extends Fragment {
                     String userEmail = MainActivity.userEmail;
                     UsersData usersData = MainActivity.usersData;
                     User user = usersData.getUserByEmail(userEmail);
-                    user.addMovie(movieID, movieTitleValue, Integer.parseInt(movieYearValue));
+                    user.addMovie(new Movie(movieID, movieTitleValue, Integer.parseInt(movieYearValue)));
                     Toasty.info(view.getContext(), movieID, Toast.LENGTH_SHORT).show();
 
                     // and then...
@@ -106,7 +106,10 @@ public class ExploreFragment extends Fragment {
         });
     }
 
+
     public void showRandomMovie() throws IOException {
+
+
         movieID = generateRandomMovieID();
         String getRequestURL = "https://www.omdbapi.com/?apikey=" + Omdb.KEY + "&i=" + movieID;
 
@@ -120,6 +123,7 @@ public class ExploreFragment extends Fragment {
             t.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
+            return;
         }
 
         renderMovieInfo();

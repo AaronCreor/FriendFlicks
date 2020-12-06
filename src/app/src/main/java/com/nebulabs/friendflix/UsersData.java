@@ -43,26 +43,9 @@ class FriendsList {
         return friendsList;
     }
 }
+/*
 
-class User {
-    public String userEmail;
-    public String userName;
-    public ArrayList<Movie> movieList;
-    public ArrayList<String> friendsList;
-
-    public User(String userEmail, String userName, ArrayList<Movie> movieList, ArrayList<String> friendsList) {
-        this.userEmail = userEmail;
-        this.userName = userName;
-        this.movieList = movieList;
-        this.friendsList = friendsList;
-    }
-
-    public void addMovie(String movieID, String movieName, int movieYear) {
-        Movie input = new Movie(movieID, movieName, movieYear);
-        this.movieList.add(input);
-    }
-}
-
+*/
 public class UsersData {
     public User getUserByEmail(String email) {
         User empty = null;

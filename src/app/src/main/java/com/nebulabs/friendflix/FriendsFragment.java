@@ -121,50 +121,7 @@ public class FriendsFragment extends Fragment {
                             dialog.setMessage("Sending request, please wait...");
                             dialog.show();
 
-                            DocumentReference docRef = db.collection("friends").document(flatDialog.getFirstTextField());
-                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        DocumentSnapshot document = task.getResult();
-                                        if (document.exists()) {
-                                            Log.d("CHECK", "Friend already exists");
-                                            Toasty.error(getContext(),"That user is already your friend!", Toasty.LENGTH_SHORT).show();
-                                            dialog.dismiss();
-                                        } else {
-                                            Log.d("CHECK", "No group exists");
-                                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                                            final Map<String, Object> memberData = new HashMap<>();
-                                            memberData.put("email",user.getEmail());
-                                            memberData.put("uid",user.getUid());
-                                            memberData.put("admin",true);
-
-
-                                            db.collection("groups").document(flatDialog.getFirstTextField())
-                                                    .set(memberData)
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void aVoid) {
-                                                            Log.d("FIRE", "DocumentSnapshot successfully written!");
-                                                            dialog.dismiss();
-                                                            Toasty.success(getContext(), flatDialog.getFirstTextField() + " created!", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Log.w("FIRE", "Error writing document", e);
-                                                            Toasty.error(getContext(),"Group Creation Failed", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
-                                            flatDialog.dismiss();
-                                        }
-                                    } else {
-                                        Log.d("CHECK", "get failed with ", task.getException());
-                                    }
-                                }
-                            });
+                            dialog.dismiss();
 
                         }
                     }

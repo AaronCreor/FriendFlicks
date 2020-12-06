@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         bottomTabView.getMenu().getItem(0).setChecked(true);
 
         Fragment selectedFrag = null;
-        selectedFrag = new MyListFragment();
+        selectedFrag = new ExploreFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,selectedFrag).commit();
 
         new Handler().postDelayed(new Runnable() {
