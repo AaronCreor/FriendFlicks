@@ -1,9 +1,11 @@
 package com.nebulabs.friendflix;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,6 +34,8 @@ import es.dmoral.toasty.Toasty;
  * Fragment to display a single friend from friend list
  */
 public class FriendFragment extends Fragment {
+
+    boolean buttonJustChecked = false;
 
     boolean clickFlag = false; // fix for click registering twice
 
@@ -85,6 +89,10 @@ public class FriendFragment extends Fragment {
                     @Override
                     public void onButtonChecked(
                         MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
+                            buttonJustChecked = true;
+                            FloatingSearchView mSearchView = view.findViewById(R.id.friend_searchBar);
+                            mSearchView.clearQuery();
+                            mSearchView.clearFocus();
 //                            friendName.setText(getResources().getResourceEntryName(checkedId)); // to debug id name corresponding to checkedId
 //                            friendName.setText(Integer.toString(checkedId)); // to debug checkedId value
                             if(getResources().getResourceEntryName(checkedId).equals("common_matches") && clickFlag) { // user clicked "show common"
@@ -103,7 +111,7 @@ public class FriendFragment extends Fragment {
 
         moviesList = new ArrayList<String[]>();
 
-        populateCommonMatches();
+        populateTheirList();
 
         recyclerView = view.findViewById(R.id.recyclerViewFriend);
         moviesRecyclerAdapter = new MoviesRecyclerAdapter(moviesList);
@@ -113,14 +121,36 @@ public class FriendFragment extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        // todo: fix filter for this screen
         FloatingSearchView mSearchView = view.findViewById(R.id.friend_searchBar);
         mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
             @Override
             public void onSearchTextChanged(String oldQuery, final String newQuery) {
-                moviesRecyclerAdapter.getFilter().filter(newQuery);
+                if(newQuery.equals("") && buttonJustChecked) {
+                    // do nothing
+                    buttonJustChecked = false;
+                }
+                else {
+                    moviesRecyclerAdapter.getFilter().filter(newQuery);
+                }
             }
         });
+        mSearchView.setDismissOnOutsideClick(true);
+        mSearchView.setOnFocusChangeListener(new FloatingSearchView.OnFocusChangeListener() {
+            @Override
+            public void onFocus() {
+
+            }
+
+            @Override
+            public void onFocusCleared() {
+                mSearchView.clearQuery();
+            }
+        });
+
+        moviesList.clear();
+        recyclerView.removeAllViews();
+        populateCommonMatches();
+
     }
 
     void populateTheirList() {
