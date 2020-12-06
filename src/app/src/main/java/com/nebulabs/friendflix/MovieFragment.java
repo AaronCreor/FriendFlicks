@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * Fragment to display a single movie from movie list
@@ -82,6 +85,16 @@ public class MovieFragment extends Fragment {
 
         // Like Button
         MaterialButton movieFavButton = view.findViewById(R.id.movie_likebutton);
+
+        Movie thisMovie = new Movie(movieID, movieTitleValue, Integer.parseInt(movieYearValue));
+        String userEmail = MainActivity.userEmail;
+        UsersData usersData = MainActivity.usersData;
+        User user = usersData.getUserByEmail(userEmail);
+
+        if(user.movieList.contains(thisMovie))
+            movieFavButton.setText("Remove");
+        else
+            movieFavButton.setText("Like");
         movieFavButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +107,19 @@ public class MovieFragment extends Fragment {
 //                    movieFavButton.setImageResource(R.drawable.ic_baseline_favorite_24);
                     pressed = 1;
                 }
+
+                // add/remove movie logic
+                if(user.movieList.contains(thisMovie)) {
+                    user.movieList.remove(thisMovie);
+                    movieFavButton.setText("Like");
+                }
+                else {
+                    user.movieList.add(thisMovie);
+                    movieFavButton.setText("Remove");
+                }
+
+//                Toasty.info(view.getContext(), movieID, Toast.LENGTH_SHORT).show();
+
             }
         });
     }
