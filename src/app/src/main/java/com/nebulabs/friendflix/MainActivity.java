@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.InputStream;
+
 import es.dmoral.toasty.Toasty;
 
 /**
@@ -36,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
         bottomTabView.getMenu().getItem(0).setChecked(true);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,new ExploreFragment()).commit();
-
-
     }
 
     /**

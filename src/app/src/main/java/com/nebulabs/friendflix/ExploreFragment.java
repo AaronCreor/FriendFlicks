@@ -25,6 +25,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
 /**
  * Fragment to display the user profile and logout button
  */
@@ -46,20 +51,29 @@ public class ExploreFragment extends Fragment {
         TextView theResponse = getView().findViewById(R.id.explore_mainText);
         theResponse.setText(MainActivity.response);
 
-        if(!MainActivity.exploreScreenAlreadyCreated)
-            showRandomMovie();
+        if(!MainActivity.exploreScreenAlreadyCreated) {
+            try {
+                showRandomMovie();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         MainActivity.exploreScreenAlreadyCreated = true;
 
         Button skip = (Button) view.findViewById(R.id.explore_skip_button);
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showRandomMovie();
+                try {
+                    showRandomMovie();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    public void showRandomMovie() {
+    public void showRandomMovie() throws IOException {
         String movieID = generateRandomMovieID();
         String getRequestURL = "https://www.omdbapi.com/?apikey=" + Omdb.KEY + "&i=" + movieID;
         TextView theResponse = getView().findViewById(R.id.explore_mainText);
@@ -87,21 +101,30 @@ public class ExploreFragment extends Fragment {
         theResponse.setText(MainActivity.response);
     }
 
-    String generateRandomMovieID() {
-        int min = 1;
-        int max = 2404811;
+    String generateRandomMovieID() throws IOException {
+//        int min = 1;
+//        int max = 2404811;
+//
+//        //Generate random int value from 1 to 999999999
+//        int random_int = (int)(Math.random() * (max - min + 1) + min);
+//        String trailingIDnumber = Integer.toString(random_int);
+//        if(trailingIDnumber.length() < 7) {
+//            int zeroesToBeAdded = 7 - trailingIDnumber.length();
+//            String zeroesString = "";
+//            while(zeroesString.length() < zeroesToBeAdded)
+//                zeroesString = zeroesString + "0";
+//            trailingIDnumber = zeroesString + trailingIDnumber;
+//        }
+//        return "tt" + trailingIDnumber;
 
-        //Generate random int value from 1 to 999999999
+        // With csv file
+        InputStream is = getResources().openRawResource(R.raw.imdbmovies);
+        ArrayList<String> movies = Omdb.fillImdbArray(is);
+//        Generate random int value from 0 to movies.length
+        int min = 0;
+        int max = movies.size();
         int random_int = (int)(Math.random() * (max - min + 1) + min);
-        String trailingIDnumber = Integer.toString(random_int);
-        if(trailingIDnumber.length() < 7) {
-            int zeroesToBeAdded = 7 - trailingIDnumber.length();
-            String zeroesString = "";
-            while(zeroesString.length() < zeroesToBeAdded)
-                zeroesString = zeroesString + "0";
-            trailingIDnumber = zeroesString + trailingIDnumber;
-        }
-        return "tt" + trailingIDnumber;
+        return movies.get(random_int);
     }
 
 }

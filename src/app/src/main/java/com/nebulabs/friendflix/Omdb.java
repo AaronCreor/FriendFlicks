@@ -1,5 +1,7 @@
 package com.nebulabs.friendflix;
 
+import android.net.Uri;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,7 +19,7 @@ public class Omdb {
 
 	public static final String SEARCH_URL = "http://www.omdbapi.com/?type=movie&s=TITLE&apikey=APIKEY";
 	public static final String SEARCH_BY_IMDB_URL = "http://www.omdbapi.com/?type=movie&i=IMDB&apikey=APIKEY";
-	private static final String PATH_TO_CSV = "IMDbMovies.csv";
+	private static final String PATH_TO_CSV = "imdbmovies.csv";
 	public static final String KEY = "2f9c8f89";
 	
 	//this gets the data string from the omdb webstie
@@ -72,9 +74,9 @@ public class Omdb {
 
 	//This gets all the imdb Ids in the csv file
 	//csv file holds most popular movies in last 15 years
-	private static ArrayList<String> fillImdbArray() throws IOException
+	public static ArrayList<String> fillImdbArray(InputStream inputStream) throws IOException
 	{
-		BufferedReader csvReader = new BufferedReader(new FileReader(PATH_TO_CSV));
+		BufferedReader csvReader = new BufferedReader(new InputStreamReader(inputStream));
 		String row;
 		ArrayList<String> movies = new ArrayList<String>();
 	
@@ -221,11 +223,11 @@ public class Omdb {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		
+
 		//This is to test out all functions
 		//This gets the title for the first 100 movies in the cvs file
 		ArrayList<String> imdbIds = new ArrayList<String>();
-		imdbIds = fillImdbArray();
+//		imdbIds = fillImdbArray();
 		for(int i=0;i<100;i++)
 		{
 			System.out.println(getTitle(imdbIds.get(i)));
