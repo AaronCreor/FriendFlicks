@@ -2,6 +2,7 @@ package com.nebulabs.friendflix;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
 import com.example.flatdialoglibrary.dialog.FlatDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -40,44 +42,7 @@ public class MyListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Search Fab
-        FloatingActionButton searchFab = view.findViewById(R.id.search_mylist_fab);
-        searchFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final FlatDialog flatDialog = new FlatDialog(getContext());
-                flatDialog.setTitle("Search Movie")
-                        .setSubtitle("Enter movie name")
-                        .setFirstTextFieldHint("movie name")
-                        .setFirstButtonText("SEARCH")
-                        .setSecondButtonText("CANCEL")
-                        .withFirstButtonListner(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                //TODO: ADD SEARCH SUPPORT
-                            }
-                        })
-                        .withSecondButtonListner(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                flatDialog.dismiss();
-                            }
-                        })
-                        .show();
-            }
-        });
-
         moviesList = new ArrayList<String[]>();
-
-        recyclerView = view.findViewById(R.id.recyclerViewMyList);
-        moviesRecyclerAdapter = new MoviesRecyclerAdapter(moviesList);
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        recyclerView.setAdapter(moviesRecyclerAdapter);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
 
         String userEmail = MainActivity.userEmail;
         UsersData usersData = MainActivity.usersData;
@@ -94,29 +59,18 @@ public class MyListFragment extends Fragment {
             }
         }
 
-//        moviesList.add("Iron Man");
-//        moviesList.add("The Incredible Hulk");
-//        moviesList.add("Iron Man 2");
-//        moviesList.add("Thor");
-//        moviesList.add("Captain America: The First Avenger");
-//        moviesList.add("The Avengers");
-//        moviesList.add("Iron Man 3");
-//        moviesList.add("Thor: The Dark World");
-//        moviesList.add("Captain America: The Winter Soldier");
-//        moviesList.add("Guardians of the Galaxy");
-//        moviesList.add("Avengers: Age of Ultron");
-//        moviesList.add("Ant-Man");
-//        moviesList.add("Captain America: Civil War");
-//        moviesList.add("Doctor Strange");
-//        moviesList.add("Guardians of the Galaxy Vol. 2");
-//        moviesList.add("Spider-Man: Homecoming");
-//        moviesList.add("Thor: Ragnarok");
-//        moviesList.add("Black Panther");
-//        moviesList.add("Avengers: Infinity War");
-//        moviesList.add("Ant-Man and the Wasp");
-//        moviesList.add("Captain Marvel");
-//        moviesList.add("Avengers: Endgame");
-//        moviesList.add("Spider-Man: Far From Home");
-    }
+        recyclerView = view.findViewById(R.id.recyclerViewMyList);
+        moviesRecyclerAdapter = new MoviesRecyclerAdapter(moviesList);
+        recyclerView.setAdapter(moviesRecyclerAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
+        FloatingSearchView mSearchView = view.findViewById(R.id.mylist_searchBar);
+        mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+            @Override
+            public void onSearchTextChanged(String oldQuery, final String newQuery) {
+                moviesRecyclerAdapter.getFilter().filter(newQuery);
+            }
+        });
+    }
 }

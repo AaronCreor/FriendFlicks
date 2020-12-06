@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.InputStream;
+
 import es.dmoral.toasty.Toasty;
 
 /**
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     public static String userEmail = "jonnyboy@gmail.com";
     public static UsersData usersData = new UsersData();
     public static MoviesData moviesData = new MoviesData();
+    public static String response = "Welcome to Explore Screen";
+    public static boolean exploreScreenAlreadyCreated = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomTabView.getMenu().getItem(0).setChecked(true);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,new MyListFragment()).commit();
-
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,new ExploreFragment()).commit();
     }
 
     /**
@@ -48,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
             Fragment selectedFrag = null;
 
             switch (item.getItemId()) {
+                case R.id.exploreTab:
+                    selectedFrag = new ExploreFragment();
+                    break;
                 case R.id.accountTab:
                     selectedFrag = new ProfileFragment();
                     break;

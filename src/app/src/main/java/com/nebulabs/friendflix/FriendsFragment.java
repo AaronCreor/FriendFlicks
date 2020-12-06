@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
 import com.example.flatdialoglibrary.dialog.FlatDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -62,17 +63,6 @@ public class FriendsFragment extends Fragment {
 
         friendsList = new ArrayList<String[]>();
 
-        recyclerView = view.findViewById(R.id.recyclerViewFriendsList);
-        friendsRecyclerAdapter = new FriendsRecyclerAdapter(friendsList);
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        recyclerView.setAdapter(friendsRecyclerAdapter);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
-
-
         String userEmail = MainActivity.userEmail;
         UsersData usersData = MainActivity.usersData;
         User user = usersData.getUserByEmail(userEmail);
@@ -87,14 +77,21 @@ public class FriendsFragment extends Fragment {
             }
         }
 
-//        friendsList.add("Chinmay Sharma");
-//        friendsList.add("Mesut Ozil");
-//        friendsList.add("Joshua Fantillo");
-//        friendsList.add("Danny Welbeck");
-//        friendsList.add("Aaron Creor");
-//        friendsList.add("Mishal Bashir");
-//        friendsList.add("Jane Doe");
-//        friendsList.add("Jonny Doe");
+        recyclerView = view.findViewById(R.id.recyclerViewFriendsList);
+        friendsRecyclerAdapter = new FriendsRecyclerAdapter(friendsList);
+
+        recyclerView.setAdapter(friendsRecyclerAdapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        FloatingSearchView mSearchView = view.findViewById(R.id.friendslist_searchBar);
+        mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+            @Override
+            public void onSearchTextChanged(String oldQuery, final String newQuery) {
+                friendsRecyclerAdapter.getFilter().filter(newQuery);
+            }
+        });
 
         FloatingActionButton addGroup_fab = view.findViewById(R.id.addgroupfab);
         addGroup_fab.setOnClickListener(new View.OnClickListener() {
