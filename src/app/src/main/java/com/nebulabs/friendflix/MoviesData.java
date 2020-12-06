@@ -19,6 +19,20 @@ class Movie {
         this.name = name;
         this.year = year;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (!(obj instanceof Movie))
+            return false;
+        final Movie om = (Movie)obj;
+        // compare om's fields to mine
+        if(this.id.equals(om.id))
+            if(this.name.equals(om.name))
+                if(this.year == om.year)
+                    return true;
+        return false;
+    }
 }
 
 

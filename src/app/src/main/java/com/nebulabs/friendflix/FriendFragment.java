@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 
 /**
  * Fragment to display a single friend from friend list
@@ -36,6 +39,7 @@ public class FriendFragment extends Fragment {
     MoviesRecyclerAdapter moviesRecyclerAdapter;
 
     List<String[]> moviesList;
+//    List<String[]> unfilteredMoviesList;
 
     String name;
     String email;
@@ -119,25 +123,6 @@ public class FriendFragment extends Fragment {
         });
     }
 
-    void populateCommonMatches() {
-        UsersData usersData = MainActivity.usersData;
-        User user = usersData.getUserByEmail(MainActivity.userEmail);
-        User friend = usersData.getUserByEmail(email);
-        Iterator<Movie> movieIterator = user.movieList.iterator();
-        while(movieIterator.hasNext()) {
-            Movie currentMovie = movieIterator.next();
-            if(friend.movieList.contains(currentMovie)) {
-                if(currentMovie != null) {
-                    String[] input = new String[3];
-                    input[0] = currentMovie.id;
-                    input[1] = currentMovie.name;
-                    input[2] = Integer.toString(currentMovie.year);
-                    moviesList.add(input);
-                }
-            }
-        }
-    }
-
     void populateTheirList() {
         UsersData usersData = MainActivity.usersData;
         User friend = usersData.getUserByEmail(email);
@@ -151,6 +136,26 @@ public class FriendFragment extends Fragment {
                 input[1] = currentMovie.name;
                 input[2] = Integer.toString(currentMovie.year);
                 moviesList.add(input);
+            }
+        }
+//        this.unfilteredMoviesList = new ArrayList<String[]>(moviesList);
+    }
+
+    void populateCommonMatches() {
+        UsersData usersData = MainActivity.usersData;
+        User user = usersData.getUserByEmail(MainActivity.userEmail);
+        User friend = usersData.getUserByEmail(email);
+        Iterator<Movie> movieIterator = friend.movieList.iterator();
+        while(movieIterator.hasNext()) {
+            Movie currentMovie = movieIterator.next();
+            if(user.movieList.contains(currentMovie)) {
+                if(currentMovie != null) {
+                    String[] input = new String[3];
+                    input[0] = currentMovie.id;
+                    input[1] = currentMovie.name;
+                    input[2] = Integer.toString(currentMovie.year);
+                    moviesList.add(input);
+                }
             }
         }
     }
