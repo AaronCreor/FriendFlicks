@@ -1,5 +1,8 @@
 package com.nebulabs.friendflix;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,7 +109,10 @@ public class ExploreFragment extends Fragment {
         });
     }
 
+
     public void showRandomMovie() throws IOException {
+
+
         movieID = generateRandomMovieID();
         String getRequestURL = "https://www.omdbapi.com/?apikey=" + Omdb.KEY + "&i=" + movieID;
 
@@ -120,6 +126,7 @@ public class ExploreFragment extends Fragment {
             t.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
+            return;
         }
 
         renderMovieInfo();

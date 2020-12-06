@@ -9,33 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 
 
-class Movie {
-    String id;
-    String name;
-    int year;
-
-    public Movie(String id, String name, int year) {
-        this.id = id;
-        this.name = name;
-        this.year = year;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-
-        if (!(obj instanceof Movie))
-            return false;
-        final Movie om = (Movie)obj;
-        // compare om's fields to mine
-        if(this.id.equals(om.id))
-            if(this.name.equals(om.name))
-                if(this.year == om.year)
-                    return true;
-        return false;
-    }
-}
-
-
 public class MoviesData {
     List<Movie> movieList= new ArrayList<Movie>();
 
