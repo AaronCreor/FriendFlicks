@@ -41,14 +41,13 @@
         app:layout_constraintTop_toBottomOf="@id/friendslist_searchBar_divider" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addgroupfab"
+        android:id="@+id/friendslist_addbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
-        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_baseline_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

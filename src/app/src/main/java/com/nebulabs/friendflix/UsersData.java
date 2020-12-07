@@ -61,6 +61,10 @@ class User {
         Movie input = new Movie(movieID, movieName, movieYear);
         this.movieList.add(input);
     }
+
+    public void addFriend(String email) {
+        this.friendsList.add(email);
+    }
 }
 
 public class UsersData {
@@ -69,7 +73,7 @@ public class UsersData {
         Iterator<User> userIterator = usersList.iterator();
         while(userIterator.hasNext()) {
             User current = userIterator.next();
-            if(current.userEmail == email)
+            if(current.userEmail.contains(email))
                 return current;
         }
         return empty;
@@ -159,8 +163,8 @@ public class UsersData {
         jonnyFriends.add("aaron@gmail.com");
         jonnyFriends.add("chinmay@gmail.com");
         jonnyFriends.add("joshua@gmail.com");
-        jonnyFriends.add("karan@gmail.com");
-        jonnyFriends.add("herobrine@gmail.com");
+//        jonnyFriends.add("karan@gmail.com");
+//        jonnyFriends.add("herobrine@gmail.com");
         User jonny = new User("jonnyboy@gmail.com", "Jonny", jonnyMovies.get(), jonnyFriends.get());
         usersList.add(jonny);
 
@@ -180,7 +184,8 @@ public class UsersData {
         herobrineFriends.add("chinmay@gmail.com");
         herobrineFriends.add("joshua@gmail.com");
         herobrineFriends.add("karan@gmail.com");
+        herobrineFriends.add("jonnyboy@gmail.com");
         User herobrine = new User("herobrine@gmail.com", "Herobrine", herobrineMovies.get(), herobrineFriends.get());
-        usersList.add(jonny);
+        usersList.add(herobrine);
     }
 }
