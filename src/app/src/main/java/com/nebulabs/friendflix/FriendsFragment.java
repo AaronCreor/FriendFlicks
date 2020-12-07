@@ -111,7 +111,7 @@ public class FriendsFragment extends Fragment {
                             User user = usersData.getUserByEmail(userEmail);
 
                             if(user.friendsList.contains(flatDialog.getFirstTextField())) {
-                                Toasty.error(getContext(),"That user is already your friend!", Toasty.LENGTH_SHORT).show();
+                                Toasty.error(getContext(),"You have already added that email!", Toasty.LENGTH_SHORT).show();
                                 flatDialog.dismiss();
                             }
                             else {

@@ -96,9 +96,9 @@ public class UsersData {
         aaronMovies.add(new Movie("tt2119532", "Hacksaw Ridge", 2016, "https://m.media-amazon.com/images/M/MV5BMjQ1NjM3MTUxNV5BMl5BanBnXkFtZTgwMDc5MTY5OTE@._V1_SX300.jpg"));
         FriendsList aaronFriends = new FriendsList();
         aaronFriends.add("jonnyboy@gmail.com");
-        aaronFriends.add("joshua@gmail.com");
-        aaronFriends.add("chinmay@gmail.com");
-        User aaron = new User("aaron@gmail.com", "Aaron", aaronMovies.get(), aaronFriends.get(), "https://cdn.discordapp.com/avatars/255897947085078529/e868b3c954d52d49b418cc1b74f3b261.png");
+        aaronFriends.add("joshuaf97@gmail.com");
+        aaronFriends.add("chinmays45@gmail.com");
+        User aaron = new User("aaronmc123@gmail.com", "Aaron", aaronMovies.get(), aaronFriends.get(), "https://cdn.discordapp.com/avatars/255897947085078529/e868b3c954d52d49b418cc1b74f3b261.png");
         usersList.add(aaron);
 
         MovieList chinmayMovies = new MovieList();
@@ -112,9 +112,9 @@ public class UsersData {
         chinmayMovies.add(new Movie("tt2582802", "Whiplash", 2014, "https://m.media-amazon.com/images/M/MV5BOTA5NDZlZGUtMjAxOS00YTRkLTkwYmMtYWQ0NWEwZDZiNjEzXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"));
         FriendsList chinmayFriends = new FriendsList();
         chinmayFriends.add("jonnyboy@gmail.com");
-        chinmayFriends.add("joshua@gmail.com");
-        chinmayFriends.add("karan@gmail.com");
-        User chinmay = new User("chinmay@gmail.com", "Chinmay", chinmayMovies.get(), chinmayFriends.get(), "https://cdn.discordapp.com/avatars/752448216997298207/be69b35931f36fcb1b1253fe804cd864.png");
+        chinmayFriends.add("joshuaf97@gmail.com");
+        chinmayFriends.add("lumbywho@gmail.com");
+        User chinmay = new User("chinmays45@gmail.com", "Chinmay", chinmayMovies.get(), chinmayFriends.get(), "https://cdn.discordapp.com/avatars/752448216997298207/be69b35931f36fcb1b1253fe804cd864.png");
         usersList.add(chinmay);
 
         MovieList joshMovies = new MovieList();
@@ -127,9 +127,9 @@ public class UsersData {
         joshMovies.add(new Movie("tt0056592", "To Kill a Mockingbird", 1962, "https://m.media-amazon.com/images/M/MV5BNmVmYzcwNzMtMWM1NS00MWIyLThlMDEtYzUwZDgzODE1NmE2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"));
         FriendsList joshFriends = new FriendsList();
         joshFriends.add("jonnyboy@gmail.com");
-        joshFriends.add("aaron@gmail.com");
-        joshFriends.add("karan@gmail.com");
-        User josh = new User("joshua@gmail.com", "Joshua", joshMovies.get(), joshFriends.get(), "https://cdn.discordapp.com/avatars/673388474082263070/a05fe7b6a679d80088545adf2f2026fa.png");
+        joshFriends.add("aaronmc123@gmail.com");
+        joshFriends.add("lumbywho@gmail.com");
+        User josh = new User("joshuaf97@gmail.com", "Joshua", joshMovies.get(), joshFriends.get(), "https://cdn.discordapp.com/avatars/673388474082263070/a05fe7b6a679d80088545adf2f2026fa.png");
         usersList.add(josh);
 
         MovieList karanMovies = new MovieList();
@@ -143,9 +143,9 @@ public class UsersData {
         karanMovies.add(new Movie("tt0087884", "Paris, Texas", 2018, "https://m.media-amazon.com/images/M/MV5BM2RjMmU3ZWItYzBlMy00ZmJkLWE5YzgtNTVkODdhOWM3NGZhXkEyXkFqcGdeQXVyNDA5Mjg5MjA@._V1_SX300.jpg"));
         FriendsList karanFriends = new FriendsList();
         karanFriends.add("jonnyboy@gmail.com");
-        karanFriends.add("aaron@gmail.com");
-        karanFriends.add("chinmay@gmail.com");
-        User karan = new User("karan@gmail.com", "Karan", karanMovies.get(), karanFriends.get(), "https://cdn.discordapp.com/avatars/756554515288948748/1fe74a8c2172db135fc8b97e7fac78d1.png");
+        karanFriends.add("aaronmc123@gmail.com");
+        karanFriends.add("chinmays45@gmail.com");
+        User karan = new User("lumbywho@gmail.com", "Karan", karanMovies.get(), karanFriends.get(), "https://cdn.discordapp.com/avatars/756554515288948748/1fe74a8c2172db135fc8b97e7fac78d1.png");
         usersList.add(karan);
 
         MovieList jonnyMovies = new MovieList();
@@ -160,11 +160,11 @@ public class UsersData {
         jonnyMovies.add(new Movie("tt0114814", "The Usual Suspects", 1995, "https://m.media-amazon.com/images/M/MV5BYTViNjMyNmUtNDFkNC00ZDRlLThmMDUtZDU2YWE4NGI2ZjVmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"));
         jonnyMovies.add(new Movie("tt0053125", "North by Northwest", 1959, "https://m.media-amazon.com/images/M/MV5BZDA3NDExMTUtMDlhOC00MmQ5LWExZGUtYmI1NGVlZWI4OWNiXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg"));
         FriendsList jonnyFriends = new FriendsList();
-        jonnyFriends.add("aaron@gmail.com");
-        jonnyFriends.add("chinmay@gmail.com");
-        jonnyFriends.add("joshua@gmail.com");
-//        jonnyFriends.add("karan@gmail.com");
-//        jonnyFriends.add("herobrine@gmail.com");
+        jonnyFriends.add("aaronmc123@gmail.com");
+        jonnyFriends.add("chinmays45@gmail.com");
+        jonnyFriends.add("joshuaf97@gmail.com");
+//        jonnyFriends.add("lumbywho@gmail.com");
+//        jonnyFriends.add("herobri@gmail.com");
         User jonny = new User("jonnyboy@gmail.com", "Jonny", jonnyMovies.get(), jonnyFriends.get(), "https://cachedimages.podchaser.com/256x256/aHR0cHM6Ly9jcmVhdG9yLWltYWdlcy5wb2RjaGFzZXIuY29tL2FjZjdmZmNkMTIxMGViOTA3N2JjN2FkN2FhYTMyMjI5LnBuZw%3D%3D/aHR0cHM6Ly93d3cucG9kY2hhc2VyLmNvbS9pbWFnZXMvbWlzc2luZy1pbWFnZS5wbmc%3D");
         usersList.add(jonny);
 
@@ -180,12 +180,12 @@ public class UsersData {
         herobrineMovies.add(new Movie("tt8579674", "1917", 2019, "https://m.media-amazon.com/images/M/MV5BOTdmNTFjNDEtNzg0My00ZjkxLTg1ZDAtZTdkMDc2ZmFiNWQ1XkEyXkFqcGdeQXVyNTAzNzgwNTg@._V1_SX300.jpg"));
         herobrineMovies.add(new Movie("tt1255953", "Incendies", 2010, "https://m.media-amazon.com/images/M/MV5BMWE3MGYzZjktY2Q5Mi00Y2NiLWIyYWUtMmIyNzA3YmZlMGFhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"));
         FriendsList herobrineFriends = new FriendsList();
-        herobrineFriends.add("aaron@gmail.com");
-        herobrineFriends.add("chinmay@gmail.com");
-        herobrineFriends.add("joshua@gmail.com");
-        herobrineFriends.add("karan@gmail.com");
+        herobrineFriends.add("aaronmc123@gmail.com");
+        herobrineFriends.add("chinmays45@gmail.com");
+        herobrineFriends.add("joshuaf97@gmail.com");
+        herobrineFriends.add("lumbywho@gmail.com");
         herobrineFriends.add("jonnyboy@gmail.com");
-        User herobrine = new User("herobrine@gmail.com", "Herobrine", herobrineMovies.get(), herobrineFriends.get(), "https://i.pinimg.com/favicons/9d470e197d6d4d445051d7a7e216b57d4285282ff62c10bb8a24550e.jpg");
+        User herobrine = new User("herobri1998@gmail.com", "Herobrine", herobrineMovies.get(), herobrineFriends.get(), "https://i.pinimg.com/favicons/9d470e197d6d4d445051d7a7e216b57d4285282ff62c10bb8a24550e.jpg");
         usersList.add(herobrine);
     }
 }
