@@ -20,8 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
+import com.example.flatdialoglibrary.dialog.FlatDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -156,6 +158,14 @@ public class FriendFragment extends Fragment {
         recyclerView.removeAllViews();
         populateCommonMatches();
 
+        FloatingActionButton addGroup_fab = view.findViewById(R.id.friend_remove);
+        addGroup_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toasty.info(getContext(),"ADD GROUP",Toasty.LENGTH_SHORT).show();
+                removeFriend();
+            }
+        });
     }
 
     void populateTheirList() {
@@ -195,5 +205,36 @@ public class FriendFragment extends Fragment {
                 }
             }
         }
+    }
+
+    void removeFriend() {
+        UsersData usersData = MainActivity.usersData;
+        User user = usersData.getUserByEmail(MainActivity.userEmail);
+
+        final FlatDialog flatDialog = new FlatDialog(getContext());
+        flatDialog.setTitle("REMOVE FRIEND")
+                .setSubtitle("Are you sure you want to remove " + name + " from your friends list?")
+                .setFirstButtonText("CONFIRM")
+                .setSecondButtonText("CANCEL")
+                .withFirstButtonListner(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        flatDialog.dismiss();
+                        if(user.friendsList.contains(email)) {
+                            user.friendsList.remove(email);
+
+                            ((FragmentActivity) getView().getContext()).getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment_container_view, new FriendsFragment())
+                                    .commit();
+                        }
+                    }
+                })
+                .withSecondButtonListner(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        flatDialog.dismiss();
+                    }
+                })
+                .show();
     }
 }

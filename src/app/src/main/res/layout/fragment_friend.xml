@@ -141,4 +141,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/friend_searchBar_divider" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:scaleType="center"
+        app:fabSize="mini"
+        android:id="@+id/friend_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        app:backgroundTint="@color/logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/friend_backButton"
+        app:srcCompat="@drawable/remove_friend" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
