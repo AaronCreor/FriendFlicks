@@ -165,7 +165,7 @@ public class FriendFragment extends Fragment {
                 input[0] = currentMovie.id;
                 input[1] = currentMovie.name;
                 input[2] = Integer.toString(currentMovie.year);
-                moviesList.add(input);
+                moviesList.add(0, input);
             }
         }
 //        this.unfilteredMoviesList = new ArrayList<String[]>(moviesList);
@@ -184,7 +184,7 @@ public class FriendFragment extends Fragment {
                     input[0] = currentMovie.id;
                     input[1] = currentMovie.name;
                     input[2] = Integer.toString(currentMovie.year);
-                    moviesList.add(input);
+                    moviesList.add(0, input);
                 }
             }
         }

@@ -145,7 +145,7 @@ public class FriendsFragment extends Fragment {
                 String[] input = new String[2];
                 input[0] = possibleFriend.userName;
                 input[1] = possibleFriend.userEmail;
-                friendsList.add(input); // show them in the friendsList recycler view
+                friendsList.add(0, input); // show them in the friendsList recycler view
             }
         }
     }
