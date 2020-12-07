@@ -15,6 +15,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.InputStream;
 
 import es.dmoral.toasty.Toasty;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Main activity screen containing all fragments and navigation views
@@ -40,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
         bottomTabView.getMenu().getItem(0).setChecked(true);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,new ExploreFragment()).commit();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://friendflix.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        final UserService userService = retrofit.create(UserService.class);
     }
 
     /**
@@ -103,8 +112,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomTabView = findViewById(R.id.bottom_navigation);
         bottomTabView.getMenu().getItem(0).setChecked(true);
 
-        Fragment selectedFrag = null;
-        selectedFrag = new ExploreFragment();
+        Fragment selectedFrag = new ExploreFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view,selectedFrag).commit();
 
         new Handler().postDelayed(new Runnable() {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
+/*
 class Movie {
     String id;
     String name;
@@ -37,7 +37,7 @@ class Movie {
     }
 }
 
-
+*/
 //public class MoviesData {
 //    List<Movie> movieList= new ArrayList<Movie>();
 //

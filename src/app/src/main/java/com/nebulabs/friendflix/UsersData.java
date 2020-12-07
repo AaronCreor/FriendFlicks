@@ -44,7 +44,7 @@ class FriendsList {
     }
 }
 
-
+/*
 class User {
     public String userEmail;
     public String userName;
@@ -69,7 +69,7 @@ class User {
         this.friendsList.add(email);
     }
 }
-
+*/
 public class UsersData {
     public User getUserByEmail(String email) {
         User empty = null;
