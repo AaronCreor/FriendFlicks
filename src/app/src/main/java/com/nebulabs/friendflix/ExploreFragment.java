@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import es.dmoral.toasty.Toasty;
 
@@ -94,8 +95,8 @@ public class ExploreFragment extends Fragment {
                     String userEmail = MainActivity.userEmail;
                     UsersData usersData = MainActivity.usersData;
                     User user = usersData.getUserByEmail(userEmail);
-                    user.addMovie(new Movie(movieID, movieTitleValue, Integer.parseInt(movieYearValue)));
-                    Toasty.info(view.getContext(), movieID, Toast.LENGTH_SHORT).show();
+                    user.addMovie(movieID, movieTitleValue, Integer.parseInt(movieYearValue),  moviePosterValue);
+                    Toasty.success(view.getContext(), "Added to My List", Toast.LENGTH_SHORT).show();
 
                     // and then...
                     showRandomMovie();
@@ -170,7 +171,24 @@ public class ExploreFragment extends Fragment {
         int min = 0;
         int max = movies.size();
         int random_int = (int)(Math.random() * (max - min + 1) + min);
-        return movies.get(random_int);
+        String movieID = movies.get(random_int);
+
+        // check if this movieID is already in the user's "My List"
+        // if it is, run the movieID generator again
+        String userEmail = MainActivity.userEmail;
+        UsersData usersData = MainActivity.usersData;
+        User user = usersData.getUserByEmail(userEmail);
+        Iterator<Movie> movieIterator = user.movieList.iterator();
+        while(movieIterator.hasNext()) {
+            Movie currentMovie = movieIterator.next();
+            if(currentMovie != null) {
+                if(currentMovie.id.equals(movieID)) {
+                    return generateRandomMovieID();
+                }
+            }
+        }
+
+        return movieID;
     }
 
 }

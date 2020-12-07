@@ -24,6 +24,8 @@ import es.dmoral.toasty.Toasty;
 
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Picasso;
+
 /**
  * Recycler view adapter for each Movie entity in movie list
  */
@@ -50,8 +52,9 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.movieIDView.setText(moviesList.get(position)[0]);
-        holder.rowCountTextView.setText(moviesList.get(position)[2]);
         holder.textView.setText(moviesList.get(position)[1]);
+        holder.rowCountTextView.setText(moviesList.get(position)[2]);
+        Picasso.get().load(moviesList.get(position)[3]).into(holder.imageView);
     }
 
     @Override
@@ -125,7 +128,6 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
 
         @Override
         public void onClick(View view) {
-            Toasty.info(view.getContext(), moviesList.get(getAdapterPosition())[0], Toast.LENGTH_SHORT).show();
             String movieID = moviesList.get(getAdapterPosition())[0];
             Fragment selectedFrag = new MovieFragment(movieID);
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()

@@ -107,7 +107,7 @@ public class FirebaseLoginActivity extends AppCompatActivity {
 //
 //                toast.show();
 
-                Toasty.success(getApplicationContext(),"Sign In Success!",Toast.LENGTH_SHORT).show();
+                Toasty.success(getApplicationContext(),"Sign In Success            !",Toast.LENGTH_SHORT).show();
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 Intent intent = new Intent(this, MainActivity.class);
