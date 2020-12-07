@@ -142,9 +142,10 @@ public class FriendsFragment extends Fragment {
         while(friendEmailIterator.hasNext()) {
             User possibleFriend = usersData.getUserByEmail(friendEmailIterator.next());
             if(possibleFriend != null && possibleFriend.friendsList.contains(userEmail)) { // if a person on your friends list also has you on their friends list
-                String[] input = new String[2];
+                String[] input = new String[3];
                 input[0] = possibleFriend.userName;
                 input[1] = possibleFriend.userEmail;
+                input[2] = possibleFriend.picture;
                 friendsList.add(0, input); // show them in the friendsList recycler view
             }
         }

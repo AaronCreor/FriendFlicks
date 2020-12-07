@@ -21,6 +21,7 @@
 
     <TextView
         android:id="@+id/movie_movietitle"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -34,6 +35,7 @@
 
     <TextView
         android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:id="@+id/movie_movieyear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +52,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"

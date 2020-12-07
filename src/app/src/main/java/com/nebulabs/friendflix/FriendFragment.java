@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -77,6 +78,10 @@ public class FriendFragment extends Fragment {
         friendName.setText(name);
         TextView friendEmail = getView().findViewById(R.id.friendEmail);
         friendEmail.setText(email);
+        ImageView friendImage = getView().findViewById(R.id.friendImage);
+        UsersData usersData = MainActivity.usersData;
+        User user = usersData.getUserByEmail(email);
+        Picasso.get().load(user.picture).into(friendImage);
 
         MaterialButtonToggleGroup materialButtonToggleGroup =
                 (MaterialButtonToggleGroup) getView().findViewById(R.id.toggleButton);

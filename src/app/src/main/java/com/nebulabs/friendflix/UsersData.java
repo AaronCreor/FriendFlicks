@@ -49,12 +49,14 @@ class User {
     public String userName;
     public ArrayList<Movie> movieList;
     public ArrayList<String> friendsList;
+    String picture;
 
-    public User(String userEmail, String userName, ArrayList<Movie> movieList, ArrayList<String> friendsList) {
+    public User(String userEmail, String userName, ArrayList<Movie> movieList, ArrayList<String> friendsList, String picture) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.movieList = movieList;
         this.friendsList = friendsList;
+        this.picture = picture;
     }
 
     public void addMovie(String movieID, String movieName, int movieYear, String moviePoster) {
@@ -96,7 +98,7 @@ public class UsersData {
         aaronFriends.add("jonnyboy@gmail.com");
         aaronFriends.add("joshua@gmail.com");
         aaronFriends.add("chinmay@gmail.com");
-        User aaron = new User("aaron@gmail.com", "Aaron", aaronMovies.get(), aaronFriends.get());
+        User aaron = new User("aaron@gmail.com", "Aaron", aaronMovies.get(), aaronFriends.get(), "https://cdn.discordapp.com/avatars/255897947085078529/e868b3c954d52d49b418cc1b74f3b261.png");
         usersList.add(aaron);
 
         MovieList chinmayMovies = new MovieList();
@@ -112,11 +114,10 @@ public class UsersData {
         chinmayFriends.add("jonnyboy@gmail.com");
         chinmayFriends.add("joshua@gmail.com");
         chinmayFriends.add("karan@gmail.com");
-        User chinmay = new User("chinmay@gmail.com", "Chinmay", chinmayMovies.get(), chinmayFriends.get());
+        User chinmay = new User("chinmay@gmail.com", "Chinmay", chinmayMovies.get(), chinmayFriends.get(), "https://cdn.discordapp.com/avatars/752448216997298207/be69b35931f36fcb1b1253fe804cd864.png");
         usersList.add(chinmay);
 
         MovieList joshMovies = new MovieList();
-        joshMovies.add(new Movie("tt0372784", "Batman Begins", 2005, "https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"));
         joshMovies.add(new Movie("tt0034583", "Casablanca", 1942, "https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_SX300.jpg"));
         joshMovies.add(new Movie("tt0053125", "North by Northwest", 1959, "https://m.media-amazon.com/images/M/MV5BZDA3NDExMTUtMDlhOC00MmQ5LWExZGUtYmI1NGVlZWI4OWNiXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg"));
         joshMovies.add(new Movie("tt0114814", "The Usual Suspects", 1995, "https://m.media-amazon.com/images/M/MV5BYTViNjMyNmUtNDFkNC00ZDRlLThmMDUtZDU2YWE4NGI2ZjVmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"));
@@ -128,7 +129,7 @@ public class UsersData {
         joshFriends.add("jonnyboy@gmail.com");
         joshFriends.add("aaron@gmail.com");
         joshFriends.add("karan@gmail.com");
-        User josh = new User("joshua@gmail.com", "Joshua", joshMovies.get(), joshFriends.get());
+        User josh = new User("joshua@gmail.com", "Joshua", joshMovies.get(), joshFriends.get(), "https://cdn.discordapp.com/avatars/673388474082263070/a05fe7b6a679d80088545adf2f2026fa.png");
         usersList.add(josh);
 
         MovieList karanMovies = new MovieList();
@@ -144,7 +145,7 @@ public class UsersData {
         karanFriends.add("jonnyboy@gmail.com");
         karanFriends.add("aaron@gmail.com");
         karanFriends.add("chinmay@gmail.com");
-        User karan = new User("karan@gmail.com", "Karan", karanMovies.get(), karanFriends.get());
+        User karan = new User("karan@gmail.com", "Karan", karanMovies.get(), karanFriends.get(), "https://cdn.discordapp.com/avatars/756554515288948748/1fe74a8c2172db135fc8b97e7fac78d1.png");
         usersList.add(karan);
 
         MovieList jonnyMovies = new MovieList();
@@ -158,14 +159,13 @@ public class UsersData {
         jonnyMovies.add(new Movie("tt0042192", "All About Eve", 1950, "https://m.media-amazon.com/images/M/MV5BMTY2MTAzODI5NV5BMl5BanBnXkFtZTgwMjM4NzQ0MjE@._V1_SX300.jpg"));
         jonnyMovies.add(new Movie("tt0114814", "The Usual Suspects", 1995, "https://m.media-amazon.com/images/M/MV5BYTViNjMyNmUtNDFkNC00ZDRlLThmMDUtZDU2YWE4NGI2ZjVmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"));
         jonnyMovies.add(new Movie("tt0053125", "North by Northwest", 1959, "https://m.media-amazon.com/images/M/MV5BZDA3NDExMTUtMDlhOC00MmQ5LWExZGUtYmI1NGVlZWI4OWNiXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg"));
-        jonnyMovies.add(new Movie("tt0372784", "Batman Begins", 2005, "https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"));
         FriendsList jonnyFriends = new FriendsList();
         jonnyFriends.add("aaron@gmail.com");
         jonnyFriends.add("chinmay@gmail.com");
         jonnyFriends.add("joshua@gmail.com");
 //        jonnyFriends.add("karan@gmail.com");
 //        jonnyFriends.add("herobrine@gmail.com");
-        User jonny = new User("jonnyboy@gmail.com", "Jonny", jonnyMovies.get(), jonnyFriends.get());
+        User jonny = new User("jonnyboy@gmail.com", "Jonny", jonnyMovies.get(), jonnyFriends.get(), "https://cachedimages.podchaser.com/256x256/aHR0cHM6Ly9jcmVhdG9yLWltYWdlcy5wb2RjaGFzZXIuY29tL2FjZjdmZmNkMTIxMGViOTA3N2JjN2FkN2FhYTMyMjI5LnBuZw%3D%3D/aHR0cHM6Ly93d3cucG9kY2hhc2VyLmNvbS9pbWFnZXMvbWlzc2luZy1pbWFnZS5wbmc%3D");
         usersList.add(jonny);
 
         MovieList herobrineMovies = new MovieList();
@@ -185,7 +185,7 @@ public class UsersData {
         herobrineFriends.add("joshua@gmail.com");
         herobrineFriends.add("karan@gmail.com");
         herobrineFriends.add("jonnyboy@gmail.com");
-        User herobrine = new User("herobrine@gmail.com", "Herobrine", herobrineMovies.get(), herobrineFriends.get());
+        User herobrine = new User("herobrine@gmail.com", "Herobrine", herobrineMovies.get(), herobrineFriends.get(), "https://i.pinimg.com/favicons/9d470e197d6d4d445051d7a7e216b57d4285282ff62c10bb8a24550e.jpg");
         usersList.add(herobrine);
     }
 }

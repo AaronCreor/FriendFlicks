@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,8 @@ import java.util.List;
 import es.dmoral.toasty.Toasty;
 
 import androidx.fragment.app.Fragment;
+
+import com.squareup.picasso.Picasso;
 
 /**
  * Recycler view adapter for each friend entity in friend list of user
@@ -39,15 +42,16 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.recycler_list_item, parent, false);
+        View view = layoutInflater.inflate(R.layout.friends_recycler_list_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.rowCountTextView.setText(friendsList.get(position)[1]);
         holder.recyclerItemTextView.setText(friendsList.get(position)[0]);
+        holder.rowCountTextView.setText(friendsList.get(position)[1]);
+        Picasso.get().load(friendsList.get(position)[2]).into(holder.imageView);
     }
 
     @Override
@@ -100,7 +104,7 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.recyclerItemImageView);
+            imageView = itemView.findViewById(R.id.recyclerItemUserImage);
             recyclerItemTextView = itemView.findViewById(R.id.recyclerItemTextView);
             rowCountTextView = itemView.findViewById(R.id.rowCountTextView);
 
@@ -122,6 +126,7 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
             Toasty.info(view.getContext(), friendsList.get(getAdapterPosition())[1], Toast.LENGTH_SHORT).show();
             String name = friendsList.get(getAdapterPosition())[0];
             String email = friendsList.get(getAdapterPosition())[1];
+            String image = friendsList.get(getAdapterPosition())[2];
             Fragment selectedFrag = new FriendFragment(name, email);
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container_view, selectedFrag)
