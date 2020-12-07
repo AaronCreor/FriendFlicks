@@ -111,10 +111,12 @@ public class MovieFragment extends Fragment {
                 // add/remove movie logic
                 if(user.movieList.contains(thisMovie)) {
                     user.movieList.remove(thisMovie);
+                    Toasty.normal(view.getContext(), "Removed from My List", Toast.LENGTH_SHORT).show();
                     movieFavButton.setText("Like");
                 }
                 else {
                     user.movieList.add(thisMovie);
+                    Toasty.success(view.getContext(), "Added to My List", Toast.LENGTH_SHORT).show();
                     movieFavButton.setText("Remove");
                 }
 

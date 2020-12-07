@@ -96,7 +96,7 @@ public class ExploreFragment extends Fragment {
                     UsersData usersData = MainActivity.usersData;
                     User user = usersData.getUserByEmail(userEmail);
                     user.addMovie(movieID, movieTitleValue, Integer.parseInt(movieYearValue),  moviePosterValue);
-                    Toasty.info(view.getContext(), movieID, Toast.LENGTH_SHORT).show();
+                    Toasty.success(view.getContext(), "Added to My List", Toast.LENGTH_SHORT).show();
 
                     // and then...
                     showRandomMovie();

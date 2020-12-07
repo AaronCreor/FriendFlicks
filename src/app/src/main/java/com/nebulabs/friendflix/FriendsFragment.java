@@ -95,7 +95,7 @@ public class FriendsFragment extends Fragment {
     public void addNewFriend(){
         final FlatDialog flatDialog = new FlatDialog(getContext());
         flatDialog.setTitle("ADD FRIEND")
-                .setSubtitle("Enter your friend's email address\n\nTell your friend to add your email address in their FriendFlix app\n\nWhen you have both added each other, you'll show up in each other's friends list!")
+                .setSubtitle("Enter your friend's email address\n\nTell your friend to add your email address in their FriendFlix app\n\nWhen you have both added each other, you'll show up in each other's Friends List!")
                 .setFirstTextFieldHint("friend's email")
                 .setFirstButtonText("SEND REQUEST")
                 .setSecondButtonText("CANCEL")

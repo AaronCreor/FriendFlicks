@@ -213,7 +213,7 @@ public class FriendFragment extends Fragment {
 
         final FlatDialog flatDialog = new FlatDialog(getContext());
         flatDialog.setTitle("REMOVE FRIEND")
-                .setSubtitle("Are you sure you want to remove " + name + " from your friends list?")
+                .setSubtitle("Are you sure you want to remove " + name + " from your Friends List?")
                 .setFirstButtonText("CONFIRM")
                 .setSecondButtonText("CANCEL")
                 .withFirstButtonListner(new View.OnClickListener() {
@@ -222,6 +222,8 @@ public class FriendFragment extends Fragment {
                         flatDialog.dismiss();
                         if(user.friendsList.contains(email)) {
                             user.friendsList.remove(email);
+
+                            Toasty.normal(view.getContext(), email + " was removed from your Friends List", Toast.LENGTH_SHORT).show();
 
                             ((FragmentActivity) getView().getContext()).getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.fragment_container_view, new FriendsFragment())

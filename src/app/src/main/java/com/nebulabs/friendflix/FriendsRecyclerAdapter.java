@@ -123,7 +123,6 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
 
         @Override
         public void onClick(View view) {
-            Toasty.info(view.getContext(), friendsList.get(getAdapterPosition())[1], Toast.LENGTH_SHORT).show();
             String name = friendsList.get(getAdapterPosition())[0];
             String email = friendsList.get(getAdapterPosition())[1];
             String image = friendsList.get(getAdapterPosition())[2];
