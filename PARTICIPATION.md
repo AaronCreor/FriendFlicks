@@ -20,5 +20,9 @@
 
 
 ## Joshua Fantillo
- - Setup Omdb database get commands (getTitle, getPoster, getRatings.. etc.)
- - Created List of most popular movies IMDbMovies.csv
+ - Setup and implemented the Omdb class and functions
+ - Created List CSV file with most popular movies
+ - Made and designed YouTube video
+ - Cleaned up MoviesData class
+ - Worked on connecting Users data from server to app
+ - Cleaned up varius other code and added comments
