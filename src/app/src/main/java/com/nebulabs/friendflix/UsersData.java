@@ -18,8 +18,8 @@ class MovieList {
         movieList.add(movie);
     }
 
-    public void add(String movieID, String movieName, int movieYear) {
-        Movie input = new Movie(movieID, movieName, movieYear);
+    public void add(String movieID, String movieName, int movieYear, String moviePoster) {
+        Movie input = new Movie(movieID, movieName, movieYear, moviePoster);
         this.add(input);
     }
 
@@ -57,8 +57,8 @@ class User {
         this.friendsList = friendsList;
     }
 
-    public void addMovie(String movieID, String movieName, int movieYear) {
-        Movie input = new Movie(movieID, movieName, movieYear);
+    public void addMovie(String movieID, String movieName, int movieYear, String moviePoster) {
+        Movie input = new Movie(movieID, movieName, movieYear, moviePoster);
         this.movieList.add(input);
     }
 
@@ -83,15 +83,15 @@ public class UsersData {
 
     public UsersData() {
         MovieList aaronMovies = new MovieList();
-        aaronMovies.add(new Movie("tt0114369", "Se7en", 1995));
-        aaronMovies.add(new Movie("tt0381681", "Before Sunset", 2004));
-        aaronMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997));
-        aaronMovies.add(new Movie("tt0043014", "Sunset Blvd.", 1950));
-        aaronMovies.add(new Movie("tt0087884", "Paris, Texas", 2018));
-        aaronMovies.add(new Movie("tt0198781", "Monsters, Inc.", 2001));
-        aaronMovies.add(new Movie("tt0110357", "The Lion King", 1994));
-        aaronMovies.add(new Movie("tt0056592", "To Kill a Mockingbird", 1962));
-        aaronMovies.add(new Movie("tt2119532", "Hacksaw Ridge", 2016));
+        aaronMovies.add(new Movie("tt0114369", "Se7en", 1995, "https://m.media-amazon.com/images/M/MV5BOTUwODM5MTctZjczMi00OTk4LTg3NWUtNmVhMTAzNTNjYjcyXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"));
+        aaronMovies.add(new Movie("tt0381681", "Before Sunset", 2004, "https://m.media-amazon.com/images/M/MV5BMTQ1MjAwNTM5Ml5BMl5BanBnXkFtZTYwNDM0MTc3._V1_SX300.jpg"));
+        aaronMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997, "https://m.media-amazon.com/images/M/MV5BYmJmM2Q4NmMtYThmNC00ZjRlLWEyZmItZTIwOTBlZDQ3NTQ1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"));
+        aaronMovies.add(new Movie("tt0043014", "Sunset Blvd.", 1950, "https://m.media-amazon.com/images/M/MV5BMTU0NTkyNzYwMF5BMl5BanBnXkFtZTgwMDU0NDk5MTI@._V1_SX300.jpg"));
+        aaronMovies.add(new Movie("tt0087884", "Paris, Texas", 2018, "https://m.media-amazon.com/images/M/MV5BM2RjMmU3ZWItYzBlMy00ZmJkLWE5YzgtNTVkODdhOWM3NGZhXkEyXkFqcGdeQXVyNDA5Mjg5MjA@._V1_SX300.jpg"));
+        aaronMovies.add(new Movie("tt0198781", "Monsters, Inc.", 2001, "https://m.media-amazon.com/images/M/MV5BMTY1NTI0ODUyOF5BMl5BanBnXkFtZTgwNTEyNjQ0MDE@._V1_SX300.jpg"));
+        aaronMovies.add(new Movie("tt0110357", "The Lion King", 1994, "https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_SX300.jpg"));
+        aaronMovies.add(new Movie("tt0056592", "To Kill a Mockingbird", 1962, "https://m.media-amazon.com/images/M/MV5BNmVmYzcwNzMtMWM1NS00MWIyLThlMDEtYzUwZDgzODE1NmE2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"));
+        aaronMovies.add(new Movie("tt2119532", "Hacksaw Ridge", 2016, "https://m.media-amazon.com/images/M/MV5BMjQ1NjM3MTUxNV5BMl5BanBnXkFtZTgwMDc5MTY5OTE@._V1_SX300.jpg"));
         FriendsList aaronFriends = new FriendsList();
         aaronFriends.add("jonnyboy@gmail.com");
         aaronFriends.add("joshua@gmail.com");
@@ -100,14 +100,14 @@ public class UsersData {
         usersList.add(aaron);
 
         MovieList chinmayMovies = new MovieList();
-        chinmayMovies.add(new Movie("tt1911644", "The Call", 2013));
-        chinmayMovies.add(new Movie("tt0116571", "House Arrest", 1996));
-        chinmayMovies.add(new Movie("tt0095765", "Cinema Paradiso", 1988));
-        chinmayMovies.add(new Movie("tt0114369", "Se7en", 1995));
-        chinmayMovies.add(new Movie("tt0381681", "Before Sunset", 2004));
-        chinmayMovies.add(new Movie("tt0032976", "Rebecca", 1940));
-        chinmayMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997));
-        chinmayMovies.add(new Movie("tt2582802", "Whiplash", 2014));
+        chinmayMovies.add(new Movie("tt1911644", "The Call", 2013, "https://m.media-amazon.com/images/M/MV5BMjExNDkzNjAwOV5BMl5BanBnXkFtZTcwMDMzMzQwOQ@@._V1_SX300.jpg"));
+        chinmayMovies.add(new Movie("tt0116571", "House Arrest", 1996, "https://m.media-amazon.com/images/M/MV5BYWJiMGU3ODItMWRiZi00MjFjLWE1ZWItM2U1YTY5NmViMjk2XkEyXkFqcGdeQXVyNTM5NzI0NDY@._V1_SX300.jpg"));
+        chinmayMovies.add(new Movie("tt0095765", "Cinema Paradiso", 1988, "https://m.media-amazon.com/images/M/MV5BM2FhYjEyYmYtMDI1Yy00YTdlLWI2NWQtYmEzNzAxOGY1NjY2XkEyXkFqcGdeQXVyNTA3NTIyNDg@._V1_SX300.jpg"));
+        chinmayMovies.add(new Movie("tt0114369", "Se7en", 1995, "https://m.media-amazon.com/images/M/MV5BOTUwODM5MTctZjczMi00OTk4LTg3NWUtNmVhMTAzNTNjYjcyXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"));
+        chinmayMovies.add(new Movie("tt0381681", "Before Sunset", 2004, "https://m.media-amazon.com/images/M/MV5BMTQ1MjAwNTM5Ml5BMl5BanBnXkFtZTYwNDM0MTc3._V1_SX300.jpg"));
+        chinmayMovies.add(new Movie("tt0032976", "Rebecca", 1940, "https://m.media-amazon.com/images/M/MV5BYTcxYWExOTMtMWFmYy00ZjgzLWI0YjktNWEzYzJkZTg0NDdmL2ltYWdlXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg"));
+        chinmayMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997, "https://m.media-amazon.com/images/M/MV5BYmJmM2Q4NmMtYThmNC00ZjRlLWEyZmItZTIwOTBlZDQ3NTQ1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"));
+        chinmayMovies.add(new Movie("tt2582802", "Whiplash", 2014, "https://m.media-amazon.com/images/M/MV5BOTA5NDZlZGUtMjAxOS00YTRkLTkwYmMtYWQ0NWEwZDZiNjEzXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"));
         FriendsList chinmayFriends = new FriendsList();
         chinmayFriends.add("jonnyboy@gmail.com");
         chinmayFriends.add("joshua@gmail.com");
@@ -116,14 +116,14 @@ public class UsersData {
         usersList.add(chinmay);
 
         MovieList joshMovies = new MovieList();
-        joshMovies.add(new Movie("tt0372784", "Batman Begins", 2005));
-        joshMovies.add(new Movie("tt0034583", "Casablanca", 1942));
-        joshMovies.add(new Movie("tt0053125", "North by Northwest", 1959));
-        joshMovies.add(new Movie("tt0114814", "The Usual Suspects", 1995));
-        joshMovies.add(new Movie("tt1255953", "Incendies", 2010));
-        joshMovies.add(new Movie("tt2119532", "Hacksaw Ridge", 2016));
-        joshMovies.add(new Movie("tt0108052", "Schindler's List", 1993));
-        joshMovies.add(new Movie("tt0056592", "To Kill a Mockingbird", 1962));
+        joshMovies.add(new Movie("tt0372784", "Batman Begins", 2005, "https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"));
+        joshMovies.add(new Movie("tt0034583", "Casablanca", 1942, "https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_SX300.jpg"));
+        joshMovies.add(new Movie("tt0053125", "North by Northwest", 1959, "https://m.media-amazon.com/images/M/MV5BZDA3NDExMTUtMDlhOC00MmQ5LWExZGUtYmI1NGVlZWI4OWNiXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg"));
+        joshMovies.add(new Movie("tt0114814", "The Usual Suspects", 1995, "https://m.media-amazon.com/images/M/MV5BYTViNjMyNmUtNDFkNC00ZDRlLThmMDUtZDU2YWE4NGI2ZjVmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"));
+        joshMovies.add(new Movie("tt1255953", "Incendies", 2010, "https://m.media-amazon.com/images/M/MV5BMWE3MGYzZjktY2Q5Mi00Y2NiLWIyYWUtMmIyNzA3YmZlMGFhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"));
+        joshMovies.add(new Movie("tt2119532", "Hacksaw Ridge", 2016, "https://m.media-amazon.com/images/M/MV5BMjQ1NjM3MTUxNV5BMl5BanBnXkFtZTgwMDc5MTY5OTE@._V1_SX300.jpg"));
+        joshMovies.add(new Movie("tt0108052", "Schindler's List", 1993, "https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"));
+        joshMovies.add(new Movie("tt0056592", "To Kill a Mockingbird", 1962, "https://m.media-amazon.com/images/M/MV5BNmVmYzcwNzMtMWM1NS00MWIyLThlMDEtYzUwZDgzODE1NmE2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"));
         FriendsList joshFriends = new FriendsList();
         joshFriends.add("jonnyboy@gmail.com");
         joshFriends.add("aaron@gmail.com");
@@ -132,14 +132,14 @@ public class UsersData {
         usersList.add(josh);
 
         MovieList karanMovies = new MovieList();
-        karanMovies.add(new Movie("tt1911644", "The Call", 2013));
-        karanMovies.add(new Movie("tt0095765", "Cinema Paradiso", 1988));
-        karanMovies.add(new Movie("tt0381681", "Before Sunset", 2004));
-        karanMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997));
-        karanMovies.add(new Movie("tt0088247", "The Terminator", 1984));
-        karanMovies.add(new Movie("tt0208092", "Snatch", 2017));
-        karanMovies.add(new Movie("tt0017136", "Metropolis", 1927));
-        karanMovies.add(new Movie("tt0087884", "Paris, Texas", 2018));
+        karanMovies.add(new Movie("tt1911644", "The Call", 2013, "https://m.media-amazon.com/images/M/MV5BMjExNDkzNjAwOV5BMl5BanBnXkFtZTcwMDMzMzQwOQ@@._V1_SX300.jpg"));
+        karanMovies.add(new Movie("tt0095765", "Cinema Paradiso", 1988, "https://m.media-amazon.com/images/M/MV5BM2FhYjEyYmYtMDI1Yy00YTdlLWI2NWQtYmEzNzAxOGY1NjY2XkEyXkFqcGdeQXVyNTA3NTIyNDg@._V1_SX300.jpg"));
+        karanMovies.add(new Movie("tt0381681", "Before Sunset", 2004, "https://m.media-amazon.com/images/M/MV5BMTQ1MjAwNTM5Ml5BMl5BanBnXkFtZTYwNDM0MTc3._V1_SX300.jpg"));
+        karanMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997, "https://m.media-amazon.com/images/M/MV5BYmJmM2Q4NmMtYThmNC00ZjRlLWEyZmItZTIwOTBlZDQ3NTQ1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"));
+        karanMovies.add(new Movie("tt0088247", "The Terminator", 1984, "https://m.media-amazon.com/images/M/MV5BYTViNzMxZjEtZGEwNy00MDNiLWIzNGQtZDY2MjQ1OWViZjFmXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"));
+        karanMovies.add(new Movie("tt0208092", "Snatch", 2017, "https://m.media-amazon.com/images/M/MV5BMzEyMTc4NzEyMl5BMl5BanBnXkFtZTgwMzA2OTYzNjM@._V1_SX300.jpg"));
+        karanMovies.add(new Movie("tt0017136", "Metropolis", 1927, "https://m.media-amazon.com/images/M/MV5BMTg5YWIyMWUtZDY5My00Zjc1LTljOTctYmI0MWRmY2M2NmRkXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"));
+        karanMovies.add(new Movie("tt0087884", "Paris, Texas", 2018, "https://m.media-amazon.com/images/M/MV5BM2RjMmU3ZWItYzBlMy00ZmJkLWE5YzgtNTVkODdhOWM3NGZhXkEyXkFqcGdeQXVyNDA5Mjg5MjA@._V1_SX300.jpg"));
         FriendsList karanFriends = new FriendsList();
         karanFriends.add("jonnyboy@gmail.com");
         karanFriends.add("aaron@gmail.com");
@@ -148,17 +148,17 @@ public class UsersData {
         usersList.add(karan);
 
         MovieList jonnyMovies = new MovieList();
-        jonnyMovies.add(new Movie("tt1911644", "The Call", 2013));
-        jonnyMovies.add(new Movie("tt0116571", "House Arrest", 1996));
-        jonnyMovies.add(new Movie("tt0095765", "Cinema Paradiso", 1988));
-        jonnyMovies.add(new Movie("tt2582802", "Whiplash", 2014));
-        jonnyMovies.add(new Movie("tt0088247", "The Terminator", 1984));
-        jonnyMovies.add(new Movie("tt0167404", "The Sixth Sense", 1999));
-        jonnyMovies.add(new Movie("tt0110357", "The Lion King", 1994));
-        jonnyMovies.add(new Movie("tt0042192", "All About Eve", 1950));
-        jonnyMovies.add(new Movie("tt0114814", "The Usual Suspects", 1995));
-        jonnyMovies.add(new Movie("tt0053125", "North by Northwest", 1959));
-        jonnyMovies.add(new Movie("tt0372784", "Batman Begins", 2005));
+        jonnyMovies.add(new Movie("tt1911644", "The Call", 2013, "https://m.media-amazon.com/images/M/MV5BMjExNDkzNjAwOV5BMl5BanBnXkFtZTcwMDMzMzQwOQ@@._V1_SX300.jpg"));
+        jonnyMovies.add(new Movie("tt0116571", "House Arrest", 1996, "https://m.media-amazon.com/images/M/MV5BYWJiMGU3ODItMWRiZi00MjFjLWE1ZWItM2U1YTY5NmViMjk2XkEyXkFqcGdeQXVyNTM5NzI0NDY@._V1_SX300.jpg"));
+        jonnyMovies.add(new Movie("tt0095765", "Cinema Paradiso", 1988, "https://m.media-amazon.com/images/M/MV5BM2FhYjEyYmYtMDI1Yy00YTdlLWI2NWQtYmEzNzAxOGY1NjY2XkEyXkFqcGdeQXVyNTA3NTIyNDg@._V1_SX300.jpg"));
+        jonnyMovies.add(new Movie("tt2582802", "Whiplash", 2014, "https://m.media-amazon.com/images/M/MV5BOTA5NDZlZGUtMjAxOS00YTRkLTkwYmMtYWQ0NWEwZDZiNjEzXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"));
+        jonnyMovies.add(new Movie("tt0088247", "The Terminator", 1984, "https://m.media-amazon.com/images/M/MV5BYTViNzMxZjEtZGEwNy00MDNiLWIzNGQtZDY2MjQ1OWViZjFmXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"));
+        jonnyMovies.add(new Movie("tt0167404", "The Sixth Sense", 1999, "https://m.media-amazon.com/images/M/MV5BMWM4NTFhYjctNzUyNi00NGMwLTk3NTYtMDIyNTZmMzRlYmQyXkEyXkFqcGdeQXVyMTAwMzUyOTc@._V1_SX300.jpg"));
+        jonnyMovies.add(new Movie("tt0110357", "The Lion King", 1994, "https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_SX300.jpg"));
+        jonnyMovies.add(new Movie("tt0042192", "All About Eve", 1950, "https://m.media-amazon.com/images/M/MV5BMTY2MTAzODI5NV5BMl5BanBnXkFtZTgwMjM4NzQ0MjE@._V1_SX300.jpg"));
+        jonnyMovies.add(new Movie("tt0114814", "The Usual Suspects", 1995, "https://m.media-amazon.com/images/M/MV5BYTViNjMyNmUtNDFkNC00ZDRlLThmMDUtZDU2YWE4NGI2ZjVmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"));
+        jonnyMovies.add(new Movie("tt0053125", "North by Northwest", 1959, "https://m.media-amazon.com/images/M/MV5BZDA3NDExMTUtMDlhOC00MmQ5LWExZGUtYmI1NGVlZWI4OWNiXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg"));
+        jonnyMovies.add(new Movie("tt0372784", "Batman Begins", 2005, "https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"));
         FriendsList jonnyFriends = new FriendsList();
         jonnyFriends.add("aaron@gmail.com");
         jonnyFriends.add("chinmay@gmail.com");
@@ -169,16 +169,16 @@ public class UsersData {
         usersList.add(jonny);
 
         MovieList herobrineMovies = new MovieList();
-        herobrineMovies.add(new Movie("tt0114369", "Se7en", 1995));
-        herobrineMovies.add(new Movie("tt0381681", "Before Sunset", 2004));
-        herobrineMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997));
-        herobrineMovies.add(new Movie("tt2582802", "Whiplash", 2014));
-        herobrineMovies.add(new Movie("tt0088247", "The Terminator", 1984));
-        herobrineMovies.add(new Movie("tt0167404", "The Sixth Sense", 1999));
-        herobrineMovies.add(new Movie("tt0208092", "Snatch", 2017));
-        herobrineMovies.add(new Movie("tt0043014", "Sunset Blvd.", 1950));
-        herobrineMovies.add(new Movie("tt8579674", "1917", 2019));
-        herobrineMovies.add(new Movie("tt1255953", "Incendies", 2010));
+        herobrineMovies.add(new Movie("tt0114369", "Se7en", 1995, "https://m.media-amazon.com/images/M/MV5BOTUwODM5MTctZjczMi00OTk4LTg3NWUtNmVhMTAzNTNjYjcyXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"));
+        herobrineMovies.add(new Movie("tt0381681", "Before Sunset", 2004, "https://m.media-amazon.com/images/M/MV5BMTQ1MjAwNTM5Ml5BMl5BanBnXkFtZTYwNDM0MTc3._V1_SX300.jpg"));
+        herobrineMovies.add(new Movie("tt0118799", "Life is Beautiful", 1997, "https://m.media-amazon.com/images/M/MV5BYmJmM2Q4NmMtYThmNC00ZjRlLWEyZmItZTIwOTBlZDQ3NTQ1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"));
+        herobrineMovies.add(new Movie("tt2582802", "Whiplash", 2014, "https://m.media-amazon.com/images/M/MV5BOTA5NDZlZGUtMjAxOS00YTRkLTkwYmMtYWQ0NWEwZDZiNjEzXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"));
+        herobrineMovies.add(new Movie("tt0088247", "The Terminator", 1984, "https://m.media-amazon.com/images/M/MV5BYTViNzMxZjEtZGEwNy00MDNiLWIzNGQtZDY2MjQ1OWViZjFmXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"));
+        herobrineMovies.add(new Movie("tt0167404", "The Sixth Sense", 1999, "https://m.media-amazon.com/images/M/MV5BMWM4NTFhYjctNzUyNi00NGMwLTk3NTYtMDIyNTZmMzRlYmQyXkEyXkFqcGdeQXVyMTAwMzUyOTc@._V1_SX300.jpg"));
+        herobrineMovies.add(new Movie("tt0208092", "Snatch", 2017, "https://m.media-amazon.com/images/M/MV5BMzEyMTc4NzEyMl5BMl5BanBnXkFtZTgwMzA2OTYzNjM@._V1_SX300.jpg"));
+        herobrineMovies.add(new Movie("tt0043014", "Sunset Blvd.", 1950, "https://m.media-amazon.com/images/M/MV5BMTU0NTkyNzYwMF5BMl5BanBnXkFtZTgwMDU0NDk5MTI@._V1_SX300.jpg"));
+        herobrineMovies.add(new Movie("tt8579674", "1917", 2019, "https://m.media-amazon.com/images/M/MV5BOTdmNTFjNDEtNzg0My00ZjkxLTg1ZDAtZTdkMDc2ZmFiNWQ1XkEyXkFqcGdeQXVyNTAzNzgwNTg@._V1_SX300.jpg"));
+        herobrineMovies.add(new Movie("tt1255953", "Incendies", 2010, "https://m.media-amazon.com/images/M/MV5BMWE3MGYzZjktY2Q5Mi00Y2NiLWIyYWUtMmIyNzA3YmZlMGFhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"));
         FriendsList herobrineFriends = new FriendsList();
         herobrineFriends.add("aaron@gmail.com");
         herobrineFriends.add("chinmay@gmail.com");

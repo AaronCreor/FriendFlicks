@@ -161,10 +161,11 @@ public class FriendFragment extends Fragment {
             Movie currentMovie = movieIterator.next();
 //            Movie currentMovie = MainActivity.moviesData.getMovieByID(currentMovieID);
             if(currentMovie != null) {
-                String[] input = new String[3];
+                String[] input = new String[4];
                 input[0] = currentMovie.id;
                 input[1] = currentMovie.name;
                 input[2] = Integer.toString(currentMovie.year);
+                input[3] = currentMovie.poster;
                 moviesList.add(0, input);
             }
         }
@@ -180,10 +181,11 @@ public class FriendFragment extends Fragment {
             Movie currentMovie = movieIterator.next();
             if(user.movieList.contains(currentMovie)) {
                 if(currentMovie != null) {
-                    String[] input = new String[3];
+                    String[] input = new String[4];
                     input[0] = currentMovie.id;
                     input[1] = currentMovie.name;
                     input[2] = Integer.toString(currentMovie.year);
+                    input[3] = currentMovie.poster;
                     moviesList.add(0, input);
                 }
             }

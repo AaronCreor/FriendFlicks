@@ -86,7 +86,7 @@ public class MovieFragment extends Fragment {
         // Like Button
         MaterialButton movieFavButton = view.findViewById(R.id.movie_likebutton);
 
-        Movie thisMovie = new Movie(movieID, movieTitleValue, Integer.parseInt(movieYearValue));
+        Movie thisMovie = new Movie(movieID, movieTitleValue, Integer.parseInt(movieYearValue), moviePosterValue);
         String userEmail = MainActivity.userEmail;
         UsersData usersData = MainActivity.usersData;
         User user = usersData.getUserByEmail(userEmail);
