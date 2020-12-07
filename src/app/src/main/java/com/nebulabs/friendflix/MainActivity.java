@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static String userEmail = "jonnyboy@gmail.com";
     public static UsersData usersData = new UsersData();
-    public static MoviesData moviesData = new MoviesData();
+//    public static MoviesData moviesData = new MoviesData();
     public static String responseExplore = "If you see this, then something went wrong";
     public static String responseMovie = "If you see this, then something went wrong";
     public static boolean exploreScreenAlreadyCreated = false;

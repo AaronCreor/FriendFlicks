@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -63,19 +64,7 @@ public class FriendsFragment extends Fragment {
 
         friendsList = new ArrayList<String[]>();
 
-        String userEmail = MainActivity.userEmail;
-        UsersData usersData = MainActivity.usersData;
-        User user = usersData.getUserByEmail(userEmail);
-        Iterator<String> friendEmailIterator = user.friendsList.iterator();
-        while(friendEmailIterator.hasNext()) {
-            User possibleFriend = usersData.getUserByEmail(friendEmailIterator.next());
-            if(possibleFriend != null && possibleFriend.friendsList.contains(userEmail)) { // if a person on your friends list also has you on their friends list
-                String[] input = new String[2];
-                input[0] = possibleFriend.userName;
-                input[1] = possibleFriend.userEmail;
-                friendsList.add(input); // show them in the friendsList recycler view
-            }
-        }
+        populateFriendsList();
 
         recyclerView = view.findViewById(R.id.recyclerViewFriendsList);
         friendsRecyclerAdapter = new FriendsRecyclerAdapter(friendsList);
@@ -93,7 +82,7 @@ public class FriendsFragment extends Fragment {
             }
         });
 
-        FloatingActionButton addGroup_fab = view.findViewById(R.id.addgroupfab);
+        FloatingActionButton addGroup_fab = view.findViewById(R.id.friendslist_addbutton);
         addGroup_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,23 +95,33 @@ public class FriendsFragment extends Fragment {
     public void addNewFriend(){
         final FlatDialog flatDialog = new FlatDialog(getContext());
         flatDialog.setTitle("ADD FRIEND")
-                .setSubtitle("Ask your friend to share their user ID with you")
-                .setFirstTextFieldHint("friend's user ID")
+                .setSubtitle("Enter your friend's email address\n\nTell your friend to add your email address in their FriendFlix app\n\nWhen you have both added each other, you'll show up in each other's Friends List!")
+                .setFirstTextFieldHint("friend's email")
                 .setFirstButtonText("SEND REQUEST")
                 .setSecondButtonText("CANCEL")
                 .withFirstButtonListner(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (flatDialog.getFirstTextField().isEmpty()){
-                            Toasty.error(getContext(),"Enter your friend's user ID", Toasty.LENGTH_SHORT).show();
+                            Toasty.error(getContext(),"Enter your friend's email", Toasty.LENGTH_SHORT).show();
                         }
                         else {
-                            ProgressDialog dialog = new ProgressDialog(getContext());
-                            dialog.setMessage("Sending request, please wait...");
-                            dialog.show();
+                            String userEmail = MainActivity.userEmail;
+                            UsersData usersData = MainActivity.usersData;
+                            User user = usersData.getUserByEmail(userEmail);
 
-                            dialog.dismiss();
-
+                            if(user.friendsList.contains(flatDialog.getFirstTextField())) {
+                                Toasty.error(getContext(),"That user is already your friend!", Toasty.LENGTH_SHORT).show();
+                                flatDialog.dismiss();
+                            }
+                            else {
+                                user.friendsList.add(flatDialog.getFirstTextField());
+                                Toasty.success(getContext(),"Friend request sent!", Toasty.LENGTH_SHORT).show();
+                                flatDialog.dismiss();
+                                friendsList.clear();
+                                recyclerView.removeAllViews();
+                                populateFriendsList();
+                            }
                         }
                     }
                 })
@@ -133,6 +132,23 @@ public class FriendsFragment extends Fragment {
                     }
                 })
                 .show();
+    }
+
+    void populateFriendsList() {
+        String userEmail = MainActivity.userEmail;
+        UsersData usersData = MainActivity.usersData;
+        User user = usersData.getUserByEmail(userEmail);
+        Iterator<String> friendEmailIterator = user.friendsList.iterator();
+        while(friendEmailIterator.hasNext()) {
+            User possibleFriend = usersData.getUserByEmail(friendEmailIterator.next());
+            if(possibleFriend != null && possibleFriend.friendsList.contains(userEmail)) { // if a person on your friends list also has you on their friends list
+                String[] input = new String[3];
+                input[0] = possibleFriend.userName;
+                input[1] = possibleFriend.userEmail;
+                input[2] = possibleFriend.picture;
+                friendsList.add(0, input); // show them in the friendsList recycler view
+            }
+        }
     }
 
 }
