@@ -61,7 +61,7 @@ Organized meeting times for the group
         - Populating “Common Matches” by filtering out only those movies that both you and your friend have in their list of liked movies
         - Transition to Movie Info screen upon selecting a movie from “Common Matches” or “Their List”
 - Meta:
-    - Set up logic for “Recycler View” components (for building/rendering a lists onto the layout)
+    - Set up logic for “Recycler View” components (for building/rendering a list onto the layout)
     - Created some classes and set them up with filler data to create some Movies and Users (along with their friends lists and movie lists) upon being instantiated, to enable testing while the back-end was still in development.
     - Refactored the action result notification messages (“Added to My List” / “Removed from My List” / etc.)
 
