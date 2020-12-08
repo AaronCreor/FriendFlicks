@@ -56,7 +56,7 @@ public class ExploreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        //gets the movie title, year, poster, and synopsis from the omdb database
         movieTitle = getView().findViewById(R.id.explore_movietitle);
         movieYear = getView().findViewById(R.id.explore_movieyear);
         moviePoster = getView().findViewById(R.id.explore_movieposter);
@@ -73,32 +73,33 @@ public class ExploreFragment extends Fragment {
             }
         }
         MainActivity.exploreScreenAlreadyCreated = true;
-
+        //code for making the skip button work on the explore page
         MaterialButton skip = view.findViewById(R.id.explore_skipbutton);
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
+                    //shows random movie when skip button is pressed
                     showRandomMovie();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
-
+        //code for adding the like button on the explore page
         MaterialButton like = view.findViewById(R.id.explore_likebutton);
         like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    // put movie in friendList [implement this here]
+                    // puts the movie in your list
                     String userEmail = MainActivity.userEmail;
                     UsersData usersData = MainActivity.usersData;
                     User user = usersData.getUserByEmail(userEmail);
                     user.addMovie(movieID, movieTitleValue, Integer.parseInt(movieYearValue),  moviePosterValue);
                     Toasty.success(view.getContext(), "Added to My List", Toast.LENGTH_SHORT).show();
 
-                    // and then...
+                    // and then shows random movie again
                     showRandomMovie();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -110,7 +111,7 @@ public class ExploreFragment extends Fragment {
 
     public void showRandomMovie() throws IOException {
 
-
+        //generates a random movie id and sends it to the omdb database and gets the result
         movieID = generateRandomMovieID();
         String getRequestURL = "https://www.omdbapi.com/?apikey=" + Omdb.KEY + "&i=" + movieID;
 
@@ -132,6 +133,7 @@ public class ExploreFragment extends Fragment {
 
     public void renderMovieInfo() {
         try {
+            //gets all the movie info. title, id, year, poster, and synopsis
             obj = new JSONObject(MainActivity.responseExplore);
             movieID = obj.getString("imdbID");
             movieTitleValue = obj.getString("Title");
@@ -141,7 +143,7 @@ public class ExploreFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        //displays all the movie info here
         movieTitle.setText(movieTitleValue);
         movieYear.setText(movieYearValue);
         Picasso.get().load(moviePosterValue).into(moviePoster);
@@ -149,25 +151,11 @@ public class ExploreFragment extends Fragment {
     }
 
     String generateRandomMovieID() throws IOException {
-//        int min = 1;
-//        int max = 2404811;
-//
-//        //Generate random int value from 1 to 999999999
-//        int random_int = (int)(Math.random() * (max - min + 1) + min);
-//        String trailingIDnumber = Integer.toString(random_int);
-//        if(trailingIDnumber.length() < 7) {
-//            int zeroesToBeAdded = 7 - trailingIDnumber.length();
-//            String zeroesString = "";
-//            while(zeroesString.length() < zeroesToBeAdded)
-//                zeroesString = zeroesString + "0";
-//            trailingIDnumber = zeroesString + trailingIDnumber;
-//        }
-//        return "tt" + trailingIDnumber;
 
         // With csv file
         InputStream is = getResources().openRawResource(R.raw.imdbmovies);
         ArrayList<String> movies = Omdb.fillImdbArray(is);
-//        Generate random int value from 0 to movies.length
+        //Generate random int value from 0 to movies.length
         int min = 0;
         int max = movies.size();
         int random_int = (int)(Math.random() * (max - min + 1) + min);
@@ -187,7 +175,6 @@ public class ExploreFragment extends Fragment {
                 }
             }
         }
-
         return movieID;
     }
 
