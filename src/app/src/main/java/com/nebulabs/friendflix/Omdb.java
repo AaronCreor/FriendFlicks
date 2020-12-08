@@ -15,16 +15,14 @@ import java.util.Random;
 
 
 public class Omdb {
-
-	public static final String SEARCH_URL = "http://www.omdbapi.com/?type=movie&s=TITLE&apikey=APIKEY";
+	//static values
 	public static final String SEARCH_BY_IMDB_URL = "http://www.omdbapi.com/?type=movie&i=IMDB&apikey=APIKEY";
-	private static final String PATH_TO_CSV = "imdbmovies.csv";
 	public static final String KEY = "2f9c8f89";
 	
 	//this gets the data string from the omdb webstie
 	public static String sendGetRequest(String requestUrl)
 	{
-		
+		//creates new string buffer
 		StringBuffer response = new StringBuffer();
 		
 		try {
@@ -33,7 +31,7 @@ public class Omdb {
 		connection.setRequestMethod("GET");
 		connection.setRequestProperty("Accept",  "*/*");
 		connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-		
+		//creates new input stream
 		InputStream stream = connection.getInputStream();
 		InputStreamReader reader = new InputStreamReader(stream);
 		BufferedReader buffer = new BufferedReader(reader);
@@ -58,23 +56,29 @@ public class Omdb {
 	private static String[] omdbDataString(String id)
 	{
 		int CONSTANT = 1000;
+		//creates movie array to store the movie info
 		String[] movieInfoArray = new String[CONSTANT];
+		//creates a string that stores all the info grabbed by OMDB
 		String movieInfo = Omdb.searchMovieByImdb(id, KEY);
+		//gets rid of all useless things in the string and replaces them with nothing or a space
 		movieInfo = movieInfo.replace("{", "").replace("}", "").replace("\"", "").replace(":", " ").replace(",", " ").replace("[", "").replace("]", "");
+		//splits all info seperated by a space into the movie array
 		movieInfoArray = movieInfo.split(" ");
 		return movieInfoArray;
 	}
 	
 	private static String searchMovieByImdb(String imdb, String key)
 	{
+		//finds the movie you are pulling by the imdb id
 		String requestUrl = SEARCH_BY_IMDB_URL.replaceAll("IMDB", imdb).replaceAll("APIKEY", key);
 		return sendGetRequest(requestUrl);
 	}
 
 	//This gets all the imdb Ids in the csv file
-	//csv file holds most popular movies in last 15 years
+	//csv file holds most popular 250 movies
 	public static ArrayList<String> fillImdbArray(InputStream inputStream) throws IOException
 	{
+		//used to read the csv file with all the movies in them
 		BufferedReader csvReader = new BufferedReader(new InputStreamReader(inputStream));
 		String row;
 		ArrayList<String> movies = new ArrayList<String>();
@@ -91,7 +95,7 @@ public class Omdb {
 		String synopsis = "";
 		String[] movieInfo = omdbDataString(id);
 		int j=0;
-		
+		//searches the movie data array with all the movie data to find the plot
 		while(j< movieInfo.length-1)
 		{
 			if(movieInfo[j].equals("Plot"))
@@ -113,6 +117,7 @@ public class Omdb {
 		String year = "";
 		String[] movieInfo = omdbDataString(id);
 		int j=0;
+		//searches the movie data arrray to find the year of the movie
 		while(j< movieInfo.length-1)
 		{
 			if(movieInfo[j].equals("Year"))
@@ -129,7 +134,7 @@ public class Omdb {
 		String movieDatabase = "";
 		String[] movieInfo = omdbDataString(id);
 		int j=0;
-		
+		//searches the movie data array to find movie database rating
 		while(j<movieInfo.length-1)
 		{
 			if(movieInfo[j].equals("Movie") && movieInfo[j+1].equals("Database") && movieInfo[j+2].equals("Value"))
@@ -147,7 +152,7 @@ public class Omdb {
 		String metacritic = "";
 		String[] movieInfo = omdbDataString(id);
 		int j=0;
-		
+		//searches the movie data array to find the metacritic rating
 		while(j<movieInfo.length-1)
 		{
 			if(movieInfo[j].equals("Metacritic") && movieInfo[j+1].equals("Value"))
@@ -166,7 +171,7 @@ public class Omdb {
 		String tomatoScore = "";
 		String[] movieInfo = omdbDataString(id);
 		int j=0;
-		
+		//searches the movie data array to find the rotten tomatos rating
 		while(j<movieInfo.length-1)
 		{
 			if(movieInfo[j].equals("Rotten") && movieInfo[j+1].equals("Tomatoes"))
@@ -184,7 +189,7 @@ public class Omdb {
 		String posterLink = "";
 		String[] movieInfo = omdbDataString(id);
 		int j=0;
-		
+		//searches the movie data array to find the poster jpg link
 		while(j<movieInfo.length-1)
 		{
 			if(movieInfo[j].equals("https"))
@@ -202,7 +207,7 @@ public class Omdb {
 		String movieName = "";
 		String[] movieInfoArray = omdbDataString(id);
 		int j =0;
-		
+		//searches the movie data array to find the title of the movie
 		while(j<movieInfoArray.length-1)
 		{
 			if(movieInfoArray[j].equals("Title"))
@@ -221,32 +226,29 @@ public class Omdb {
 		return  movieName;
 	}
 
+	//used to help get random number
 	public static String fillId() throws IOException {
 		String id = "";
 		id = String.valueOf(randomNum());
 		return id;
 	}
-
+	//gets random number
 	protected static int randomNum()
 	{
 		Random rand = new Random();
 		int upperBound = 250;
 		return rand.nextInt(upperBound);
 	}
-	
+	//just for testing purposes
 	public static void main(String[] args) throws IOException {
 
 		//This is to test out all functions
 		//This gets the title for the first 100 movies in the cvs file
 		ArrayList<String> imdbIds = new ArrayList<String>();
-//		imdbIds = fillImdbArray();
+		//imdbIds = fillImdbArray();
 		for(int i=0;i<100;i++)
 		{
 			System.out.println(getTitle(imdbIds.get(i)));
 		}
-		
-		
 	}
-	
-
 }
