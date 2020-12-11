@@ -9,6 +9,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,7 +24,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
@@ -27,7 +35,6 @@ import es.dmoral.toasty.Toasty;
  */
 public class FirebaseLoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,11 @@ public class FirebaseLoginActivity extends AppCompatActivity {
             Intent i = new Intent(this, MainActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
+
+
+            postUser(user.getUid(), user.getEmail(), user.getDisplayName(), user.getPhotoUrl().toString());
+
+
             Toasty.success(getApplicationContext(),"Logged In", Toast.LENGTH_SHORT).show();
         } else {
             // No user is signed in
@@ -146,6 +158,36 @@ public class FirebaseLoginActivity extends AppCompatActivity {
                     }
                 });
         // [END auth_fui_signout]
+    }
+
+    // add user to heroku
+    public void postUser(final String userid, final String userEmail, final String userName, final String photoUrl){
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+        String url = "https://friendflix.herokuapp.com/users/create"; // <----enter your post url here
+        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //This code is executed if the server responds, whether or not the response contains data.
+                //The String 'response' contains the server's response.
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //This code is executed if there is an error.
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put("userid", userid);
+                MyData.put("userEmail", userEmail);
+                MyData.put("userName", userName);
+                MyData.put("photoUrl", photoUrl);
+                return MyData;
+            }
+        };
+
+
+        MyRequestQueue.add(MyStringRequest);
     }
 
 }

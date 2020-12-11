@@ -51,6 +51,18 @@ class User {
     public ArrayList<String> friendsList;
     String picture;
 
+    public String userid;
+    public String useremail;
+    public String username;
+    public String photourl;
+
+    public User(String userid, String useremail, String username, String photourl) {
+        this.userid = userid;
+        this.useremail = useremail;
+        this.username = username;
+        this.photourl = photourl;
+    }
+
     public User(String userEmail, String userName, ArrayList<Movie> movieList, ArrayList<String> friendsList, String picture) {
         this.userEmail = userEmail;
         this.userName = userName;

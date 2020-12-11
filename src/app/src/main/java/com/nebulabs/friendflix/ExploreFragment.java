@@ -12,16 +12,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
@@ -30,7 +43,13 @@ import es.dmoral.toasty.Toasty;
  */
 public class ExploreFragment extends Fragment {
 
+    RequestQueue MyRequestQueue;
+    FirebaseUser user;
+    String userID;
+
     String movieID;
+
+    ArrayList<String> userMovies;
 
     TextView movieTitle;
     TextView movieYear;
@@ -45,6 +64,15 @@ public class ExploreFragment extends Fragment {
     String movieSynopsisValue;
 
     public ExploreFragment(){
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MyRequestQueue = Volley.newRequestQueue(getActivity());
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
+        getUserMovies();
     }
 
     @Nullable
@@ -91,12 +119,9 @@ public class ExploreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    // put movie in friendList [implement this here]
-                    String userEmail = MainActivity.userEmail;
-                    UsersData usersData = MainActivity.usersData;
-                    User user = usersData.getUserByEmail(userEmail);
-                    user.addMovie(movieID, movieTitleValue, Integer.parseInt(movieYearValue),  moviePosterValue);
+                    // put movie in movieList
                     Toasty.success(view.getContext(), "Added to My List", Toast.LENGTH_SHORT).show();
+                    postMovieToUser();
 
                     // and then...
                     showRandomMovie();
@@ -142,6 +167,8 @@ public class ExploreFragment extends Fragment {
         movieYear.setText(movieYearValue);
         Picasso.get().load(moviePosterValue).into(moviePoster);
         movieSynopsis.setText(movieSynopsisValue);
+
+        postMovie(movieID, movieTitleValue, movieYearValue, moviePosterValue);
     }
 
     String generateRandomMovieID() throws IOException {
@@ -171,20 +198,121 @@ public class ExploreFragment extends Fragment {
 
         // check if this movieID is already in the user's "My List"
         // if it is, run the movieID generator again
-        String userEmail = MainActivity.userEmail;
-        UsersData usersData = MainActivity.usersData;
-        User user = usersData.getUserByEmail(userEmail);
-        Iterator<Movie> movieIterator = user.movieList.iterator();
+        Iterator<String> movieIterator = userMovies.iterator();
         while(movieIterator.hasNext()) {
-            Movie currentMovie = movieIterator.next();
+            String currentMovie = movieIterator.next();
             if(currentMovie != null) {
-                if(currentMovie.id.equals(movieID)) {
+                if(currentMovie.equals(movieID)) {
                     return generateRandomMovieID();
                 }
             }
         }
 
         return movieID;
+    }
+
+    public void postMovie(final String mid, final String moviename, final String year, final String posterurl){
+        String url = "https://friendflix.herokuapp.com/movies/create"; // <----enter your post url here
+        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //This code is executed if the server responds, whether or not the response contains data.
+                //The String 'response' contains the server's response.
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //This code is executed if there is an error.
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put("mid", mid);
+                MyData.put("moviename", moviename);
+                MyData.put("year", year);
+                MyData.put("posterurl", posterurl);
+                return MyData;
+            }
+        };
+
+
+        MyRequestQueue.add(MyStringRequest);
+    }
+
+    public void postMovieToUser(){
+        String url = "https://friendflix.herokuapp.com/addmovie/" + userID + "/" + movieID;
+        StringRequest MyStringRequest = new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //This code is executed if there is an error.
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put("userid", userID);
+                MyData.put("mid", movieID);
+                return MyData;
+            }
+        };
+
+
+        MyRequestQueue.add(MyStringRequest);
+    }
+
+    public void getUserMovies() {
+        userMovies = new ArrayList<String>();
+        String url = "https://friendflix.herokuapp.com/users/" + userID + "/" + "getmovies";
+
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+
+                        // Process the JSON
+                        try{
+                            // Loop through the array elements
+                            for(int i=0;i<response.length();i++){
+                                // Get current json object
+                                JSONObject movie = response.getJSONObject(i);
+
+                                // Get the current movie (json object) data
+                                userMovies.add(0, movie.getString("mid"));
+//
+//                                // Display the formatted json data in text view
+//                                mTextView.append(firstName +" " + lastName +"\nAge : " + age);
+//                                mTextView.append("\n\n");
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        // Do something when error occurred
+//                        Snackbar.make(
+//                                mCLayout,
+//                                "Error...",
+//                                Snackbar.LENGTH_LONG
+//                        ).show();
+                    }
+                }
+        );
+
+        // Add JsonArrayRequest to the RequestQueue
+        MyRequestQueue.add(jsonArrayRequest);
     }
 
 }
