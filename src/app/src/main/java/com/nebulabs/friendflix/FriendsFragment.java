@@ -205,21 +205,30 @@ public class FriendsFragment extends Fragment {
 //                                mTextView.append("\n\n");
                             }
                             // if(getView()) should fix the crash error
-                            recyclerView = getView().findViewById(R.id.recyclerViewFriendsList);
-                            friendsRecyclerAdapter = new FriendsRecyclerAdapter(friendsList);
+                            if(getView() != null) {
+                                recyclerView = getView().findViewById(R.id.recyclerViewFriendsList);
+                                if(recyclerView != null) {
+                                    friendsRecyclerAdapter = new FriendsRecyclerAdapter(friendsList);
 
-                            recyclerView.setAdapter(friendsRecyclerAdapter);
+                                    recyclerView.setAdapter(friendsRecyclerAdapter);
 
-                            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-                            recyclerView.addItemDecoration(dividerItemDecoration);
-
-                            FloatingSearchView mSearchView = getView().findViewById(R.id.friendslist_searchBar);
-                            mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
-                                @Override
-                                public void onSearchTextChanged(String oldQuery, final String newQuery) {
-                                    friendsRecyclerAdapter.getFilter().filter(newQuery);
+                                    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+                                    recyclerView.addItemDecoration(dividerItemDecoration);
                                 }
-                            });
+
+
+                                FloatingSearchView mSearchView = getView().findViewById(R.id.friendslist_searchBar);
+                                if(mSearchView != null) {
+                                    mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+                                        @Override
+                                        public void onSearchTextChanged(String oldQuery, final String newQuery) {
+                                            friendsRecyclerAdapter.getFilter().filter(newQuery);
+                                        }
+                                    });
+                                }
+                            }
+
+
                         }catch (JSONException e){
                             e.printStackTrace();
                         }

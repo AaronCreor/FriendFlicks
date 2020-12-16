@@ -141,19 +141,28 @@ public class MyListFragment extends Fragment {
 //                                mTextView.append(firstName +" " + lastName +"\nAge : " + age);
 //                                mTextView.append("\n\n");
                             }
-                            recyclerView = getView().findViewById(R.id.recyclerViewMyList);
-                            moviesRecyclerAdapter = new MoviesRecyclerAdapter(moviesList);
-                            recyclerView.setAdapter(moviesRecyclerAdapter);
-                            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-                            recyclerView.addItemDecoration(dividerItemDecoration);
-
-                            FloatingSearchView mSearchView = getView().findViewById(R.id.mylist_searchBar);
-                            mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
-                                @Override
-                                public void onSearchTextChanged(String oldQuery, final String newQuery) {
-                                    moviesRecyclerAdapter.getFilter().filter(newQuery);
+                            if (getView() != null) {
+                                recyclerView = getView().findViewById(R.id.recyclerViewMyList);
+                                if(recyclerView != null) {
+                                    moviesRecyclerAdapter = new MoviesRecyclerAdapter(moviesList);
+                                    recyclerView.setAdapter(moviesRecyclerAdapter);
+                                    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+                                    recyclerView.addItemDecoration(dividerItemDecoration);
                                 }
-                            });
+
+
+                                FloatingSearchView mSearchView = getView().findViewById(R.id.mylist_searchBar);
+                                if(mSearchView != null) {
+                                    mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+                                        @Override
+                                        public void onSearchTextChanged(String oldQuery, final String newQuery) {
+                                            moviesRecyclerAdapter.getFilter().filter(newQuery);
+                                        }
+                                    });
+                                }
+                            }
+
+
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
