@@ -59,7 +59,7 @@ public class FriendsFragment extends Fragment {
     RecyclerView recyclerView;
     FriendsRecyclerAdapter friendsRecyclerAdapter;
 
-    ArrayList<User> allFriends;
+    ArrayList<User> allFriends; // should be named allUsers really
     ArrayList<String> userFriends;
     ArrayList<String[]> friendsList;
 
@@ -90,21 +90,7 @@ public class FriendsFragment extends Fragment {
 
         populateFriendsList();
 
-        recyclerView = view.findViewById(R.id.recyclerViewFriendsList);
-        friendsRecyclerAdapter = new FriendsRecyclerAdapter(friendsList);
 
-        recyclerView.setAdapter(friendsRecyclerAdapter);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
-
-        FloatingSearchView mSearchView = view.findViewById(R.id.friendslist_searchBar);
-        mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
-            @Override
-            public void onSearchTextChanged(String oldQuery, final String newQuery) {
-                friendsRecyclerAdapter.getFilter().filter(newQuery);
-            }
-        });
 
         FloatingActionButton addGroup_fab = view.findViewById(R.id.friendslist_addbutton);
         addGroup_fab.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +159,7 @@ public class FriendsFragment extends Fragment {
 //                friendsList.add(0, input); // show them in the friendsList recycler view
 //            }
 //        }
-        getAllFriends();
+        getAllUsers();
     }
 
     public void getUserFriends() {
@@ -197,6 +183,7 @@ public class FriendsFragment extends Fragment {
                             for(int i=0;i<response.length();i++){
                                 // Get current json object
                                 JSONObject friend = response.getJSONObject(i);
+                                String thisUID = friend.getString("frienduid");
 
                                 // Get the current movie (json object) data
                                 userFriends.add(0, friend.getString("frienduid"));
@@ -204,12 +191,12 @@ public class FriendsFragment extends Fragment {
                                 Iterator<User> allFriendsIterator = allFriends.iterator();
                                 while(allFriendsIterator.hasNext()) {
                                     User currentAllFriend = allFriendsIterator.next();
-                                    if(friend.getString("mid").contains(currentAllFriend.userid)) {
+                                    if(thisUID.equals(currentAllFriend.userid)) {
                                         String input[] = new String[3];
                                         input[0] = currentAllFriend.username;
                                         input[1] = currentAllFriend.useremail;
                                         input[2] = currentAllFriend.photourl;
-                                        friendsList.add(0, input);
+                                        friendsList.add(0, input); // show them in the friendsList recycler view
                                     }
                                 }
 //
@@ -217,6 +204,22 @@ public class FriendsFragment extends Fragment {
 //                                mTextView.append(firstName +" " + lastName +"\nAge : " + age);
 //                                mTextView.append("\n\n");
                             }
+                            // if(getView()) should fix the crash error
+                            recyclerView = getView().findViewById(R.id.recyclerViewFriendsList);
+                            friendsRecyclerAdapter = new FriendsRecyclerAdapter(friendsList);
+
+                            recyclerView.setAdapter(friendsRecyclerAdapter);
+
+                            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+                            recyclerView.addItemDecoration(dividerItemDecoration);
+
+                            FloatingSearchView mSearchView = getView().findViewById(R.id.friendslist_searchBar);
+                            mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+                                @Override
+                                public void onSearchTextChanged(String oldQuery, final String newQuery) {
+                                    friendsRecyclerAdapter.getFilter().filter(newQuery);
+                                }
+                            });
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -239,9 +242,9 @@ public class FriendsFragment extends Fragment {
         MyRequestQueue.add(jsonArrayRequest);
     }
 
-    public void getAllFriends() {
+    public void getAllUsers() {
         allFriends = new ArrayList<User>();
-        String url = "https://friendflix.herokuapp.com/movies";
+        String url = "https://friendflix.herokuapp.com/users";
 
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
