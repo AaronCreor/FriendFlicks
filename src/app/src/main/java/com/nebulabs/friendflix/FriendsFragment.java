@@ -20,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.example.flatdialoglibrary.dialog.FlatDialog;
@@ -52,9 +53,12 @@ import es.dmoral.toasty.Toasty;
  */
 public class FriendsFragment extends Fragment {
 
+    String frienduid;
+
     RequestQueue MyRequestQueue;
     FirebaseUser user;
     String userID;
+    String userEmail;
 
     RecyclerView recyclerView;
     FriendsRecyclerAdapter friendsRecyclerAdapter;
@@ -74,6 +78,7 @@ public class FriendsFragment extends Fragment {
         MyRequestQueue = Volley.newRequestQueue(getActivity());
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
+        userEmail = user.getEmail();
     }
 
     @Nullable
@@ -104,33 +109,28 @@ public class FriendsFragment extends Fragment {
 
     public void addNewFriend(){
         final FlatDialog flatDialog = new FlatDialog(getContext());
-        flatDialog.setTitle("ADD FRIEND")
-                .setSubtitle("Enter your friend's email address\n\nTell your friend to add your email address in their FriendFlix app\n\nWhen you have both added each other, you'll show up in each other's Friends List!")
+        flatDialog.setTitle("ADD A FRIEND")
+                .setSubtitle("Enter your friend's email address to add them to your Friends List")
                 .setFirstTextFieldHint("friend's email")
-                .setFirstButtonText("SEND REQUEST")
+                .setFirstButtonText("ADD FRIEND")
                 .setSecondButtonText("CANCEL")
                 .withFirstButtonListner(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (flatDialog.getFirstTextField().isEmpty()){
-                            Toasty.error(getContext(),"Enter your friend's email", Toasty.LENGTH_SHORT).show();
+                            Toasty.error(getContext(),"Please enter your friend's email", Toasty.LENGTH_SHORT).show();
                         }
                         else {
-                            String userEmail = MainActivity.userEmail;
-                            UsersData usersData = MainActivity.usersData;
-                            User user = usersData.getUserByEmail(userEmail);
 
-                            if(user.friendsList.contains(flatDialog.getFirstTextField())) { // check heroku
+                            if(userEmail.equals(flatDialog.getFirstTextField())) {
+                                Toasty.error(getContext(),"This is your own email, please enter your friend's email!", Toasty.LENGTH_SHORT).show();
+                            }
+                            else if(userFriends.contains(flatDialog.getFirstTextField())) { // check heroku
                                 Toasty.error(getContext(),"You have already added that email!", Toasty.LENGTH_SHORT).show();
-                                flatDialog.dismiss();
                             }
                             else {
-                                user.friendsList.add(flatDialog.getFirstTextField()); // send post friend request
-                                Toasty.success(getContext(),"Friend request sent!", Toasty.LENGTH_SHORT).show();
+                                postFriend(flatDialog.getFirstTextField()); // send post friend request
                                 flatDialog.dismiss();
-                                friendsList.clear();
-                                recyclerView.removeAllViews();
-                                populateFriendsList();
                             }
                         }
                     }
@@ -185,8 +185,6 @@ public class FriendsFragment extends Fragment {
                                 JSONObject friend = response.getJSONObject(i);
                                 String thisUID = friend.getString("frienduid");
 
-                                // Get the current movie (json object) data
-                                userFriends.add(0, friend.getString("frienduid"));
 
                                 Iterator<User> allFriendsIterator = allFriends.iterator();
                                 while(allFriendsIterator.hasNext()) {
@@ -197,6 +195,7 @@ public class FriendsFragment extends Fragment {
                                         input[1] = currentAllFriend.useremail;
                                         input[2] = currentAllFriend.photourl;
                                         friendsList.add(0, input); // show them in the friendsList recycler view
+                                        userFriends.add(currentAllFriend.useremail);
                                     }
                                 }
 //
@@ -297,6 +296,56 @@ public class FriendsFragment extends Fragment {
 
         // Add JsonArrayRequest to the RequestQueue
         MyRequestQueue.add(jsonArrayRequest);
+    }
+
+    public void postFriend(String friendEmail){
+        frienduid = "";
+        boolean accountExists = false;
+
+        Iterator<User> allFriendsIterator = allFriends.iterator();
+        while(allFriendsIterator.hasNext()) {
+            User currentAllFriend = allFriendsIterator.next();
+            if(friendEmail.equals(currentAllFriend.useremail)) {
+                frienduid = currentAllFriend.userid;
+                accountExists = true;
+            }
+            else {
+            }
+        }
+
+        if(!accountExists) {
+            Toasty.error(getContext(),"Could not find an account associated with that email... If the account was just created, please restart your app and try again", Toasty.LENGTH_LONG).show();
+            return;
+        }
+
+
+        String url = "https://friendflix.herokuapp.com/addfriend/" + userID + "/" + frienduid;
+        StringRequest MyStringRequest = new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //This code is executed if the server responds, whether or not the response contains data.
+                //The String 'response' contains the server's response.
+                Toasty.success(getContext(),"Friend added successfully!", Toasty.LENGTH_SHORT).show();
+                friendsList.clear();
+                recyclerView.removeAllViews();
+                populateFriendsList();
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //This code is executed if there is an error.
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put("userid1", userID);
+                MyData.put("userid2", frienduid);
+                return MyData;
+            }
+        };
+
+
+        MyRequestQueue.add(MyStringRequest);
     }
 
 }
