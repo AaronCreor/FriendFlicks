@@ -19,16 +19,31 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.example.flatdialoglibrary.dialog.FlatDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
@@ -45,15 +60,32 @@ public class FriendFragment extends Fragment {
     RecyclerView recyclerView;
     MoviesRecyclerAdapter moviesRecyclerAdapter;
 
-    List<String[]> moviesList;
-//    List<String[]> unfilteredMoviesList;
-
+    String id;
     String name;
     String email;
+    String picture;
 
-    public FriendFragment(String name, String email){
+    ArrayList<String> userMovies;
+    List<String[]> moviesList;
+    ArrayList<Movie> allMovies;
+
+    public RequestQueue MyRequestQueue;
+    public FirebaseUser user;
+    public String userID;
+
+    public FriendFragment(String id, String name, String email, String picture){
+        this.id = id;
         this.name = name;
         this.email = email;
+        this.picture = picture;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MyRequestQueue = Volley.newRequestQueue(getActivity());
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
     }
 
     @Nullable
@@ -77,56 +109,22 @@ public class FriendFragment extends Fragment {
         });
 
         TextView friendName = getView().findViewById(R.id.friendName);
+        String[] splitStr = name.split("\\s+");
+        name = splitStr[0];
         friendName.setText(name);
         TextView friendEmail = getView().findViewById(R.id.friendEmail);
         friendEmail.setText(email);
         ImageView friendImage = getView().findViewById(R.id.friendImage);
-        UsersData usersData = MainActivity.usersData;
-        User user = usersData.getUserByEmail(email);
-        Picasso.get().load(user.picture).into(friendImage);
+        Picasso.get().load(picture).into(friendImage);
 
-        MaterialButtonToggleGroup materialButtonToggleGroup =
-                (MaterialButtonToggleGroup) getView().findViewById(R.id.toggleButton);
-        int buttonId = materialButtonToggleGroup.getCheckedButtonId();
 
-        MaterialButton button = materialButtonToggleGroup.findViewById(buttonId);
-
-        materialButtonToggleGroup.addOnButtonCheckedListener(
-                new MaterialButtonToggleGroup.OnButtonCheckedListener() {
-                    @Override
-                    public void onButtonChecked(
-                        MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
-                            buttonJustChecked = true;
-                            FloatingSearchView mSearchView = view.findViewById(R.id.friend_searchBar);
-                            mSearchView.clearQuery();
-                            mSearchView.clearFocus();
-//                            friendName.setText(getResources().getResourceEntryName(checkedId)); // to debug id name corresponding to checkedId
-//                            friendName.setText(Integer.toString(checkedId)); // to debug checkedId value
-                            if(getResources().getResourceEntryName(checkedId).equals("common_matches") && clickFlag) { // user clicked "show common"
-                                moviesList.clear();
-                                recyclerView.removeAllViews();
-                                populateCommonMatches();
-                            }
-                            else if(getResources().getResourceEntryName(checkedId).equals("their_list") && clickFlag) {// user clicked "their list"
-                                moviesList.clear();
-                                recyclerView.removeAllViews();
-                                populateTheirList();
-                            }
-                            clickFlag = !clickFlag;
-                        }
-                });
 
         moviesList = new ArrayList<String[]>();
 
-        populateTheirList();
+//        populateTheirList();
+        getMovies();
 
-        recyclerView = view.findViewById(R.id.recyclerViewFriend);
-        moviesRecyclerAdapter = new MoviesRecyclerAdapter(moviesList);
 
-        recyclerView.setAdapter(moviesRecyclerAdapter);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
 
         FloatingSearchView mSearchView = view.findViewById(R.id.friend_searchBar);
         mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
@@ -154,9 +152,9 @@ public class FriendFragment extends Fragment {
             }
         });
 
-        moviesList.clear();
-        recyclerView.removeAllViews();
-        populateCommonMatches();
+//        moviesList.clear();
+//        recyclerView.removeAllViews();
+//        populateCommonMatches();
 
         FloatingActionButton addGroup_fab = view.findViewById(R.id.friend_remove);
         addGroup_fab.setOnClickListener(new View.OnClickListener() {
@@ -208,8 +206,6 @@ public class FriendFragment extends Fragment {
     }
 
     void removeFriend() {
-        UsersData usersData = MainActivity.usersData;
-        User user = usersData.getUserByEmail(MainActivity.userEmail);
 
         final FlatDialog flatDialog = new FlatDialog(getContext());
         flatDialog.setTitle("REMOVE FRIEND")
@@ -220,15 +216,12 @@ public class FriendFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         flatDialog.dismiss();
-                        if(user.friendsList.contains(email)) {
-                            user.friendsList.remove(email);
+                        // call remove friend function
+                        removeFriendnow();
 
-                            Toasty.normal(view.getContext(), email + " was removed from your Friends List", Toast.LENGTH_SHORT).show();
+                            // move this stuff into that function's response
 
-                            ((FragmentActivity) getView().getContext()).getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment_container_view, new FriendsFragment())
-                                    .commit();
-                        }
+
                     }
                 })
                 .withSecondButtonListner(new View.OnClickListener() {
@@ -238,5 +231,171 @@ public class FriendFragment extends Fragment {
                     }
                 })
                 .show();
+    }
+
+
+
+
+    public void getUserMovies() {
+        userMovies = new ArrayList<String>();
+        String url = "https://friendflix.herokuapp.com/users/" + id + "/" + "getmovies";
+
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+
+                        // Process the JSON
+                        try{
+                            // Loop through the array elements
+                            for(int i=0;i<response.length();i++){
+                                // Get current json object
+                                JSONObject movie = response.getJSONObject(i);
+
+
+                                Iterator<Movie> allMoviesIterator = allMovies.iterator();
+                                while(allMoviesIterator.hasNext()) {
+                                    Movie currentAllMovie = allMoviesIterator.next();
+                                    if(movie.getString("mid").contains(currentAllMovie.id)) {
+                                        String input[] = new String[4];
+                                        input[0] = currentAllMovie.id;
+                                        input[1] = currentAllMovie.name;
+                                        input[2] = Integer.toString(currentAllMovie.year);
+                                        input[3] = currentAllMovie.poster;
+                                        moviesList.add(0, input);
+                                    }
+                                }
+//
+//                                // Display the formatted json data in text view
+//                                mTextView.append(firstName +" " + lastName +"\nAge : " + age);
+//                                mTextView.append("\n\n");
+                            }
+                            recyclerView = getView().findViewById(R.id.recyclerViewFriend);
+                            moviesRecyclerAdapter = new MoviesRecyclerAdapter(moviesList);
+                            recyclerView.setAdapter(moviesRecyclerAdapter);
+                            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+                            recyclerView.addItemDecoration(dividerItemDecoration);
+
+                            FloatingSearchView mSearchView = getView().findViewById(R.id.friend_searchBar);
+                            mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+                                @Override
+                                public void onSearchTextChanged(String oldQuery, final String newQuery) {
+                                    moviesRecyclerAdapter.getFilter().filter(newQuery);
+                                }
+                            });
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        // Do something when error occurred
+//                        Snackbar.make(
+//                                mCLayout,
+//                                "Error...",
+//                                Snackbar.LENGTH_LONG
+//                        ).show();
+                    }
+                }
+        );
+
+        // Add JsonArrayRequest to the RequestQueue
+        MyRequestQueue.add(jsonArrayRequest);
+    }
+
+    public void getMovies() {
+        allMovies = new ArrayList<Movie>();
+        String url = "https://friendflix.herokuapp.com/movies";
+
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+
+                        // Process the JSON
+                        try{
+                            // Loop through the array elements
+                            for(int i=0;i<response.length();i++){
+                                // Get current json object
+                                JSONObject movie = response.getJSONObject(i);
+
+                                // Get the current movie (json object) data
+                                String mid = movie.getString("mid");
+                                String moviename = movie.getString("moviename");
+                                String year = movie.getString("year");
+                                String posterurl = movie.getString("posterurl");
+                                String[] input = new String[4];
+                                allMovies.add(new Movie(mid, moviename, Integer.parseInt(year), posterurl));
+//
+//                                // Display the formatted json data in text view
+//                                mTextView.append(firstName +" " + lastName +"\nAge : " + age);
+//                                mTextView.append("\n\n");
+                            }
+                            getUserMovies();
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        // Do something when error occurred
+//                        Snackbar.make(
+//                                mCLayout,
+//                                "Error...",
+//                                Snackbar.LENGTH_LONG
+//                        ).show();
+                    }
+                }
+        );
+
+        // Add JsonArrayRequest to the RequestQueue
+        MyRequestQueue.add(jsonArrayRequest);
+    }
+
+    public void removeFriendnow(){
+        String url = "https://friendflix.herokuapp.com/removefriend/" + userID + "/" + id;
+        StringRequest MyStringRequest = new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //This code is executed if the server responds, whether or not the response contains data.
+                //The String 'response' contains the server's response.
+                Toasty.normal(getView().getContext(), email + " was removed from your Friends List", Toast.LENGTH_SHORT).show();
+
+                ((FragmentActivity) getView().getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container_view, new FriendsFragment())
+                        .commit();
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //This code is executed if there is an error.
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put("userid1", userID);
+                MyData.put("userid2", id);
+                return MyData;
+            }
+        };
+
+
+        MyRequestQueue.add(MyStringRequest);
     }
 }

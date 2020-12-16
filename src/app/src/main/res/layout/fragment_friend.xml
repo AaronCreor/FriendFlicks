@@ -70,42 +70,13 @@
 <!--        app:layout_constraintTop_toBottomOf="@+id/profileImage"-->
 <!--        tools:layout_editor_absoluteX="0dp" />-->
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
+    <View
         android:id="@+id/toggleButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:weightSum="1.0"
-        app:checkedButton="@id/common_matches"
         app:layout_constraintTop_toBottomOf="@id/friend_backButton"
-        app:selectionRequired="true"
-        app:singleSelection="true"
-        app:theme="@style/Theme.MaterialComponents">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/common_matches"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".1"
-            android:insetBottom="0dp"
-            android:text="Common Matches"
-            app:cornerRadius="0dp"
-            app:strokeColor="@android:color/darker_gray"
-            app:theme="@style/Theme.MaterialComponents" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/their_list"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".9"
-            android:insetBottom="0dp"
-            android:text="Their List"
-            app:cornerRadius="0dp"
-            app:strokeColor="@android:color/darker_gray"
-            app:theme="@style/Theme.MaterialComponents" />
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+        android:layout_marginTop="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
 
     <com.arlib.floatingsearchview.FloatingSearchView
         android:id="@+id/friend_searchBar"

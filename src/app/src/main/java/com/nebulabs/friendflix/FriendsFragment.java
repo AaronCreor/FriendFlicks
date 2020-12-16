@@ -190,10 +190,11 @@ public class FriendsFragment extends Fragment {
                                 while(allFriendsIterator.hasNext()) {
                                     User currentAllFriend = allFriendsIterator.next();
                                     if(thisUID.equals(currentAllFriend.userid)) {
-                                        String input[] = new String[3];
-                                        input[0] = currentAllFriend.username;
-                                        input[1] = currentAllFriend.useremail;
-                                        input[2] = currentAllFriend.photourl;
+                                        String input[] = new String[4];
+                                        input[0] = currentAllFriend.userid;
+                                        input[1] = currentAllFriend.username;
+                                        input[2] = currentAllFriend.useremail;
+                                        input[3] = currentAllFriend.photourl;
                                         friendsList.add(0, input); // show them in the friendsList recycler view
                                         userFriends.add(currentAllFriend.useremail);
                                     }

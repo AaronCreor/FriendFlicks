@@ -49,9 +49,10 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.recyclerItemTextView.setText(friendsList.get(position)[0]);
-        holder.rowCountTextView.setText(friendsList.get(position)[1]);
-        Picasso.get().load(friendsList.get(position)[2]).into(holder.imageView);
+        holder.friendIDView.setText(friendsList.get(position)[0]);
+        holder.recyclerItemTextView.setText(friendsList.get(position)[1]);
+        holder.rowCountTextView.setText(friendsList.get(position)[2]);
+        Picasso.get().load(friendsList.get(position)[3]).into(holder.imageView);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imageView;
-        TextView recyclerItemTextView, rowCountTextView;
+        TextView recyclerItemTextView, rowCountTextView, friendIDView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,6 +108,7 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
             imageView = itemView.findViewById(R.id.recyclerItemUserImage);
             recyclerItemTextView = itemView.findViewById(R.id.recyclerItemTextView);
             rowCountTextView = itemView.findViewById(R.id.rowCountTextView);
+            friendIDView = itemView.findViewById(R.id.friendIDview);
 
             itemView.setOnClickListener(this);
 
@@ -123,10 +125,11 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
 
         @Override
         public void onClick(View view) {
-            String name = friendsList.get(getAdapterPosition())[0];
-            String email = friendsList.get(getAdapterPosition())[1];
-            String image = friendsList.get(getAdapterPosition())[2];
-            Fragment selectedFrag = new FriendFragment(name, email);
+            String id = friendsList.get(getAdapterPosition())[0];
+            String name = friendsList.get(getAdapterPosition())[1];
+            String email = friendsList.get(getAdapterPosition())[2];
+            String image = friendsList.get(getAdapterPosition())[3];
+            Fragment selectedFrag = new FriendFragment(id, name, email, image);
             ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container_view, selectedFrag)
                     .commit();
