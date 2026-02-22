@@ -1,6 +1,6 @@
 # FriendFlicks
 
-An app for **movie discovery with friends** — built as a group project for COMP 370.
+An app for **movie discovery with friends**
 
 ---
 
